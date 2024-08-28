@@ -14,7 +14,7 @@ class LoadingWidget extends StatelessWidget {
         children: [
           LoadingAnimationWidget.discreteCircle(
             color: AppPallete.white,
-            secondRingColor: AppPallete.elevatedButtonBackgroundColor,
+            secondRingColor: AppPallete.lightBlue,
             size: 30,
           ),
           // const SizedBox(height: 30),

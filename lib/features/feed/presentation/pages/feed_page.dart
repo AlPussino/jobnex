@@ -109,7 +109,7 @@ class FeedPagePortrait extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: InkWell(
-                      highlightColor: AppPallete.elevatedButtonBackgroundColor,
+                      highlightColor: AppPallete.lightBlue,
                       customBorder: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13),
                       ),
@@ -140,52 +140,21 @@ class FeedPagePortrait extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    feedData['company_name'],
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyMedium,
-                                  ),
+                                  Text(feedData['company_name']),
                                   Text(
                                     changeToTimeAgo(feedData['created_at']),
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .displaySmall,
                                   ),
                                 ],
                               ),
-                              Text(
-                                feedData['job_position'],
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .headlineMedium,
-                              ),
-                              Text(
-                                feedData['role_responsibility'],
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .displaySmall,
-                                softWrap: false,
-                                overflow: TextOverflow.fade,
-                              ),
+                              Text(feedData['job_position']),
+                              Text(feedData['role_responsibility'],
+                                  softWrap: false, overflow: TextOverflow.fade),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Chip(
-                                    label: Text(
-                                      feedData['sallary_range'],
-                                      style: Theme.of(context)
-                                          .primaryTextTheme
-                                          .displaySmall,
-                                    ),
-                                  ),
-                                  Text(
-                                    feedData['job_location'],
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .displaySmall,
-                                  ),
+                                  Chip(label: Text(feedData['sallary_range'])),
+                                  Text(feedData['job_location']),
                                 ],
                               )
                             ],
@@ -200,7 +169,7 @@ class FeedPagePortrait extends StatelessWidget {
           );
         }
         return const SizedBox(
-          child: Text("No Active State"),
+          child: ErrorWidgets(errorMessage: "No active state."),
         );
       },
     );
@@ -253,7 +222,7 @@ class FeedPageLandscape extends StatelessWidget {
                   final feedData = feedSnapShot[index].data();
                   final feedId = feedSnapShot[index].id;
                   return InkWell(
-                    highlightColor: AppPallete.elevatedButtonBackgroundColor,
+                    highlightColor: AppPallete.lightBlue,
                     customBorder: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(13),
                     ),
@@ -284,29 +253,17 @@ class FeedPageLandscape extends StatelessWidget {
                               children: [
                                 Text(
                                   feedData['company_name'],
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyMedium,
                                 ),
                                 Text(
                                   changeToTimeAgo(feedData['created_at']),
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .displaySmall,
                                 ),
                               ],
                             ),
                             Text(
                               feedData['job_position'],
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .headlineMedium,
                             ),
                             Text(
                               feedData['role_responsibility'],
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .displaySmall,
                               softWrap: false,
                               overflow: TextOverflow.fade,
                             ),
@@ -316,16 +273,10 @@ class FeedPageLandscape extends StatelessWidget {
                                 Chip(
                                   label: Text(
                                     feedData['sallary_range'],
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .displaySmall,
                                   ),
                                 ),
                                 Text(
                                   feedData['job_location'],
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .displaySmall,
                                 ),
                               ],
                             )
@@ -340,7 +291,7 @@ class FeedPageLandscape extends StatelessWidget {
           );
         }
         return const SizedBox(
-          child: Text("No Active State"),
+          child: ErrorWidgets(errorMessage: "No active state."),
         );
       },
     );

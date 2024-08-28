@@ -72,7 +72,7 @@ class _VideosGridPageState extends State<VideosGridPage> {
                             backgroundColor: AppPallete.white,
                             child: Icon(
                               Icons.check,
-                              color: AppPallete.elevatedButtonBackgroundColor,
+                              color: AppPallete.lightBlue,
                             ),
                           )
                         : const SizedBox(),

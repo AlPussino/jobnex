@@ -42,7 +42,7 @@ class _FillInformationPageState extends State<FillInformationPage> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppPallete.borderColor),
+                  border: Border.all(color: AppPallete.lightBlue),
                 ),
                 child: DropdownButton(
                   isExpanded: true,

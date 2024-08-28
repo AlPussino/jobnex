@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
@@ -96,8 +95,8 @@ class _ChatPageState extends State<ChatPage> {
                                 children: [
                                   CircleAvatar(
                                     radius: 27,
-                                    backgroundColor:
-                                        AppPallete.scaffoldBackgroundColor,
+                                    // backgroundColor:
+                                    //     AppPallete.scaffoldBackgroundColor,
                                     child: CircleAvatar(
                                       radius: 25,
                                       backgroundImage:
@@ -105,24 +104,20 @@ class _ChatPageState extends State<ChatPage> {
                                               snapshot.data!['profile_url']),
                                     ),
                                   ),
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     radius: 8,
-                                    backgroundColor:
-                                        AppPallete.scaffoldBackgroundColor,
                                     child: CircleAvatar(
-                                        radius: 6,
-                                        backgroundColor:
-                                            snapshot.data!['is_online']
-                                                ? AppPallete.green
-                                                : AppPallete.grey),
+                                      radius: 6,
+                                      // backgroundColor:
+                                      //     snapshot.data!['is_online']
+                                      //         ? AppPallete.green
+                                      //         : AppPallete.grey,
+                                    ),
                                   )
                                 ],
                               ),
                               title: Text(
                                 snapshot.data!['name'],
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodyMedium,
                               ),
                               subtitle: Text(
                                 chatListData['last_message'],

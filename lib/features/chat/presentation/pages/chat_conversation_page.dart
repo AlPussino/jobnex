@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
@@ -84,14 +83,14 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                       onPressed: () {},
                       icon: const Icon(
                         Iconsax.call_bold,
-                        color: AppPallete.white,
+                        // color: AppPallete.white,
                       ),
                     ),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(
                         Iconsax.video_bold,
-                        color: AppPallete.white,
+                        // color: AppPallete.white,
                       ),
                     ),
                     IconButton(
@@ -112,7 +111,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                       },
                       icon: const Icon(
                         Iconsax.info_circle_bold,
-                        color: AppPallete.white,
+                        // color: AppPallete.white,
                       ),
                     ),
                   ],
@@ -177,14 +176,14 @@ class ChatConversationAppBar extends StatelessWidget {
               backgroundImage:
                   CachedNetworkImageProvider(receiverData['profile_url']),
             ),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 6,
-              backgroundColor: AppPallete.scaffoldBackgroundColor,
+              // backgroundColor: AppPallete.scaffoldBackgroundColor,
               child: CircleAvatar(
                 radius: 4,
-                backgroundColor: receiverData['is_online']
-                    ? AppPallete.green
-                    : AppPallete.grey,
+                // backgroundColor: receiverData['is_online']
+                //     ? AppPallete.green
+                //     : AppPallete.grey,
               ),
             )
           ],
@@ -198,7 +197,6 @@ class ChatConversationAppBar extends StatelessWidget {
               receiverData['is_online']
                   ? "online"
                   : changeToTimeAgo(chatRoomData['last_online']),
-              style: Theme.of(context).primaryTextTheme.bodySmall,
             ),
           ],
         ),

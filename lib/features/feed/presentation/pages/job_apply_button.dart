@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/auth/presentation/widgets/elevated_buttons.dart';
 import 'package:freezed_example/features/feed/presentation/bloc/feed_bloc.dart';
@@ -54,18 +53,13 @@ class _JobApplyButtonState extends State<JobApplyButton> {
           return const LoadingWidget(caption: "Applying...");
         }
         return Container(
-          decoration:
-              const BoxDecoration(color: AppPallete.cardBackgroundColor),
+          decoration: const BoxDecoration(),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: widget.candiateList.contains(fireStore
                     .collection("users")
                     .doc(fireAuth.currentUser!.uid))
                 ? ElevatedButton(
-                    style: const ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                          AppPallete.scaffoldBackgroundColor),
-                    ),
                     onPressed: () {},
                     child: const Text("Applied"),
                   )

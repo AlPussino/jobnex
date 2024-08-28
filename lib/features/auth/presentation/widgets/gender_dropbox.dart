@@ -16,7 +16,7 @@ class _GenderDropBoxState extends State<GenderDropBox> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppPallete.borderColor),
+        border: Border.all(color: AppPallete.lightBlue),
       ),
       child: DropdownButton(
         isExpanded: true,

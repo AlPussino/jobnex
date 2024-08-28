@@ -176,17 +176,14 @@ class _WorkExperienceDetailPageState extends State<WorkExperienceDetailPage> {
                                 ),
                                 const CircleAvatar(
                                   radius: 65,
-                                  backgroundColor:
-                                      AppPallete.scaffoldBackgroundColor,
+                                  backgroundColor: AppPallete.backgroundColor,
                                   child: CircleAvatar(
                                     radius: 60,
-                                    backgroundColor:
-                                        AppPallete.scaffoldBackgroundColor,
+                                    backgroundColor: AppPallete.backgroundColor,
                                     child: Icon(
                                       Iconsax.briefcase_bold,
                                       size: 60,
-                                      color: AppPallete
-                                          .elevatedButtonBackgroundColor,
+                                      color: AppPallete.lightBlue,
                                     ),
                                   ),
                                 )

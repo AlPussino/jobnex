@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/auth_gate.dart';
-import 'package:freezed_example/core/theme/theme.dart';
+import 'package:freezed_example/core/theme/dark_theme.dart';
+import 'package:freezed_example/core/theme/light_theme.dart';
 import 'package:freezed_example/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
 import 'package:freezed_example/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
@@ -69,8 +70,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tegether 3',
-      theme: ThemeData.light(),
-      darkTheme: AppTheme.darkTheme,
+      theme: LightTheme.lightTheme,
+      darkTheme: DarkTheme.darkTheme,
       onGenerateRoute: (settings) => generateRoute(settings),
       home: const AuthGate(),
     );

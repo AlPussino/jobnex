@@ -66,8 +66,6 @@ class _JobRecruiterState extends State<JobRecruiter> {
                           children: [
                             Text(
                               userSnapShot['name'],
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodyMedium,
                             ),
                             Text(
                               userSnapShot['email'],

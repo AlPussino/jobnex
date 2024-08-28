@@ -72,7 +72,7 @@ class _ImagesGridPageState extends State<ImagesGridPage> {
                             backgroundColor: AppPallete.white,
                             child: Icon(
                               Icons.check,
-                              color: AppPallete.elevatedButtonBackgroundColor,
+                              color: AppPallete.lightBlue,
                             ),
                           )
                         : const SizedBox(),

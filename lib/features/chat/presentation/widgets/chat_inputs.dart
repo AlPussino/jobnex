@@ -6,7 +6,6 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:freezed_example/features/chat/presentation/pages/select_photos_page.dart';
 import 'package:freezed_example/features/chat/presentation/provider/chat_input_provider.dart';
@@ -224,16 +223,16 @@ class _ChatInputsState extends State<ChatInputs> {
                           },
                           childWhenDragging: Container(
                             padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.grey)),
+                            // decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(10),
+                            //     border: Border.all(color: Colors.grey)),
                             child: Row(
                               children: [
                                 AnimateIcon(
                                   key: UniqueKey(),
                                   onTap: () {},
                                   iconType: IconType.continueAnimation,
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   animateIcon: AnimateIcons.loading3,
                                 ),
                                 SizedBox(width: size.width / 20),
@@ -245,10 +244,10 @@ class _ChatInputsState extends State<ChatInputs> {
                                         (context, candidateData, rejectedData) {
                                       return CircleAvatar(
                                         radius: candidateData.isEmpty ? 20 : 30,
-                                        backgroundColor: Colors.red,
+                                        // backgroundColor: Colors.red,
                                         child: const Icon(
                                           Icons.delete,
-                                          color: Colors.white,
+                                          // color: Colors.white,
                                           size: 20,
                                         ),
                                       );
@@ -363,7 +362,7 @@ class _ChatInputsState extends State<ChatInputs> {
                         verticalSpacing: 10,
                         emojiSizeMax: 25,
                         gridPadding: EdgeInsets.zero,
-                        backgroundColor: AppPallete.scaffoldBackgroundColor,
+                        // backgroundColor: AppPallete.scaffoldBackgroundColor,
                         columns: 7,
                         buttonMode: ButtonMode.CUPERTINO,
                       ),
@@ -375,15 +374,15 @@ class _ChatInputsState extends State<ChatInputs> {
                         categoryIcons: CategoryIcons(),
                         recentTabBehavior: RecentTabBehavior.NONE,
                         tabIndicatorAnimDuration: kTabScrollDuration,
-                        backgroundColor: AppPallete.scaffoldBackgroundColor,
-                        iconColorSelected:
-                            AppPallete.elevatedButtonBackgroundColor,
-                        indicatorColor:
-                            AppPallete.elevatedButtonBackgroundColor,
+                        // backgroundColor: AppPallete.scaffoldBackgroundColor,
+                        // iconColorSelected:
+                        // AppPallete.elevatedButtonBackgroundColor,
+                        // indicatorColor:
+                        // AppPallete.elevatedButtonBackgroundColor,
                         showBackspaceButton: true,
-                        backspaceColor:
-                            AppPallete.elevatedButtonBackgroundColor,
-                        dividerColor: AppPallete.grey,
+                        // backspaceColor:
+                        // AppPallete.elevatedButtonBackgroundColor,
+                        // dividerColor: AppPallete.grey,
                       ),
                     ),
                   ),

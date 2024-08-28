@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ class CandidatesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     List<dynamic> candidateList = JobRecruitmentData["candidates"];
     if (candidateList.isEmpty) {
       return const ErrorWidgets(errorMessage: "No candidate found.");
@@ -41,7 +41,6 @@ class CandidatesList extends StatelessWidget {
 
                 return InkWell(
                   onTap: () {
-                    log(snapshot.data!['user_id']);
                     Navigator.pushNamed(context, ProfilePage.routeName,
                         arguments: snapshot.data!['user_id']);
                   },
@@ -54,14 +53,12 @@ class CandidatesList extends StatelessWidget {
                           backgroundImage: CachedNetworkImageProvider(
                               snapshot.data!['profile_url']),
                         ),
-                        const SizedBox(width: 20),
+                        SizedBox(width: size.width / 20),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               snapshot.data!['name'],
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodyMedium,
                             ),
                             Text(
                               snapshot.data!['email'],

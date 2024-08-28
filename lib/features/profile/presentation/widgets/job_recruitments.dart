@@ -68,7 +68,7 @@ class _JobRecruitmentsState extends State<JobRecruitments> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: InkWell(
-                      highlightColor: AppPallete.elevatedButtonBackgroundColor,
+                      highlightColor: AppPallete.lightBlue,
                       customBorder: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13),
                       ),

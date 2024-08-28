@@ -25,7 +25,6 @@ class JobDetail extends StatelessWidget {
         children: [
           Text(
             jobRecruitmentData['job_position'],
-            style: Theme.of(context).primaryTextTheme.headlineMedium,
           ),
           SizedBox(height: size.height / 40),
           Row(
@@ -33,7 +32,6 @@ class JobDetail extends StatelessWidget {
             children: [
               Text(
                 jobRecruitmentData['company_name'],
-                style: Theme.of(context).primaryTextTheme.bodyMedium,
               ),
               Text(jobRecruitmentData['job_location']),
             ],

@@ -119,7 +119,7 @@ class _AudioMessageState extends State<AudioMessage> {
                         onPressed: isPlaying ? pauseAudio : playAudio,
                         icon: Icon(
                           isPlaying ? Icons.pause_circle : Icons.play_circle,
-                          color: Colors.white,
+                          // color: Colors.white,
                         ),
                       ),
 
@@ -129,7 +129,7 @@ class _AudioMessageState extends State<AudioMessage> {
                               key: UniqueKey(),
                               onTap: isPlaying ? pauseAudio : playAudio,
                               iconType: IconType.continueAnimation,
-                              color: Colors.white,
+                              // color: Colors.white,
                               animateIcon: AnimateIcons.loading3,
                             )
                           : audioDuration == Duration.zero
@@ -137,7 +137,7 @@ class _AudioMessageState extends State<AudioMessage> {
                                   key: UniqueKey(),
                                   onTap: isPlaying ? pauseAudio : playAudio,
                                   iconType: IconType.continueAnimation,
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   animateIcon: AnimateIcons.loading6,
                                   height: 30,
                                 )

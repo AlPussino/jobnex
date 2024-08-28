@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -48,6 +47,9 @@ class _VideoWidgetState extends State<VideoWidget>
     //
     betterPlayerConfiguration = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
+      allowedScreenSleep: false,
+      fit: BoxFit.contain,
+      expandToFill: true,
       controlsConfiguration: const BetterPlayerControlsConfiguration(
         backgroundColor: Colors.black,
         controlBarColor: Colors.transparent,
@@ -83,13 +85,18 @@ class _VideoWidgetState extends State<VideoWidget>
     );
 
     betterPlayerController.addEventsListener((BetterPlayerEvent event) {
-      log(event.betterPlayerEventType.name);
-      if (event.betterPlayerEventType == BetterPlayerEventType.initialized) {
+      if (event.betterPlayerEventType ==
+          BetterPlayerEventType.setupDataSource) {
         double? aspectRatio =
             betterPlayerController.videoPlayerController?.value.aspectRatio;
         if (aspectRatio != null) {
           betterPlayerController.setOverriddenAspectRatio(aspectRatio);
         }
+      } else if (event.betterPlayerEventType ==
+          BetterPlayerEventType.openFullscreen) {
+        setState(() {
+          betterPlayerController.enterFullScreen();
+        });
       }
     });
   }

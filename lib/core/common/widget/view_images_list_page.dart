@@ -146,7 +146,7 @@ class _ViewImagesListPageState extends State<ViewImagesListPage> {
                       width: 40,
                       height: 40,
                       child: CircularProgressIndicator(
-                        color: AppPallete.elevatedButtonBackgroundColor,
+                        color: AppPallete.lightBlue,
                         strokeWidth: 4,
                         value: event == null
                             ? 0
@@ -173,8 +173,7 @@ class _ViewImagesListPageState extends State<ViewImagesListPage> {
                                   radius: 20,
                                   backgroundColor: AppPallete.white,
                                   child: BackButton(
-                                    color: AppPallete
-                                        .elevatedButtonBackgroundColor,
+                                    color: AppPallete.lightBlue,
                                   ),
                                 ),
                                 IconButton(

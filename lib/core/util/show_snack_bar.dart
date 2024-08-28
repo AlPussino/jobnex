@@ -8,7 +8,7 @@ class SnackBars {
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          backgroundColor: AppPallete.successSnackBarBackgroundColor,
+          backgroundColor: AppPallete.green,
           content: Text(
             message,
             style: Theme.of(context)
@@ -25,13 +25,13 @@ class SnackBars {
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          backgroundColor: AppPallete.errorSnackBarBackgroundColor,
+          backgroundColor: AppPallete.red,
           content: Text(
             message,
             style: Theme.of(context)
                 .primaryTextTheme
                 .bodyMedium!
-                .copyWith(color: AppPallete.errorColor, fontSize: 14),
+                .copyWith(color: AppPallete.red, fontSize: 14),
           ),
         ),
       );

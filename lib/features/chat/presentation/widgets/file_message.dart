@@ -70,7 +70,7 @@ class _FileMessageState extends State<FileMessage> {
                                 height: double.infinity,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: AppPallete.cardBackgroundColor,
+                                  color: AppPallete.onBackgroundColor,
                                 ),
                                 child: isDownloading
                                     ? const LoadingWidget(caption: "")

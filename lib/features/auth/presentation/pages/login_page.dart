@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:freezed_example/features/auth/presentation/pages/sign_up_page.dart';
@@ -62,13 +61,14 @@ class LogInPagePortrait extends StatelessWidget {
   final TextEditingController passwordController;
   final VoidCallback login;
 
-  const LogInPagePortrait(
-      {super.key,
-      required this.formKey,
-      required this.size,
-      required this.emailController,
-      required this.passwordController,
-      required this.login});
+  const LogInPagePortrait({
+    super.key,
+    required this.formKey,
+    required this.size,
+    required this.emailController,
+    required this.passwordController,
+    required this.login,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,10 +95,7 @@ class LogInPagePortrait extends StatelessWidget {
             }
             return ListView(
               children: [
-                Text(
-                  "Login.",
-                  style: Theme.of(context).primaryTextTheme.headlineLarge,
-                ),
+                const Text("Login."),
                 SizedBox(height: size.height / 10),
                 TextFormFields(
                   hintText: "Email",
@@ -117,29 +114,10 @@ class LogInPagePortrait extends StatelessWidget {
                   onPressed: login,
                 ),
                 SizedBox(height: size.height / 10),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SignUpPage.routeName);
-                    },
-                    child: RichText(
-                      text: TextSpan(
-                          text: "You don have an account? ",
-                          style: Theme.of(context).primaryTextTheme.bodyMedium,
-                          children: [
-                            TextSpan(
-                              text: 'Sign up',
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: AppPallete
-                                          .elevatedButtonBackgroundColor,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                          ]),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, SignUpPage.routeName),
+                  child: const Text("You don't have an account?. Sign up."),
                 ),
               ],
             );
@@ -157,13 +135,14 @@ class LogInPageLandscape extends StatelessWidget {
   final TextEditingController passwordController;
   final VoidCallback login;
 
-  const LogInPageLandscape(
-      {super.key,
-      required this.formKey,
-      required this.size,
-      required this.emailController,
-      required this.passwordController,
-      required this.login});
+  const LogInPageLandscape({
+    super.key,
+    required this.formKey,
+    required this.size,
+    required this.emailController,
+    required this.passwordController,
+    required this.login,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -193,9 +172,8 @@ class LogInPageLandscape extends StatelessWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                       "Login.",
-                      style: Theme.of(context).primaryTextTheme.headlineLarge,
                     ),
                   ),
                 ),
@@ -221,31 +199,11 @@ class LogInPageLandscape extends StatelessWidget {
                         onPressed: login,
                       ),
                       SizedBox(height: size.height / 10),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, SignUpPage.routeName);
-                          },
-                          child: RichText(
-                            text: TextSpan(
-                                text: "You don have an account? ",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .bodyMedium,
-                                children: [
-                                  TextSpan(
-                                    text: 'Sign up',
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                            color: AppPallete
-                                                .elevatedButtonBackgroundColor,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                ]),
-                          ),
-                        ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, SignUpPage.routeName),
+                        child:
+                            const Text("You don't have an account?. Sign up."),
                       ),
                     ],
                   ),

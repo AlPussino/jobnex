@@ -140,8 +140,7 @@ class _ProfileCardState extends State<ProfileCard> {
                                                 onPressed: changeCoverImage,
                                                 icon: const Icon(
                                                   Iconsax.camera_bold,
-                                                  color: AppPallete
-                                                      .elevatedButtonBackgroundColor,
+                                                  color: AppPallete.lightBlue,
                                                 ),
                                               )
                                             : const SizedBox(),
@@ -182,11 +181,11 @@ class _ProfileCardState extends State<ProfileCard> {
                                     child: CircleAvatar(
                                       radius: 65,
                                       backgroundColor:
-                                          AppPallete.scaffoldBackgroundColor,
+                                          AppPallete.backgroundColor,
                                       child: CircleAvatar(
                                         radius: 60,
                                         backgroundColor:
-                                            AppPallete.scaffoldBackgroundColor,
+                                            AppPallete.backgroundColor,
                                         foregroundImage:
                                             CachedNetworkImageProvider(
                                           snapShotData['profile_url'],
@@ -198,13 +197,12 @@ class _ProfileCardState extends State<ProfileCard> {
                                       ? CircleAvatar(
                                           radius: 20,
                                           backgroundColor:
-                                              AppPallete.cardBackgroundColor,
+                                              AppPallete.onBackgroundColor,
                                           child: IconButton(
                                             onPressed: changeProfileImage,
                                             icon: const Icon(
                                               Iconsax.refresh_circle_bold,
-                                              color: AppPallete
-                                                  .elevatedButtonBackgroundColor,
+                                              color: AppPallete.lightBlue,
                                             ),
                                           ),
                                         )

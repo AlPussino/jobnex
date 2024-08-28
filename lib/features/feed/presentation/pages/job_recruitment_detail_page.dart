@@ -1,7 +1,5 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/feed/presentation/pages/job_apply_button.dart';
 import 'package:freezed_example/features/feed/presentation/widgets/candidates_list.dart';
 import 'package:freezed_example/features/feed/presentation/widgets/role_responsibilities.dart';
@@ -42,33 +40,23 @@ class JobRecruitmentDetailPage extends StatelessWidget {
                   //   fit: BoxFit.cover,
                   // ),
                 ),
-                SizedBox(
-                  width: size.width,
-                  height: size.height,
-                  child: Center(
-                    child: DefaultTextStyle(
-                      style: const TextStyle(fontSize: 70.0),
-                      child: AnimatedTextKit(
-                        animatedTexts: [
-                          ScaleAnimatedText('We are hiring'),
-                          ScaleAnimatedText('a'),
-                          ScaleAnimatedText(JobRecruitmentData['job_position']),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const Positioned(
-                  top: 40,
-                  left: 20,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppPallete.white,
-                    child: BackButton(
-                      color: AppPallete.elevatedButtonBackgroundColor,
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: size.width,
+                //   height: size.height,
+                //   child: Center(
+                //     child: DefaultTextStyle(
+                //       style: const TextStyle(fontSize: 70.0),
+                //       child: AnimatedTextKit(
+                //         animatedTexts: [
+                //           ScaleAnimatedText('We are hiring'),
+                //           ScaleAnimatedText('a'),
+                //           ScaleAnimatedText(JobRecruitmentData['job_position']),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                const Positioned(top: 40, left: 20, child: BackButton()),
                 DraggableScrollableSheet(
                   snap: true,
                   maxChildSize: 1,
@@ -82,92 +70,93 @@ class JobRecruitmentDetailPage extends StatelessWidget {
                                 fireAuth.currentUser!.uid
                             ? 4
                             : 3,
-                        child: Container(
-                          width: size.width,
-                          height: size.height,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30)),
-                            color: AppPallete.cardBackgroundColor,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Column(
-                              children: [
-                                // const BackButton(),
-                                SafeArea(
-                                  child: TabBar(
-                                    automaticIndicatorColorAdjustment: true,
-                                    isScrollable: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    tabs: JobRecruitmentData['recruiter_id'] ==
-                                            fireAuth.currentUser!.uid
-                                        ? const [
-                                            Tab(text: 'Details'),
-                                            Tab(text: 'Oppotunities'),
-                                            Tab(text: 'Responsibles'),
-                                            Tab(text: 'Candidates')
-                                          ]
-                                        : const [
-                                            Tab(text: 'Details'),
-                                            Tab(text: 'Oppotunities'),
-                                            Tab(text: 'Responsibles'),
-                                          ],
+                        child: Card(
+                          child: Container(
+                            width: size.width,
+                            height: size.height,
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30)),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Column(
+                                children: [
+                                  SafeArea(
+                                    child: TabBar(
+                                      automaticIndicatorColorAdjustment: true,
+                                      isScrollable: true,
+                                      physics: const BouncingScrollPhysics(),
+                                      tabs:
+                                          JobRecruitmentData['recruiter_id'] ==
+                                                  fireAuth.currentUser!.uid
+                                              ? const [
+                                                  Tab(text: 'Details'),
+                                                  Tab(text: 'Oppotunities'),
+                                                  Tab(text: 'Responsibles'),
+                                                  Tab(text: 'Candidates')
+                                                ]
+                                              : const [
+                                                  Tab(text: 'Details'),
+                                                  Tab(text: 'Oppotunities'),
+                                                  Tab(text: 'Responsibles'),
+                                                ],
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TabBarView(
-                                    children:
-                                        JobRecruitmentData['recruiter_id'] ==
-                                                fireAuth.currentUser!.uid
-                                            ? [
-                                                JobDetail(
-                                                  size: size,
-                                                  jobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                  skillList: skillList,
-                                                  jobRecruitmentId:
-                                                      jobRecruitmentId,
-                                                ),
-                                                Oppotunities(
-                                                  size: size,
-                                                  JobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                ),
-                                                RoleResponsiblities(
-                                                  size: size,
-                                                  JobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                ),
-                                                CandidatesList(
-                                                  JobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                ),
-                                              ]
-                                            : [
-                                                JobDetail(
-                                                  size: size,
-                                                  jobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                  skillList: skillList,
-                                                  jobRecruitmentId:
-                                                      jobRecruitmentId,
-                                                ),
-                                                Oppotunities(
-                                                  size: size,
-                                                  JobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                ),
-                                                RoleResponsiblities(
-                                                  size: size,
-                                                  JobRecruitmentData:
-                                                      JobRecruitmentData,
-                                                ),
-                                              ],
-                                  ),
-                                )
-                              ],
+                                  Expanded(
+                                    child: TabBarView(
+                                      children:
+                                          JobRecruitmentData['recruiter_id'] ==
+                                                  fireAuth.currentUser!.uid
+                                              ? [
+                                                  JobDetail(
+                                                    size: size,
+                                                    jobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                    skillList: skillList,
+                                                    jobRecruitmentId:
+                                                        jobRecruitmentId,
+                                                  ),
+                                                  Oppotunities(
+                                                    size: size,
+                                                    JobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                  ),
+                                                  RoleResponsiblities(
+                                                    size: size,
+                                                    JobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                  ),
+                                                  CandidatesList(
+                                                    JobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                  ),
+                                                ]
+                                              : [
+                                                  JobDetail(
+                                                    size: size,
+                                                    jobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                    skillList: skillList,
+                                                    jobRecruitmentId:
+                                                        jobRecruitmentId,
+                                                  ),
+                                                  Oppotunities(
+                                                    size: size,
+                                                    JobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                  ),
+                                                  RoleResponsiblities(
+                                                    size: size,
+                                                    JobRecruitmentData:
+                                                        JobRecruitmentData,
+                                                  ),
+                                                ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

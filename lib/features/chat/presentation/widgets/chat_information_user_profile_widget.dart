@@ -25,7 +25,7 @@ class ChatInformationUserProfileWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundColor: AppPallete.scaffoldBackgroundColor,
+                  backgroundColor: AppPallete.backgroundColor,
                   child: CircleAvatar(
                     radius: 38,
                     backgroundImage: CachedNetworkImageProvider(
@@ -34,7 +34,7 @@ class ChatInformationUserProfileWidget extends StatelessWidget {
                 ),
                 CircleAvatar(
                   radius: 12,
-                  backgroundColor: AppPallete.scaffoldBackgroundColor,
+                  backgroundColor: AppPallete.backgroundColor,
                   child: CircleAvatar(
                       radius: 8,
                       backgroundColor: snapshot.data!['is_online']

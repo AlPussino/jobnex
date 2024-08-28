@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
+import 'package:freezed_example/features/auth/presentation/pages/login_page.dart';
 import 'package:freezed_example/features/auth/presentation/provider/sign_up_page_provider.dart';
 import 'package:freezed_example/features/auth/presentation/widgets/elevated_buttons.dart';
 import 'package:freezed_example/features/bottom_navigation_bar_page.dart';
@@ -115,9 +115,8 @@ class SignUpPagePortrait extends StatelessWidget {
 
             return ListView(
               children: [
-                Text(
+                const Text(
                   "Sign Up.",
-                  style: Theme.of(context).primaryTextTheme.headlineLarge,
                 ),
                 SizedBox(height: size.height / 10),
                 TextFormFields(
@@ -143,27 +142,10 @@ class SignUpPagePortrait extends StatelessWidget {
                   onPressed: signUp,
                 ),
                 SizedBox(height: size.height / 10),
-                Center(
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: RichText(
-                      text: TextSpan(
-                          text: "Already have an account? ",
-                          style: Theme.of(context).primaryTextTheme.bodyMedium,
-                          children: [
-                            TextSpan(
-                              text: 'Login',
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: AppPallete
-                                          .elevatedButtonBackgroundColor,
-                                      fontWeight: FontWeight.bold),
-                            ),
-                          ]),
-                    ),
-                  ),
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, LoginPage.routeName),
+                  child: const Text("Already have an account?. Log in."),
                 ),
               ],
             );
@@ -221,9 +203,8 @@ class SignUpLandscape extends StatelessWidget {
                 Expanded(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                       "Sign Up.",
-                      style: Theme.of(context).primaryTextTheme.headlineLarge,
                     ),
                   ),
                 ),
@@ -255,28 +236,10 @@ class SignUpLandscape extends StatelessWidget {
                       onPressed: signUp,
                     ),
                     SizedBox(height: size.height / 10),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Already have an account? ",
-                              style:
-                                  Theme.of(context).primaryTextTheme.bodyMedium,
-                              children: [
-                                TextSpan(
-                                  text: 'Login',
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          color: AppPallete
-                                              .elevatedButtonBackgroundColor,
-                                          fontWeight: FontWeight.bold),
-                                ),
-                              ]),
-                        ),
-                      ),
+                    TextButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, LoginPage.routeName),
+                      child: const Text("Already have an account?. Log in."),
                     ),
                   ],
                 ))
