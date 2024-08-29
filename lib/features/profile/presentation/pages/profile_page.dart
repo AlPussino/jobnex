@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_example/auth_gate.dart';
 import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/profile/presentation/pages/add_work_experiences_page.dart';
-import 'package:freezed_example/features/profile/presentation/widgets/answer_quiz_page.dart';
 import 'package:freezed_example/features/profile/presentation/widgets/job_recruitments.dart';
 import 'package:freezed_example/features/profile/presentation/widgets/profile_card.dart';
-import 'package:freezed_example/features/profile/presentation/widgets/save_certificate.dart';
-import 'package:freezed_example/features/profile/presentation/widgets/test_comment_tree.dart';
 import 'package:freezed_example/features/profile/presentation/widgets/work_experiences.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -29,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
-    tabController = TabController(length: 6, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     tabController.addListener(
       () => setState(() {}),
     );
@@ -45,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Profile"),
@@ -79,9 +76,9 @@ class _ProfilePageState extends State<ProfilePage>
                 Tab(text: "User Profile"),
                 Tab(text: "Work Experience"),
                 Tab(text: "Job Recruitments"),
-                Tab(text: "Save Certificate"),
-                Tab(text: "Comment Tree"),
-                Tab(text: "Quzi"),
+                // Tab(text: "Save Certificate"),
+                // Tab(text: "Comment Tree"),
+                // Tab(text: "Quzi"),
               ],
             ),
             Expanded(
@@ -92,15 +89,15 @@ class _ProfilePageState extends State<ProfilePage>
                   ProfileCard(user_id: widget.user_id),
                   WorkExperiences(user_id: widget.user_id),
                   JobRecruitments(user_id: widget.user_id),
-                  const SaveCertificate(),
-                  const TestCommentTree(),
-                  const AnswerQuizPage(),
+                  // const SaveCertificate(),
+                  // const TestCommentTree(),
+                  // const AnswerQuizPage(),
                 ],
               ),
             ),
           ],
         ),
-        floatingActionButton: tabController.index == 1
+        floatingActionButton: tabController.index == 1 &&  widget.user_id==fireAuth.currentUser!.uid
             ? FloatingActionButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AddWorkExperiencePage.routeName);

@@ -164,7 +164,7 @@ class _ViewImagesListPageState extends State<ViewImagesListPage> {
                         child: Container(
                             width: size.width,
                             height: size.height / 15,
-                            color: AppPallete.transpartent,
+                            color: AppPallete.transparent,
                             alignment: Alignment.center,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -222,7 +222,7 @@ class _ViewImagesListPageState extends State<ViewImagesListPage> {
                 child: Offstage(
                   offstage: !isButtonsShowed,
                   child: Container(
-                    color: AppPallete.transpartent,
+                    color: AppPallete.transparent,
                     alignment: Alignment.center,
                     height: 50,
                     width: size.width,
@@ -257,13 +257,13 @@ class _ViewImagesListPageState extends State<ViewImagesListPage> {
                                         width: 1,
                                         color: pageId == index
                                             ? AppPallete.white
-                                            : AppPallete.transpartent,
+                                            : AppPallete.transparent,
                                       ),
                                       vertical: BorderSide(
                                         width: 2,
                                         color: pageId == index
                                             ? AppPallete.white
-                                            : AppPallete.transpartent,
+                                            : AppPallete.transparent,
                                       ))),
                               height: 50,
                               width: pageId == index ? 50 : 45,

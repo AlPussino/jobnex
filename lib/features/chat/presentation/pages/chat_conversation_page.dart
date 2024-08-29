@@ -1,17 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:freezed_example/features/chat/presentation/pages/chat_information_page.dart';
+import 'package:freezed_example/features/chat/presentation/widgets/chat_conversation_app_bar.dart';
 import 'package:freezed_example/features/chat/presentation/widgets/chat_inputs.dart';
 import 'package:freezed_example/features/chat/presentation/widgets/message_list_widget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
+
+import '../../../../core/theme/app_pallete.dart';
 
 class ChatConversationPage extends StatefulWidget {
   static const routeName = '/chat-conversation-page';
@@ -81,17 +82,11 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                   actions: [
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Iconsax.call_bold,
-                        // color: AppPallete.white,
-                      ),
+                      icon: const Icon(Iconsax.call_bold),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Iconsax.video_bold,
-                        // color: AppPallete.white,
-                      ),
+                      icon: const Icon(Iconsax.video_bold),
                     ),
                     IconButton(
                       onPressed: () {
@@ -109,10 +104,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                               )
                             : null;
                       },
-                      icon: const Icon(
-                        Iconsax.info_circle_bold,
-                        // color: AppPallete.white,
-                      ),
+                      icon: const Icon(Iconsax.info_circle_bold),
                     ),
                   ],
                 ),
@@ -136,7 +128,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                         : Container(
                             padding: const EdgeInsets.all(10),
                             width: size.width,
-                            color: Colors.black,
+                            color: AppPallete.black,
                             child: Center(
                                 child: Text(
                                     "${chatRoomData['block_by'] == fireAuth.currentUser!.uid ? "You" : "Other"} blocked."))),
@@ -148,59 +140,6 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         }
         return const Scaffold();
       },
-    );
-  }
-}
-
-class ChatConversationAppBar extends StatelessWidget {
-  final Map<String, dynamic> receiverData;
-
-  final Map<String, dynamic> chatRoomData;
-  final Size size;
-  const ChatConversationAppBar({
-    super.key,
-    required this.receiverData,
-    required this.chatRoomData,
-    required this.size,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Stack(
-          alignment: Alignment.bottomRight,
-          children: [
-            CircleAvatar(
-              radius: 18,
-              backgroundImage:
-                  CachedNetworkImageProvider(receiverData['profile_url']),
-            ),
-            const CircleAvatar(
-              radius: 6,
-              // backgroundColor: AppPallete.scaffoldBackgroundColor,
-              child: CircleAvatar(
-                radius: 4,
-                // backgroundColor: receiverData['is_online']
-                //     ? AppPallete.green
-                //     : AppPallete.grey,
-              ),
-            )
-          ],
-        ),
-        SizedBox(width: size.width / 25),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(receiverData['name']),
-            Text(
-              receiverData['is_online']
-                  ? "online"
-                  : changeToTimeAgo(chatRoomData['last_online']),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

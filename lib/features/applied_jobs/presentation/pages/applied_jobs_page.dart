@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
-import 'package:freezed_example/features/feed/presentation/pages/job_recruitment_detail_page.dart';
+import 'package:freezed_example/features/feed/presentation/widgets/job_recruitment_card.dart';
 import 'package:toastification/toastification.dart';
 
 class AppliedJobsPage extends StatefulWidget {
@@ -32,7 +31,6 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Applied Jobs"),
@@ -76,80 +74,11 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
                             ConnectionState.waiting) {
                           return const LoadingWidget(caption: "Loading...");
                         }
-                        final feedData = snapshot.data!.data()!;
-                        final feedId = snapshot.data!.id;
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          child: InkWell(
-                            customBorder: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(13),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                JobRecruitmentDetailPage.routeName,
-                                arguments: {
-                                  "jobRecruitmentData": feedData,
-                                  "jobRecruitmentId": feedId,
-                                },
-                              );
-                            },
-                            child: Card(
-                              child: Container(
-                                width: size.width,
-                                height: size.width / 2,
-                                padding: const EdgeInsets.all(10),
-                                margin: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          feedData['company_name'],
-                                        ),
-                                        Text(
-                                          changeToTimeAgo(
-                                              feedData['created_at']),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      feedData['job_position'],
-                                    ),
-                                    Text(
-                                      feedData['role_responsibility'],
-                                      softWrap: false,
-                                      overflow: TextOverflow.fade,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Chip(
-                                          label: Text(
-                                            feedData['sallary_range'],
-                                          ),
-                                        ),
-                                        Text(
-                                          feedData['job_location'],
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
+                        final recruitmentData = snapshot.data!.data()!;
+                        final recruitmentId = snapshot.data!.id;
+                        return JobRecruitmentCard(
+                            recruitmentData: recruitmentData,
+                            recruitmentId: recruitmentId);
                       },
                     );
                   },

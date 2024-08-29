@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/download_file.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -70,7 +69,7 @@ class _FileMessageState extends State<FileMessage> {
                                 height: double.infinity,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: AppPallete.onBackgroundColor,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                                 child: isDownloading
                                     ? const LoadingWidget(caption: "")

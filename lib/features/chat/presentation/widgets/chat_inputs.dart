@@ -6,6 +6,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:freezed_example/core/common/enum/message_type_enum.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:freezed_example/features/chat/presentation/pages/select_photos_page.dart';
 import 'package:freezed_example/features/chat/presentation/provider/chat_input_provider.dart';
@@ -221,46 +222,45 @@ class _ChatInputsState extends State<ChatInputs> {
                               });
                             }
                           },
-                          childWhenDragging: Container(
-                            padding: const EdgeInsets.all(10),
-                            // decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(10),
-                            //     border: Border.all(color: Colors.grey)),
-                            child: Row(
-                              children: [
-                                AnimateIcon(
-                                  key: UniqueKey(),
-                                  onTap: () {},
-                                  iconType: IconType.continueAnimation,
-                                  // color: Colors.white,
-                                  animateIcon: AnimateIcons.loading3,
-                                ),
-                                SizedBox(width: size.width / 20),
-                                Text(formatDuration(durationInSeconds)),
-                                SizedBox(width: size.width / 20),
-                                if (isRecording)
-                                  DragTarget(
-                                    builder:
-                                        (context, candidateData, rejectedData) {
-                                      return CircleAvatar(
-                                        radius: candidateData.isEmpty ? 20 : 30,
-                                        // backgroundColor: Colors.red,
-                                        child: const Icon(
-                                          Icons.delete,
-                                          // color: Colors.white,
-                                          size: 20,
-                                        ),
-                                      );
-                                    },
-                                    onAcceptWithDetails: (data) {
-                                      setState(() {
-                                        stopAudioRecording();
-                                        isRecording = false;
-                                      });
-                                      log('Recording canceled');
-                                    },
+                          childWhenDragging: Card(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                children: [
+                                  AnimateIcon(
+                                    key: UniqueKey(),
+                                    onTap: () {},
+                                    iconType: IconType.continueAnimation,
+                                    color: Theme.of(context).primaryColor,
+                                    animateIcon: AnimateIcons.loading3,
                                   ),
-                              ],
+                                  SizedBox(width: size.width / 20),
+                                  Text(formatDuration(durationInSeconds)),
+                                  SizedBox(width: size.width / 20),
+                                  if (isRecording)
+                                    DragTarget(
+                                      builder: (context, candidateData,
+                                          rejectedData) {
+                                        return CircleAvatar(
+                                          radius:
+                                              candidateData.isEmpty ? 20 : 30,
+                                          backgroundColor: AppPallete.red,
+                                          child: const Icon(
+                                            Icons.delete,
+                                            size: 20,
+                                          ),
+                                        );
+                                      },
+                                      onAcceptWithDetails: (data) {
+                                        setState(() {
+                                          stopAudioRecording();
+                                          isRecording = false;
+                                        });
+                                        log('Recording canceled');
+                                      },
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
                           child: const CircleAvatar(
@@ -355,34 +355,31 @@ class _ChatInputsState extends State<ChatInputs> {
                     onEmojiSelected: (category, emoji) {},
                     onBackspacePressed: () {},
                     textEditingController: widget.messageController,
-                    config: const Config(
+                    config: Config(
                       checkPlatformCompatibility: true,
                       emojiViewConfig: EmojiViewConfig(
                         horizontalSpacing: 10,
                         verticalSpacing: 10,
                         emojiSizeMax: 25,
                         gridPadding: EdgeInsets.zero,
-                        // backgroundColor: AppPallete.scaffoldBackgroundColor,
+                        backgroundColor: Theme.of(context).canvasColor,
                         columns: 7,
                         buttonMode: ButtonMode.CUPERTINO,
                       ),
                       swapCategoryAndBottomBar: false,
-                      bottomActionBarConfig: BottomActionBarConfig(
+                      bottomActionBarConfig: const BottomActionBarConfig(
                         enabled: false,
                       ),
                       categoryViewConfig: CategoryViewConfig(
-                        categoryIcons: CategoryIcons(),
+                        categoryIcons: const CategoryIcons(),
                         recentTabBehavior: RecentTabBehavior.NONE,
                         tabIndicatorAnimDuration: kTabScrollDuration,
-                        // backgroundColor: AppPallete.scaffoldBackgroundColor,
-                        // iconColorSelected:
-                        // AppPallete.elevatedButtonBackgroundColor,
-                        // indicatorColor:
-                        // AppPallete.elevatedButtonBackgroundColor,
+                        backgroundColor: Theme.of(context).canvasColor,
+                        iconColorSelected: AppPallete.lightBlue,
+                        indicatorColor: AppPallete.lightBlue,
                         showBackspaceButton: true,
-                        // backspaceColor:
-                        // AppPallete.elevatedButtonBackgroundColor,
-                        // dividerColor: AppPallete.grey,
+                        backspaceColor: AppPallete.lightBlue,
+                        dividerColor: AppPallete.grey,
                       ),
                     ),
                   ),

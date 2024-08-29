@@ -11,134 +11,199 @@ class DarkTheme {
       );
 
   static final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
-    scaffoldBackgroundColor: AppPallete.backgroundColor,
+      scaffoldBackgroundColor: AppPallete.backgroundColor,
 
-    // AppBar
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppPallete.backgroundColor,
-      surfaceTintColor: AppPallete.backgroundColor,
-      foregroundColor: AppPallete.white,
-      elevation: 0,
-      titleTextStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: AppPallete.white,
+      // Color Scheme
+      colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: AppPallete.blue,
       ),
-    ),
+      canvasColor: AppPallete.backgroundColor,
+      primaryColor: AppPallete.white,
 
-    // ElevatedButton
-    elevatedButtonTheme: const ElevatedButtonThemeData(
-      style: ButtonStyle(
-        enableFeedback: true,
-        shape: WidgetStatePropertyAll(ContinuousRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)))),
-        minimumSize: WidgetStatePropertyAll(Size(1000, 55)),
-        maximumSize: WidgetStatePropertyAll(Size(1000, 55)),
-        foregroundColor: WidgetStatePropertyAll(AppPallete.white),
-        backgroundColor: WidgetStatePropertyAll(AppPallete.lightBlue),
-        alignment: Alignment.center,
+      // AppBar
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppPallete.backgroundColor,
+        surfaceTintColor: AppPallete.backgroundColor,
+        foregroundColor: AppPallete.white,
+        elevation: 0,
+        titleTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: AppPallete.white,
+          fontSize: 20,
+        ),
       ),
-    ),
 
-    // TextFields
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(20),
-      enabledBorder: border(),
-      focusedBorder: border(AppPallete.lightBlue),
-      errorBorder: border(AppPallete.red),
-      errorStyle: const TextStyle(color: AppPallete.red),
-      focusedErrorBorder: border(AppPallete.red),
-      border: border(),
-    ),
-
-    // Texts
-    primaryTextTheme: const TextTheme(
-      headlineLarge: TextStyle(color: AppPallete.white),
-      headlineMedium: TextStyle(color: AppPallete.white),
-      headlineSmall: TextStyle(color: AppPallete.white),
-      bodyLarge: TextStyle(color: AppPallete.white),
-      bodyMedium: TextStyle(color: AppPallete.white),
-      bodySmall: TextStyle(color: AppPallete.white),
-      displayLarge: TextStyle(color: AppPallete.white),
-      displayMedium: TextStyle(color: AppPallete.white),
-      displaySmall: TextStyle(color: AppPallete.white),
-      labelLarge: TextStyle(color: AppPallete.white),
-      labelMedium: TextStyle(color: AppPallete.white),
-      labelSmall: TextStyle(color: AppPallete.white),
-      titleLarge: TextStyle(color: AppPallete.white),
-      titleMedium: TextStyle(color: AppPallete.white),
-      titleSmall: TextStyle(color: AppPallete.white),
-    ),
-    textTheme: const TextTheme(
-      headlineLarge: TextStyle(color: AppPallete.white),
-      headlineMedium: TextStyle(color: AppPallete.white),
-      headlineSmall: TextStyle(color: AppPallete.white),
-      bodyLarge: TextStyle(color: AppPallete.white),
-      bodyMedium: TextStyle(color: AppPallete.white),
-      bodySmall: TextStyle(color: AppPallete.white),
-      displayLarge: TextStyle(color: AppPallete.white),
-      displayMedium: TextStyle(color: AppPallete.white),
-      displaySmall: TextStyle(color: AppPallete.white),
-      labelLarge: TextStyle(color: AppPallete.white),
-      labelMedium: TextStyle(color: AppPallete.white),
-      labelSmall: TextStyle(color: AppPallete.white),
-      titleLarge: TextStyle(color: AppPallete.white),
-      titleMedium: TextStyle(color: AppPallete.white),
-      titleSmall: TextStyle(color: AppPallete.white),
-    ),
-    // Text Selection
-    textSelectionTheme:
-        const TextSelectionThemeData(cursorColor: AppPallete.lightBlue),
-
-    // Text Button
-    textButtonTheme: const TextButtonThemeData(
-      style: ButtonStyle(
-        alignment: Alignment.center,
-        foregroundColor: WidgetStatePropertyAll(AppPallete.white),
-      ),
-    ),
-
-    // FloatingActionButton
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: AppPallete.lightBlue,
-      foregroundColor: AppPallete.white,
-      enableFeedback: true,
-    ),
-
-    // Chip
-    chipTheme: const ChipThemeData(
-      labelStyle: TextStyle(color: AppPallete.lightBlue),
-    ),
-
-    // Bottom Navigation Bar
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      enableFeedback: true,
-      elevation: 0,
-      selectedItemColor: AppPallete.lightBlue,
-      selectedLabelStyle: TextStyle(color: AppPallete.lightBlue),
-      unselectedItemColor: AppPallete.white,
-      unselectedLabelStyle: TextStyle(color: AppPallete.white),
-      landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-      backgroundColor: AppPallete.backgroundColor,
-      type: BottomNavigationBarType.fixed,
-    ),
-
-    // Icon Button
-    iconButtonTheme: const IconButtonThemeData(
+      // ElevatedButton
+      elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-            foregroundColor: WidgetStatePropertyAll(AppPallete.black),
-            backgroundColor: WidgetStatePropertyAll(AppPallete.lightBlue))),
+          enableFeedback: true,
+          shape: WidgetStatePropertyAll(ContinuousRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)))),
+          minimumSize: WidgetStatePropertyAll(Size(1000, 55)),
+          maximumSize: WidgetStatePropertyAll(Size(1000, 55)),
+          foregroundColor: WidgetStatePropertyAll(AppPallete.white),
+          backgroundColor: WidgetStatePropertyAll(AppPallete.lightBlue),
+          alignment: Alignment.center,
+        ),
+      ),
 
-    // Card
-    cardTheme: const CardTheme(elevation: 1),
+      // TextFields
+      inputDecorationTheme: InputDecorationTheme(
+        contentPadding: const EdgeInsets.all(20),
+        enabledBorder: border(),
+        focusedBorder: border(AppPallete.lightBlue),
+        errorBorder: border(AppPallete.red),
+        errorStyle: const TextStyle(color: AppPallete.red),
+        focusedErrorBorder: border(AppPallete.red),
+        border: border(),
+      ),
 
-    // Tab Bar
-    tabBarTheme: const TabBarTheme(
-      indicatorColor: AppPallete.transpartent,
-      unselectedLabelColor: AppPallete.white,
-      labelColor: AppPallete.lightBlue,
-    ),
-    //
-  );
+      // Texts
+      primaryTextTheme: const TextTheme(
+        headlineLarge: TextStyle(color: AppPallete.white),
+        headlineMedium: TextStyle(color: AppPallete.white),
+        headlineSmall: TextStyle(color: AppPallete.white),
+        bodyLarge: TextStyle(color: AppPallete.white),
+        bodyMedium: TextStyle(color: AppPallete.white),
+        bodySmall: TextStyle(color: AppPallete.white),
+        displayLarge: TextStyle(color: AppPallete.white),
+        displayMedium: TextStyle(color: AppPallete.white),
+        displaySmall: TextStyle(color: AppPallete.white),
+        labelLarge: TextStyle(color: AppPallete.white),
+        labelMedium: TextStyle(color: AppPallete.white),
+        labelSmall: TextStyle(color: AppPallete.white),
+        titleLarge: TextStyle(color: AppPallete.white),
+        titleMedium: TextStyle(color: AppPallete.white),
+        titleSmall: TextStyle(color: AppPallete.white),
+      ),
+      textTheme: const TextTheme(
+        headlineLarge: TextStyle(color: AppPallete.white),
+        headlineMedium: TextStyle(color: AppPallete.white),
+        headlineSmall: TextStyle(color: AppPallete.white),
+        bodyLarge: TextStyle(color: AppPallete.white),
+        bodyMedium: TextStyle(color: AppPallete.white),
+        bodySmall: TextStyle(color: AppPallete.white),
+        displayLarge: TextStyle(color: AppPallete.white),
+        displayMedium: TextStyle(color: AppPallete.white),
+        displaySmall: TextStyle(color: AppPallete.white),
+        labelLarge: TextStyle(color: AppPallete.white),
+        labelMedium: TextStyle(color: AppPallete.white),
+        labelSmall: TextStyle(color: AppPallete.white),
+        titleLarge: TextStyle(color: AppPallete.white),
+        titleMedium: TextStyle(color: AppPallete.white),
+        titleSmall: TextStyle(color: AppPallete.white),
+      ),
+      // Text Selection
+      textSelectionTheme:
+          const TextSelectionThemeData(cursorColor: AppPallete.lightBlue),
+
+      // Text Button
+      textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          alignment: Alignment.center,
+          foregroundColor: WidgetStatePropertyAll(AppPallete.white),
+        ),
+      ),
+
+      // FloatingActionButton
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: AppPallete.lightBlue,
+        foregroundColor: AppPallete.white,
+        enableFeedback: true,
+      ),
+
+      // Chip
+      chipTheme: const ChipThemeData(
+        labelStyle: TextStyle(color: AppPallete.lightBlue),
+      ),
+
+      // Bottom Navigation Bar
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        enableFeedback: true,
+        elevation: 0,
+        selectedItemColor: AppPallete.lightBlue,
+        selectedLabelStyle: TextStyle(color: AppPallete.lightBlue),
+        unselectedItemColor: AppPallete.white,
+        unselectedLabelStyle: TextStyle(color: AppPallete.white),
+        landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+        backgroundColor: AppPallete.backgroundColor,
+        type: BottomNavigationBarType.fixed,
+      ),
+
+      // Icon Button
+      iconButtonTheme: const IconButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStatePropertyAll(AppPallete.white),
+        ),
+      ),
+
+      // Card
+      cardTheme: const CardTheme(elevation: 1),
+
+      // Tab Bar
+      tabBarTheme: const TabBarTheme(
+        indicatorColor: AppPallete.lightBlue,
+        unselectedLabelColor: AppPallete.white,
+        labelColor: AppPallete.lightBlue,
+        dividerColor: AppPallete.transparent,
+        tabAlignment: TabAlignment.center,
+      ),
+      //ListTile
+      listTileTheme: const ListTileThemeData(
+        iconColor: AppPallete.lightBlue,
+        titleTextStyle: TextStyle(fontSize: 12, color: AppPallete.grey),
+        subtitleTextStyle: TextStyle(fontSize: 14, color: AppPallete.white),
+      ),
+
+      // Icon
+      iconTheme: const IconThemeData(color: AppPallete.lightBlue),
+
+      //Switch
+      switchTheme: SwitchThemeData(
+        trackOutlineColor: const WidgetStatePropertyAll(AppPallete.white),
+        thumbColor: WidgetStateProperty.resolveWith(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppPallete.lightBlue;
+            } else {
+              return AppPallete.black;
+            }
+          },
+        ),
+        trackColor: WidgetStateProperty.resolveWith(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppPallete.white;
+            } else {
+              return AppPallete.grey;
+            }
+          },
+        ),
+      ),
+
+      // Pop Up Menu Button
+      popupMenuTheme: const PopupMenuThemeData(
+        surfaceTintColor: AppPallete.backgroundColor,
+        iconColor: AppPallete.white,
+        color: AppPallete.backgroundColor,
+        shadowColor: AppPallete.lightBlue,
+        labelTextStyle: WidgetStatePropertyAll(
+          TextStyle(color: AppPallete.white),
+        ),
+      ),
+
+      // Drop Down Menu Button
+      dropdownMenuTheme: DropdownMenuThemeData(
+          textStyle: TextStyle(color: AppPallete.green),
+          menuStyle: MenuStyle(
+              shadowColor: WidgetStatePropertyAll(Colors.amber),
+              surfaceTintColor: WidgetStatePropertyAll(Colors.indigo),
+              backgroundColor: WidgetStatePropertyAll(AppPallete.red)),
+          inputDecorationTheme:
+              InputDecorationTheme(fillColor: AppPallete.blue))
+      //
+      );
 }

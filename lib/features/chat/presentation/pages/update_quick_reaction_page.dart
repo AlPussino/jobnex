@@ -52,7 +52,7 @@ class _UpdateQuickReactionPageState extends State<UpdateQuickReactionPage> {
               onPressed: updateQuickReaction,
               icon: const Icon(
                 Icons.check,
-                color: Colors.white,
+                color: AppPallete.white,
               ),
             ),
         ],

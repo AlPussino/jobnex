@@ -55,7 +55,7 @@ class _ViewImagePageState extends State<ViewImagePage> {
                 scale: scale,
                 child: PhotoView(
                   backgroundDecoration:
-                      const BoxDecoration(color: AppPallete.transpartent),
+                      const BoxDecoration(color: AppPallete.transparent),
                   heroAttributes: PhotoViewHeroAttributes(tag: widget.image),
                   onScaleEnd: (context, details, controllerValue) {
                     controllerValue.position == const Offset(0.0, 0.0)

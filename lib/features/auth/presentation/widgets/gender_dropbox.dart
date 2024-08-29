@@ -20,7 +20,7 @@ class _GenderDropBoxState extends State<GenderDropBox> {
       ),
       child: DropdownButton(
         isExpanded: true,
-        focusColor: Colors.red,
+        focusColor: AppPallete.red,
         elevation: 1,
         underline: const SizedBox(),
         padding: const EdgeInsets.all(8),

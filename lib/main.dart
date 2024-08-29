@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/auth_gate.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/theme/dark_theme.dart';
 import 'package:freezed_example/core/theme/light_theme.dart';
 import 'package:freezed_example/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
@@ -18,7 +19,7 @@ import 'core/route/router.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+      const SystemUiOverlayStyle(statusBarColor: AppPallete.transparent));
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

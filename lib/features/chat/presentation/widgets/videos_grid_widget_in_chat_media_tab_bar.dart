@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
 import 'package:freezed_example/core/common/widget/view_video_page.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -148,7 +149,7 @@ class _VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
         : Container(
             width: 150,
             height: 150,
-            color: Colors.grey[300],
+            color: AppPallete.grey,
             child: const LoadingWidget(caption: ""),
           );
   }

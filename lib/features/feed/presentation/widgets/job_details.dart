@@ -51,13 +51,19 @@ class JobDetail extends StatelessWidget {
             ],
           ),
           SizedBox(height: size.height / 40),
-          ListTile(
-            title: const Text('Experience'),
-            subtitle: Text(
-              jobRecruitmentData['years_of_experience'],
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Experience'),
+              Text(
+                jobRecruitmentData['years_of_experience'],
+              ),
+            ],
           ),
-          const ListTile(title: Text('Skills')),
+          SizedBox(height: size.height / 40),
+          const Text('Skills'),
           Wrap(
             spacing: 8.0,
             runSpacing: 4.0,

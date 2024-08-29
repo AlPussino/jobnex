@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ import 'package:freezed_example/core/common/enum/message_type_enum.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
 import 'package:freezed_example/core/common/widget/view_image_page.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/change_date_format.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
@@ -31,7 +29,6 @@ class _ProfileCardState extends State<ProfileCard> {
   final fireAuth = FirebaseAuth.instance;
   @override
   void initState() {
-    log("PP Build");
     context.read<UserBloc>().add(UserGetUserInfo(widget.user_id));
     super.initState();
   }
@@ -97,122 +94,104 @@ class _ProfileCardState extends State<ProfileCard> {
                 return ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: SizedBox(
-                        height: size.width,
-                        width: size.width,
-                        child: Card(
-                            child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Column(
-                                children: [
-                                  Expanded(
-                                    child: Stack(
-                                      alignment: Alignment.bottomRight,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                              context,
-                                              ViewImagePage.routeName,
-                                              arguments:
-                                                  snapShotData['cover_url'],
-                                            );
-                                          },
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  snapShotData!['cover_url'],
-                                              fit: BoxFit.cover,
-                                              width: size.width,
+                    SizedBox(
+                      height: size.width,
+                      width: size.width,
+                      child: Card(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Expanded(
+                                  child: Stack(
+                                    alignment: Alignment.bottomRight,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            ViewImagePage.routeName,
+                                            arguments:
+                                                snapShotData['cover_url'],
+                                          );
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                snapShotData!['cover_url'],
+                                            fit: BoxFit.cover,
+                                            width: size.width,
+                                          ),
+                                        ),
+                                      ),
+                                      if (widget.user_id ==
+                                          fireAuth.currentUser!.uid)
+                                        CircleAvatar(
+                                          child: IconButton(
+                                            onPressed: changeCoverImage,
+                                            icon: const Icon(
+                                              Iconsax.camera_bold,
                                             ),
                                           ),
                                         ),
-                                        widget.user_id ==
-                                                fireAuth.currentUser!.uid
-                                            ? IconButton(
-                                                onPressed: changeCoverImage,
-                                                icon: const Icon(
-                                                  Iconsax.camera_bold,
-                                                  color: AppPallete.lightBlue,
-                                                ),
-                                              )
-                                            : const SizedBox(),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: SizedBox(
+                                    width: size.width,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(snapShotData['name']),
+                                        Text(
+                                            snapShotData['professional_title']),
                                       ],
                                     ),
                                   ),
-                                  Expanded(
-                                    child: SizedBox(
-                                      width: size.width,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            snapShotData['name'],
-                                            style: Theme.of(context)
-                                                .primaryTextTheme
-                                                .bodyMedium,
-                                          ),
-                                          Text(snapShotData[
-                                              'professional_title']),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Stack(
-                                alignment: Alignment.bottomRight,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, ViewImagePage.routeName,
-                                          arguments:
-                                              snapShotData['profile_url']);
-                                    },
+                                ),
+                              ],
+                            ),
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, ViewImagePage.routeName,
+                                        arguments: snapShotData['profile_url']);
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 65,
                                     child: CircleAvatar(
-                                      radius: 65,
-                                      backgroundColor:
-                                          AppPallete.backgroundColor,
-                                      child: CircleAvatar(
-                                        radius: 60,
-                                        backgroundColor:
-                                            AppPallete.backgroundColor,
-                                        foregroundImage:
-                                            CachedNetworkImageProvider(
-                                          snapShotData['profile_url'],
-                                        ),
+                                      radius: 60,
+                                      foregroundImage:
+                                          CachedNetworkImageProvider(
+                                        snapShotData['profile_url'],
                                       ),
                                     ),
                                   ),
-                                  widget.user_id == fireAuth.currentUser!.uid
-                                      ? CircleAvatar(
-                                          radius: 20,
-                                          backgroundColor:
-                                              AppPallete.onBackgroundColor,
-                                          child: IconButton(
-                                            onPressed: changeProfileImage,
-                                            icon: const Icon(
-                                              Iconsax.refresh_circle_bold,
-                                              color: AppPallete.lightBlue,
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox(),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )),
-                      ),
+                                ),
+                                if (widget.user_id == fireAuth.currentUser!.uid)
+                                  CircleAvatar(
+                                    radius: 20,
+                                    child: IconButton(
+                                      onPressed: changeProfileImage,
+                                      icon: const Icon(
+                                          Iconsax.refresh_circle_bold),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )),
                     ),
                     SizedBox(height: size.height / 40),
                     widget.user_id != fireAuth.currentUser!.uid
@@ -276,7 +255,7 @@ class _ProfileCardState extends State<ProfileCard> {
                           )
                         : const SizedBox(),
                     ListTile(
-                      title: const Text("Contacts"),
+                      title: const Text("Personal Information"),
                       trailing: widget.user_id == fireAuth.currentUser!.uid
                           ? IconButton(
                               onPressed: () {
@@ -287,7 +266,6 @@ class _ProfileCardState extends State<ProfileCard> {
                               icon: const Icon(Iconsax.card_edit_bold),
                             )
                           : const SizedBox(),
-                      iconColor: AppPallete.white,
                     ),
                     Card(
                       child: Container(

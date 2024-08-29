@@ -1,5 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoWidget extends StatefulWidget {
@@ -51,25 +52,25 @@ class _VideoWidgetState extends State<VideoWidget>
       fit: BoxFit.contain,
       expandToFill: true,
       controlsConfiguration: const BetterPlayerControlsConfiguration(
-        backgroundColor: Colors.black,
-        controlBarColor: Colors.transparent,
+        backgroundColor: AppPallete.black,
+        controlBarColor: AppPallete.transparent,
         enablePip: false,
         enableSubtitles: false,
         enableAudioTracks: false,
         enableSkips: true,
-        progressBarBackgroundColor: Colors.white,
-        progressBarBufferedColor: Colors.grey,
+        progressBarBackgroundColor: AppPallete.white,
+        progressBarBufferedColor: AppPallete.grey,
         progressBarPlayedColor: Color(0xff227143),
         enableMute: true,
         enableFullscreen: true,
-        iconsColor: Colors.white,
+        iconsColor: AppPallete.white,
         enableRetry: true,
       ),
       autoDetectFullscreenDeviceOrientation: false,
       autoDetectFullscreenAspectRatio: false,
       fullScreenByDefault: false,
       overlay: Container(
-        color: Colors.black.withOpacity(0.10),
+        color: AppPallete.black.withOpacity(0.10),
       ),
       placeholderOnTop: true,
       showPlaceholderUntilPlay: true,

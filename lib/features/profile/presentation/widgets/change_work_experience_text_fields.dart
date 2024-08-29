@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 
 class ChangeWorkExperienceTextFields extends StatefulWidget {
   final TextEditingController controller;
@@ -34,7 +35,7 @@ class _ChangeWorkExperienceTextFields
           suffixIcon: widget.controller.text.isNotEmpty
               ? IconButton(
                   onPressed: widget.onPressed,
-                  icon: const Icon(Icons.check, color: Colors.green),
+                  icon: const Icon(Icons.check, color: AppPallete.green),
                 )
               : null,
         ),

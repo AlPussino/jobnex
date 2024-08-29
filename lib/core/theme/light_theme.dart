@@ -13,6 +13,14 @@ class LightTheme {
   static final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
     scaffoldBackgroundColor: AppPallete.white,
 
+    // Color Scheme
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppPallete.white,
+      brightness: Brightness.light,
+    ),
+    canvasColor: AppPallete.white,
+    primaryColor: AppPallete.black,
+
     // AppBar
     appBarTheme: const AppBarTheme(
       backgroundColor: AppPallete.white,
@@ -22,6 +30,7 @@ class LightTheme {
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 20,
       ),
     ),
 
@@ -107,6 +116,8 @@ class LightTheme {
 
     // Chip
     chipTheme: const ChipThemeData(
+      backgroundColor: AppPallete.transparent,
+      surfaceTintColor: AppPallete.transparent,
       labelStyle: TextStyle(color: AppPallete.lightBlue),
     ),
 
@@ -118,8 +129,8 @@ class LightTheme {
       elevation: 0,
       selectedItemColor: AppPallete.lightBlue,
       selectedLabelStyle: TextStyle(color: AppPallete.lightBlue),
-      unselectedItemColor: AppPallete.backgroundColor,
-      unselectedLabelStyle: TextStyle(color: AppPallete.backgroundColor),
+      unselectedItemColor: AppPallete.lightGrey,
+      unselectedLabelStyle: TextStyle(color: AppPallete.lightGrey),
       landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
       backgroundColor: AppPallete.white,
       type: BottomNavigationBarType.fixed,
@@ -128,8 +139,7 @@ class LightTheme {
     // Icon Button
     iconButtonTheme: const IconButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: WidgetStatePropertyAll(AppPallete.white),
-        backgroundColor: WidgetStatePropertyAll(AppPallete.lightBlue),
+        foregroundColor: WidgetStatePropertyAll(AppPallete.black),
       ),
     ),
 
@@ -138,11 +148,55 @@ class LightTheme {
 
     // Tab Bar
     tabBarTheme: const TabBarTheme(
-      indicatorColor: AppPallete.transpartent,
+      indicatorColor: AppPallete.lightBlue,
       unselectedLabelColor: AppPallete.black,
       labelColor: AppPallete.lightBlue,
+      dividerColor: AppPallete.transparent,
+      tabAlignment: TabAlignment.center,
     ),
 
+    //ListTile
+    listTileTheme: const ListTileThemeData(
+      iconColor: AppPallete.lightBlue,
+      titleTextStyle: TextStyle(color: AppPallete.backgroundColor),
+      subtitleTextStyle: TextStyle(color: AppPallete.black),
+    ),
+
+    // Icon
+    iconTheme: const IconThemeData(color: AppPallete.lightBlue),
+    //Switch
+    switchTheme: SwitchThemeData(
+      trackOutlineColor: const WidgetStatePropertyAll(AppPallete.black),
+      thumbColor: WidgetStateProperty.resolveWith(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppPallete.lightBlue;
+          } else {
+            return AppPallete.white;
+          }
+        },
+      ),
+      trackColor: WidgetStateProperty.resolveWith(
+        (states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppPallete.white;
+          } else {
+            return AppPallete.grey;
+          }
+        },
+      ),
+    ),
+
+    // Pop Up Menu Button
+    popupMenuTheme: const PopupMenuThemeData(
+      surfaceTintColor: AppPallete.white,
+      iconColor: AppPallete.black,
+      color: AppPallete.white,
+      shadowColor: AppPallete.lightBlue,
+      labelTextStyle: WidgetStatePropertyAll(
+        TextStyle(color: AppPallete.black),
+      ),
+    ),
     //
   );
 }

@@ -33,7 +33,7 @@ class ImagesMessage extends StatelessWidget {
               height: size.height / 4,
               width: size.width / 3,
               child: imageList[0] == ""
-                  ? const Card(child: LoadingWidget(caption: "Sending..."))
+                  ? const Card(child: LoadingWidget(caption: ""))
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: InkWell(
@@ -76,8 +76,7 @@ class ImagesMessage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final image = imageList[index];
                     return image == ""
-                        ? const Card(
-                            child: LoadingWidget(caption: "sending..."))
+                        ? const Card(child: LoadingWidget(caption: ""))
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: InkWell(

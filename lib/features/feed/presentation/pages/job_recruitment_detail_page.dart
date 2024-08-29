@@ -85,75 +85,42 @@ class JobRecruitmentDetailPage extends StatelessWidget {
                                 children: [
                                   SafeArea(
                                     child: TabBar(
-                                      automaticIndicatorColorAdjustment: true,
-                                      isScrollable: true,
-                                      physics: const BouncingScrollPhysics(),
-                                      tabs:
-                                          JobRecruitmentData['recruiter_id'] ==
-                                                  fireAuth.currentUser!.uid
-                                              ? const [
-                                                  Tab(text: 'Details'),
-                                                  Tab(text: 'Oppotunities'),
-                                                  Tab(text: 'Responsibles'),
-                                                  Tab(text: 'Candidates')
-                                                ]
-                                              : const [
-                                                  Tab(text: 'Details'),
-                                                  Tab(text: 'Oppotunities'),
-                                                  Tab(text: 'Responsibles'),
-                                                ],
-                                    ),
+                                        automaticIndicatorColorAdjustment: true,
+                                        isScrollable: true,
+                                        physics: const BouncingScrollPhysics(),
+                                        tabs: [
+                                          const Tab(text: 'Details'),
+                                          const Tab(text: 'Oppotunities'),
+                                          const Tab(text: 'Responsibles'),
+                                          if (JobRecruitmentData[
+                                                  'recruiter_id'] ==
+                                              fireAuth.currentUser!.uid)
+                                            const Tab(text: 'Candidates')
+                                        ]),
                                   ),
                                   Expanded(
-                                    child: TabBarView(
-                                      children:
-                                          JobRecruitmentData['recruiter_id'] ==
-                                                  fireAuth.currentUser!.uid
-                                              ? [
-                                                  JobDetail(
-                                                    size: size,
-                                                    jobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                    skillList: skillList,
-                                                    jobRecruitmentId:
-                                                        jobRecruitmentId,
-                                                  ),
-                                                  Oppotunities(
-                                                    size: size,
-                                                    JobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                  ),
-                                                  RoleResponsiblities(
-                                                    size: size,
-                                                    JobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                  ),
-                                                  CandidatesList(
-                                                    JobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                  ),
-                                                ]
-                                              : [
-                                                  JobDetail(
-                                                    size: size,
-                                                    jobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                    skillList: skillList,
-                                                    jobRecruitmentId:
-                                                        jobRecruitmentId,
-                                                  ),
-                                                  Oppotunities(
-                                                    size: size,
-                                                    JobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                  ),
-                                                  RoleResponsiblities(
-                                                    size: size,
-                                                    JobRecruitmentData:
-                                                        JobRecruitmentData,
-                                                  ),
-                                                ],
-                                    ),
+                                    child: TabBarView(children: [
+                                      JobDetail(
+                                        size: size,
+                                        jobRecruitmentData: JobRecruitmentData,
+                                        skillList: skillList,
+                                        jobRecruitmentId: jobRecruitmentId,
+                                      ),
+                                      Oppotunities(
+                                        size: size,
+                                        JobRecruitmentData: JobRecruitmentData,
+                                      ),
+                                      RoleResponsiblities(
+                                        size: size,
+                                        JobRecruitmentData: JobRecruitmentData,
+                                      ),
+                                      if (JobRecruitmentData['recruiter_id'] ==
+                                          fireAuth.currentUser!.uid)
+                                        CandidatesList(
+                                          JobRecruitmentData:
+                                              JobRecruitmentData,
+                                        ),
+                                    ]),
                                   )
                                 ],
                               ),
@@ -167,13 +134,12 @@ class JobRecruitmentDetailPage extends StatelessWidget {
               ],
             ),
           ),
-          JobRecruitmentData['recruiter_id'] == fireAuth.currentUser!.uid
-              ? const SizedBox()
-              : JobApplyButton(
-                  candiateList: candidateList,
-                  JobRecruitmentData: JobRecruitmentData,
-                  jobRecruitmentId: jobRecruitmentId,
-                ),
+          if (JobRecruitmentData['recruiter_id'] != fireAuth.currentUser!.uid)
+            JobApplyButton(
+              candiateList: candidateList,
+              JobRecruitmentData: JobRecruitmentData,
+              jobRecruitmentId: jobRecruitmentId,
+            ),
         ],
       ),
     );

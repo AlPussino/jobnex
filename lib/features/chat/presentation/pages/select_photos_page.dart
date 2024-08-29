@@ -125,7 +125,7 @@ class _SelectPhotosPageState extends State<SelectPhotosPage> {
                           "${e.name} (${snapshot.data})",
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 12),
+                          // style: const TextStyle(fontSize: 12),
                         );
                       }
                     },

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:toastification/toastification.dart';
@@ -50,7 +51,7 @@ class _UpdateThemePageState extends State<UpdateThemePage> {
               onPressed: updateTheme,
               icon: const Icon(
                 Icons.check,
-                color: Colors.white,
+                color: AppPallete.white,
               ),
             ),
         ],
@@ -141,7 +142,7 @@ class _UpdateThemePageState extends State<UpdateThemePage> {
               Expanded(
                 child: Center(
                   child: CircleColorPicker(
-                    textStyle: const TextStyle(color: Colors.transparent),
+                    textStyle: const TextStyle(color: AppPallete.transparent),
                     controller: controller,
                     onChanged: (color) {
                       setState(() {

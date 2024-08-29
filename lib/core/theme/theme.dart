@@ -114,7 +114,7 @@
 //     tabBarTheme: const TabBarTheme(
 //       indicatorColor: AppPallete.elevatedButtonBackgroundColor,
 //       labelColor: AppPallete.elevatedButtonBackgroundColor,
-//       dividerColor: AppPallete.transpartent,
+//       dividerColor: AppPallete.transparent,
 //       tabAlignment: TabAlignment.center,
 //       indicatorSize: TabBarIndicatorSize.label,
 //       indicator: BoxDecoration(
@@ -256,7 +256,7 @@ class AppTheme {
     tabBarTheme: const TabBarTheme(
       indicatorColor: AppPallete.lightBlue,
       labelColor: AppPallete.lightBlue,
-      dividerColor: AppPallete.transpartent,
+      dividerColor: AppPallete.transparent,
       tabAlignment: TabAlignment.center,
       indicatorSize: TabBarIndicatorSize.label,
       indicator: BoxDecoration(
