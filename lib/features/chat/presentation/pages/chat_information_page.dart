@@ -77,8 +77,8 @@ class ChatInformationPage extends StatelessWidget {
             SnackBars.showToastification(
                 context,
                 state.is_block
-                    ? "block sunncessfully."
-                    : "unblock sunncessfully.",
+                    ? "blocked successfully."
+                    : "unblocked successfully.",
                 ToastificationType.success);
             Navigator.pop(context);
           }

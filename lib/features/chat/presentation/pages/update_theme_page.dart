@@ -49,10 +49,7 @@ class _UpdateThemePageState extends State<UpdateThemePage> {
           if (Color(widget.chatListData['theme']) != controller.color)
             IconButton(
               onPressed: updateTheme,
-              icon: const Icon(
-                Icons.check,
-                color: AppPallete.white,
-              ),
+              icon: const Icon(Icons.check),
             ),
         ],
       ),

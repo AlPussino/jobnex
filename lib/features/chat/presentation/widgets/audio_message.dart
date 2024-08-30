@@ -91,20 +91,22 @@ class _AudioMessageState extends State<AudioMessage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return Container(
       width: widget.size.width,
       alignment: widget.chatData['sender_id'] == fireAuth.currentUser!.uid
           ? Alignment.centerRight
           : Alignment.centerLeft,
       child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         color: widget.chatData['sender_id'] == fireAuth.currentUser!.uid
             ? Color(widget.chatListData['theme'])
             : null,
         child: Container(
           width: widget.size.width / 2,
-          height: widget.size.height / 10,
+          height: widget.size.height / 15,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(40),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -112,18 +114,19 @@ class _AudioMessageState extends State<AudioMessage> {
                 ? const LoadingWidget(caption: "")
                 : Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        onPressed: isPlaying ? pauseAudio : playAudio,
-                        icon: Icon(
-                          isPlaying ? Icons.pause_circle : Icons.play_circle,
-                          color: Theme.of(context).primaryColor,
+                      InkWell(
+                        onTap: isPlaying ? pauseAudio : playAudio,
+                        child: CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: Icon(
+                            isPlaying ? Icons.pause : Icons.play_arrow,
+                            color: Theme.of(context).canvasColor,
+                          ),
                         ),
                       ),
-
-                      //
+                      SizedBox(width: size.width / 30),
                       isPlaying
                           ? AnimateIcon(
                               key: UniqueKey(),
@@ -143,7 +146,7 @@ class _AudioMessageState extends State<AudioMessage> {
                                 )
                               : Text(
                                   formatDuration(audioDuration),
-                                ),
+                                )
                     ],
                   ),
           ),

@@ -204,8 +204,13 @@ class _ChatInputsState extends State<ChatInputs> {
                       children: [
                         Draggable(
                           data: "mic",
-                          feedback: const CircleAvatar(
-                              child: Icon(Iconsax.microphone_2_bold)),
+                          feedback: CircleAvatar(
+                              backgroundColor:
+                                  Color(widget.chatListData['theme']),
+                              child: const Icon(
+                                Iconsax.microphone_2_bold,
+                                color: AppPallete.white,
+                              )),
                           onDragStarted: () {
                             startAudioRecording();
                             setState(() {
@@ -247,6 +252,7 @@ class _ChatInputsState extends State<ChatInputs> {
                                           backgroundColor: AppPallete.red,
                                           child: const Icon(
                                             Icons.delete,
+                                            color: AppPallete.white,
                                             size: 20,
                                           ),
                                         );
@@ -263,8 +269,13 @@ class _ChatInputsState extends State<ChatInputs> {
                               ),
                             ),
                           ),
-                          child: const CircleAvatar(
-                              child: Icon(Iconsax.microphone_2_bold)),
+                          child: CircleAvatar(
+                              backgroundColor:
+                                  Color(widget.chatListData['theme']),
+                              child: const Icon(
+                                Iconsax.microphone_2_bold,
+                                color: AppPallete.white,
+                              )),
                         ),
 
                         //
@@ -285,14 +296,18 @@ class _ChatInputsState extends State<ChatInputs> {
                           ),
                       ],
                     ),
-
                   if (!isRecording)
                     Expanded(
-                      child: TextField(
+                      child: TextFormField(
                         autofocus: false,
                         controller: widget.messageController,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(8),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  width: 2,
+                                  color: Color(widget.chatListData['theme']))),
                           suffixIcon: IconButton(
                             onPressed: () async {
                               FocusManager.instance.primaryFocus!.unfocus();
@@ -333,15 +348,6 @@ class _ChatInputsState extends State<ChatInputs> {
                                   style: const TextStyle(fontSize: 25))
                               : const Icon(Iconsax.send_2_bulk),
                     ),
-
-                  /////
-
-                  // if (context.watch<ChatInputProvider>().inputTexts.isEmpty)
-                  //   TextButton(
-                  //     onPressed: sendTextMessage,
-                  //     child: Text(widget.chatListData['quick_react'],
-                  //         style: const TextStyle(fontSize: 25)),
-                  //   )
                 ],
               ),
 
@@ -352,7 +358,9 @@ class _ChatInputsState extends State<ChatInputs> {
                   alignment: Alignment.bottomCenter,
                   curve: Curves.bounceInOut,
                   child: EmojiPicker(
-                    onEmojiSelected: (category, emoji) {},
+                    onEmojiSelected: (category, emoji) {
+                      context.read<ChatInputProvider>().userTypes(emoji.emoji);
+                    },
                     onBackspacePressed: () {},
                     textEditingController: widget.messageController,
                     config: Config(

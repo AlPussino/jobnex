@@ -35,13 +35,13 @@ class _FileMessageState extends State<FileMessage> {
             ? Color(widget.chatListData['theme'])
             : null,
         child: Container(
-          width: widget.size.width / 1.3,
-          height: widget.size.height / 10,
+          width: widget.size.width / 1.5,
+          height: widget.size.height / 13,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: widget.chatData['message'][0] == ""
                 ? const LoadingWidget(caption: "")
                 : SizedBox(
@@ -64,13 +64,8 @@ class _FileMessageState extends State<FileMessage> {
                                 },
                               );
                             },
-                            child: Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                            child: CircleAvatar(
+                                radius: double.infinity,
                                 child: isDownloading
                                     ? const LoadingWidget(caption: "")
                                     : const Icon(
@@ -79,7 +74,7 @@ class _FileMessageState extends State<FileMessage> {
                         ),
                         SizedBox(width: widget.size.width / 10),
                         Expanded(
-                          flex: 2,
+                          flex: 4,
                           child: Text(
                             widget.chatData['message'][0],
                             softWrap: true,

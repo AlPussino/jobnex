@@ -195,15 +195,10 @@ class DarkTheme {
         ),
       ),
 
-      // Drop Down Menu Button
-      dropdownMenuTheme: DropdownMenuThemeData(
-          textStyle: TextStyle(color: AppPallete.green),
-          menuStyle: MenuStyle(
-              shadowColor: WidgetStatePropertyAll(Colors.amber),
-              surfaceTintColor: WidgetStatePropertyAll(Colors.indigo),
-              backgroundColor: WidgetStatePropertyAll(AppPallete.red)),
-          inputDecorationTheme:
-              InputDecorationTheme(fillColor: AppPallete.blue))
+      // Dialog
+      dialogTheme: const DialogTheme(
+        backgroundColor: AppPallete.backgroundColor,
+      )
       //
       );
 }

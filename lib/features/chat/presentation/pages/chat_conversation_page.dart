@@ -12,8 +12,6 @@ import 'package:freezed_example/features/chat/presentation/widgets/message_list_
 import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
 
-import '../../../../core/theme/app_pallete.dart';
-
 class ChatConversationPage extends StatefulWidget {
   static const routeName = '/chat-conversation-page';
 
@@ -125,13 +123,10 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                             messageController: messageController,
                             chatListData: chatRoomData,
                           )
-                        : Container(
-                            padding: const EdgeInsets.all(10),
-                            width: size.width,
-                            color: AppPallete.black,
-                            child: Center(
-                                child: Text(
-                                    "${chatRoomData['block_by'] == fireAuth.currentUser!.uid ? "You" : "Other"} blocked."))),
+                        : Card(
+                            child: Text(
+                                "${chatRoomData['block_by'] == fireAuth.currentUser!.uid ? "You" : "Other"} blocked."),
+                          ),
                   ],
                 ),
               );

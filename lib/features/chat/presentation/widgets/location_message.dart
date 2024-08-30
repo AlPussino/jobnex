@@ -45,7 +45,7 @@ class LocationMessage extends StatelessWidget {
             : null,
         child: Container(
           width: size.width / 2,
-          height: size.height / 10,
+          height: size.height / 15,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -53,22 +53,25 @@ class LocationMessage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () => openMap(
-                  latitude: double.parse(latitude),
-                  longitude: double.parse(longitude),
-                  addressTitle: addressTitle,
+              Expanded(
+                flex: 1,
+                child: IconButton(
+                  onPressed: () => openMap(
+                    latitude: double.parse(latitude),
+                    longitude: double.parse(longitude),
+                    addressTitle: addressTitle,
+                  ),
+                  icon: const Icon(Iconsax.location_bold),
                 ),
-                icon: const Icon(Iconsax.location_bold),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(latitude),
-                  Text(longitude),
-                ],
+              Expanded(
+                flex: 3,
+                child: Text(
+                  addressTitle,
+                  softWrap: true,
+                  maxLines: 1,
+                  overflow: TextOverflow.clip,
+                ),
               ),
             ],
           ),

@@ -30,12 +30,12 @@ class ImagesMessage extends StatelessWidget {
           : Alignment.centerLeft,
       child: imageList.length == 1
           ? SizedBox(
-              height: size.height / 4,
-              width: size.width / 3,
+              height: size.height / 5,
+              width: size.width / 4,
               child: imageList[0] == ""
                   ? const Card(child: LoadingWidget(caption: ""))
                   : ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       child: InkWell(
                         onTap: () {
                           Navigator.pushNamed(
@@ -69,8 +69,9 @@ class ImagesMessage extends StatelessWidget {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    crossAxisSpacing: 3,
-                    mainAxisSpacing: 3,
+                    crossAxisSpacing: 1,
+                    mainAxisSpacing: 1,
+                    childAspectRatio: 1 / 1.5,
                   ),
                   itemCount: imageList.length,
                   itemBuilder: (context, index) {
@@ -78,7 +79,7 @@ class ImagesMessage extends StatelessWidget {
                     return image == ""
                         ? const Card(child: LoadingWidget(caption: ""))
                         : ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(8),
                             child: InkWell(
                               onTap: () {
                                 Navigator.pushNamed(

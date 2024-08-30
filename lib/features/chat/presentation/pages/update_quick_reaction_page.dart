@@ -50,10 +50,7 @@ class _UpdateQuickReactionPageState extends State<UpdateQuickReactionPage> {
           if (updateReact)
             IconButton(
               onPressed: updateQuickReaction,
-              icon: const Icon(
-                Icons.check,
-                color: AppPallete.white,
-              ),
+              icon: const Icon(Icons.check),
             ),
         ],
       ),

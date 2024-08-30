@@ -45,7 +45,7 @@ class _MessageListWidgetState extends State<MessageListWidget> {
       },
       builder: (context, state) {
         if (state is ChatLoading) {
-          return const LoadingWidget(caption: "Loading...");
+          return const LoadingWidget(caption: "");
         }
         if (state is ChatFailure) {
           return ErrorWidgets(errorMessage: state.message);
@@ -56,24 +56,22 @@ class _MessageListWidgetState extends State<MessageListWidget> {
             stream: state.chatStream,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "Loading...");
+                return const LoadingWidget(caption: "");
               } else if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
                 return const ErrorWidgets(
                     errorMessage: "No conversation found.");
               }
               final chatStreamSnapShot = snapshot.data!.docs;
-              return SizedBox(
-                child: ListView.builder(
-                  reverse: true,
-                  itemCount: chatStreamSnapShot.length,
-                  itemBuilder: (context, index) {
-                    final chatStreamData = chatStreamSnapShot[index].data();
-                    return MessageBox(
-                      chatData: chatStreamData,
-                      chatListData: widget.chatRoomData,
-                    );
-                  },
-                ),
+              return ListView.builder(
+                reverse: true,
+                itemCount: chatStreamSnapShot.length,
+                itemBuilder: (context, index) {
+                  final chatStreamData = chatStreamSnapShot[index].data();
+                  return MessageBox(
+                    chatData: chatStreamData,
+                    chatListData: widget.chatRoomData,
+                  );
+                },
               );
             },
           );
