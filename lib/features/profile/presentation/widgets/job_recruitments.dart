@@ -37,14 +37,14 @@ class _JobRecruitmentsState extends State<JobRecruitments> {
       },
       builder: (context, state) {
         if (state is UserLoading) {
-          return const LoadingWidget(caption: "Loading...");
+          return const LoadingWidget();
         }
         if (state is UserGetUserJobRecruitmentsSuccess) {
           return StreamBuilder(
             stream: state.jobRecruitments,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               }
               final recruitmentSnapShot = snapshot.data!.docs;
               if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
@@ -59,8 +59,10 @@ class _JobRecruitmentsState extends State<JobRecruitments> {
                   final recruitmentId = recruitmentSnapShot[index].id;
 
                   return JobRecruitmentCard(
-                      recruitmentData: recruitmentData,
-                      recruitmentId: recruitmentId);
+                    recruitmentData: recruitmentData,
+                    recruitmentId: recruitmentId,
+                    index: index,
+                  );
                 },
               );
             },

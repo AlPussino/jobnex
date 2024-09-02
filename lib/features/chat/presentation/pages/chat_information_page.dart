@@ -85,7 +85,7 @@ class ChatInformationPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is ChatLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           if (state is ChatFailure) {
             return ErrorWidgets(errorMessage: state.message);

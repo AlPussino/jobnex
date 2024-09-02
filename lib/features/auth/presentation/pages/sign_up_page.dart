@@ -108,9 +108,7 @@ class SignUpPagePortrait extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return const LoadingWidget(
-                caption: "Creating account...",
-              );
+              return const LoadingWidget();
             }
 
             return ListView(
@@ -194,9 +192,7 @@ class SignUpLandscape extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return const LoadingWidget(
-                caption: "Creating account...",
-              );
+              return const LoadingWidget();
             }
             return Row(
               children: [

@@ -37,11 +37,15 @@ class ChatConversationAppBar extends StatelessWidget {
           )
         ],
       ),
-      title: Text(receiverData['name']),
+      title: Text(
+        receiverData['name'],
+        style: Theme.of(context).primaryTextTheme.titleMedium,
+      ),
       subtitle: Text(
         receiverData['is_online']
             ? "online"
             : changeToTimeAgo(chatRoomData['last_online']),
+        style: Theme.of(context).primaryTextTheme.bodySmall,
       ),
     );
   }

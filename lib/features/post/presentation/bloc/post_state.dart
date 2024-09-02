@@ -24,6 +24,6 @@ final class PostGetPostsSuccessState extends PostState {
 final class PostAddPostSuccessState extends PostState {}
 
 final class PostGetPostByIdSuccessState extends PostState {
-  final Post post;
+  final Stream<Post> post;
   const PostGetPostByIdSuccessState({required this.post});
 }

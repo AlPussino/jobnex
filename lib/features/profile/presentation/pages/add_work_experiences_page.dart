@@ -90,7 +90,7 @@ class _AddWorkExperiencePageState extends State<AddWorkExperiencePage> {
           },
           builder: (context, state) {
             if (state is WorkExperienceLoading) {
-              return const LoadingWidget(caption: "Adding...");
+              return const LoadingWidget();
             }
             return Padding(
               padding: const EdgeInsets.all(10),

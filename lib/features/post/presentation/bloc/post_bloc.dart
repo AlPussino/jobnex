@@ -5,6 +5,7 @@ import 'package:freezed_example/core/usecase/usecase.dart';
 import 'package:freezed_example/features/post/data/model/post.dart';
 import 'package:freezed_example/features/post/domain/usecase/add_post.dart';
 import 'package:freezed_example/features/post/domain/usecase/get_all_posts.dart';
+import 'package:freezed_example/features/post/domain/usecase/get_post_by_id.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
@@ -12,12 +13,15 @@ part 'post_state.dart';
 class PostBloc extends Bloc<PostEvent, PostState> {
   final AddPost _addPost;
   final GetAllPosts _getAllPosts;
+  final GetPostById _getPostById;
 
   PostBloc({
     required AddPost addPost,
     required GetAllPosts getAllPosts,
+    required GetPostById getPostById,
   })  : _addPost = addPost,
         _getAllPosts = getAllPosts,
+        _getPostById = getPostById,
         super(PostInitial()) {
     on<PostEvent>((_, emit) => emit(PostLoading()));
     on<PostGetAllPost>(onPostGetAllPosts);
@@ -42,11 +46,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   FutureOr<void> onPostGetPostById(
       PostGetPostById event, Emitter<PostState> emit) async {
-    final response = await _getAllPosts.call(NoParams());
+    final response =
+        await _getPostById.call(GetPostByIdParams(postId: event.post_id));
 
-    response.fold(
-        (failure) => emit(PostFailure(failure.message)),
-        (posts) => emit(PostGetPostByIdSuccessState(
-            post: Post(text: "Bla", image: "", created_at: DateTime.now()))));
+    response.fold((failure) => emit(PostFailure(failure.message)),
+        (post) => emit(PostGetPostByIdSuccessState(post: post)));
   }
 }

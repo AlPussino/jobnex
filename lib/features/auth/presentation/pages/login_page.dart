@@ -91,7 +91,7 @@ class LogInPagePortrait extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return const LoadingWidget(caption: "Logging in...");
+              return const LoadingWidget();
             }
             return ListView(
               children: [
@@ -165,7 +165,7 @@ class LogInPageLandscape extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return const LoadingWidget(caption: "Logging in...");
+              return const LoadingWidget();
             }
             return Row(
               children: [

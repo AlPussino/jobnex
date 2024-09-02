@@ -46,6 +46,7 @@ import 'package:freezed_example/features/post/data/repository/post_repository_im
 import 'package:freezed_example/features/post/domain/repository/post_repository.dart';
 import 'package:freezed_example/features/post/domain/usecase/add_post.dart';
 import 'package:freezed_example/features/post/domain/usecase/get_all_posts.dart';
+import 'package:freezed_example/features/post/domain/usecase/get_post_by_id.dart';
 import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
 import 'package:freezed_example/features/profile/data/datasource/user_remote_datasource.dart';
 import 'package:freezed_example/features/profile/data/repository/user_repository_impl.dart';
@@ -241,12 +242,13 @@ void initPost() {
     //Usecase
     ..registerFactory(() => AddPost(serviceLocator()))
     ..registerFactory(() => GetAllPosts(serviceLocator()))
+    ..registerFactory(() => GetPostById(serviceLocator()))
 
     //Bloc
     ..registerFactory(() => PostBloc(
-          addPost: serviceLocator(),
-          getAllPosts: serviceLocator(),
-        ));
+        addPost: serviceLocator(),
+        getAllPosts: serviceLocator(),
+        getPostById: serviceLocator()));
 }
 
 void initAppliedJobs() {

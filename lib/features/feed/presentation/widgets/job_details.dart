@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/feed/presentation/widgets/job_recruiter.dart';
 
 class JobDetail extends StatelessWidget {
@@ -25,6 +26,10 @@ class JobDetail extends StatelessWidget {
         children: [
           Text(
             jobRecruitmentData['job_position'],
+            style: Theme.of(context)
+                .primaryTextTheme
+                .titleLarge!
+                .copyWith(color: AppPallete.lightBlue),
           ),
           SizedBox(height: size.height / 40),
           Row(
@@ -32,8 +37,12 @@ class JobDetail extends StatelessWidget {
             children: [
               Text(
                 jobRecruitmentData['company_name'],
+                style: Theme.of(context).primaryTextTheme.titleMedium,
               ),
-              Text(jobRecruitmentData['job_location']),
+              Text(
+                jobRecruitmentData['job_location'],
+                style: Theme.of(context).primaryTextTheme.titleMedium,
+              ),
             ],
           ),
           SizedBox(height: size.height / 40),
@@ -42,6 +51,7 @@ class JobDetail extends StatelessWidget {
             children: [
               Text(
                 jobRecruitmentData['sallary_range'],
+                style: Theme.of(context).primaryTextTheme.titleMedium,
               ),
               Chip(
                 label: Text(
@@ -56,14 +66,21 @@ class JobDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Experience'),
+              Text(
+                'Experience',
+                style: Theme.of(context).primaryTextTheme.bodySmall,
+              ),
               Text(
                 jobRecruitmentData['years_of_experience'],
+                style: Theme.of(context).primaryTextTheme.titleMedium,
               ),
             ],
           ),
           SizedBox(height: size.height / 40),
-          const Text('Skills'),
+          Text(
+            'Skills',
+            style: Theme.of(context).primaryTextTheme.bodySmall,
+          ),
           Wrap(
             spacing: 8.0,
             runSpacing: 4.0,

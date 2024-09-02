@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
 import 'package:freezed_example/core/theme/app_pallete.dart';
+import 'package:freezed_example/features/profile/presentation/pages/profile_page.dart';
 
 class ChatInformationUserProfileWidget extends StatelessWidget {
   final DocumentReference<Map<String, dynamic>> userData;
@@ -14,7 +15,7 @@ class ChatInformationUserProfileWidget extends StatelessWidget {
       stream: userData.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingWidget(caption: "");
+          return const LoadingWidget();
         } else if (snapshot.hasError) {
           return Center(child: Text("${snapshot.error}"));
         }
@@ -23,13 +24,19 @@ class ChatInformationUserProfileWidget extends StatelessWidget {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: AppPallete.backgroundColor,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfilePage.routeName,
+                        arguments: snapshot.data!['user_id']);
+                  },
                   child: CircleAvatar(
-                    radius: 38,
-                    backgroundImage: CachedNetworkImageProvider(
-                        snapshot.data!['profile_url']),
+                    radius: 40,
+                    backgroundColor: AppPallete.backgroundColor,
+                    child: CircleAvatar(
+                      radius: 38,
+                      backgroundImage: CachedNetworkImageProvider(
+                          snapshot.data!['profile_url']),
+                    ),
                   ),
                 ),
                 CircleAvatar(

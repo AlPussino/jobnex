@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_example/auth_gate.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:freezed_example/features/profile/presentation/pages/add_work_experiences_page.dart';
 import 'package:freezed_example/features/profile/presentation/widgets/job_recruitments.dart';
 import 'package:freezed_example/features/profile/presentation/widgets/profile_card.dart';
@@ -59,7 +58,6 @@ class _ProfilePageState extends State<ProfilePage>
                     },
                     icon: const Icon(
                       Iconsax.logout_bold,
-                      color: AppPallete.white,
                     ),
                   ),
                 ]
@@ -97,7 +95,8 @@ class _ProfilePageState extends State<ProfilePage>
             ),
           ],
         ),
-        floatingActionButton: tabController.index == 1 &&  widget.user_id==fireAuth.currentUser!.uid
+        floatingActionButton: tabController.index == 1 &&
+                widget.user_id == fireAuth.currentUser!.uid
             ? FloatingActionButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AddWorkExperiencePage.routeName);

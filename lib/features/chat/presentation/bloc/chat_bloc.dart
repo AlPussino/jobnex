@@ -97,6 +97,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     final response = await _getChatList.call(NoParams());
     response.fold((failure) => emit(ChatFailure(failure.message)),
         (chatList) => emit(ChatGetChatListSuccess(chatList)));
+    // (chatList) => emit(ChatLoading()));
   }
 
   void onChatGetChatMessages(

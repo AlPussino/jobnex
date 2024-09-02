@@ -20,12 +20,22 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
-  String get text => throw _privateConstructorUsedError;
-  set text(String value) => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  set id(String? value) => throw _privateConstructorUsedError;
+  String get post_title => throw _privateConstructorUsedError;
+  set post_title(String value) => throw _privateConstructorUsedError;
+  String get post_body => throw _privateConstructorUsedError;
+  set post_body(String value) => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   set image(String value) => throw _privateConstructorUsedError;
   DateTime get created_at => throw _privateConstructorUsedError;
   set created_at(DateTime value) => throw _privateConstructorUsedError;
+  String? get post_owner_id => throw _privateConstructorUsedError;
+  set post_owner_id(String? value) => throw _privateConstructorUsedError;
+  List<React> get reacts => throw _privateConstructorUsedError;
+  set reacts(List<React> value) => throw _privateConstructorUsedError;
+  List<Comment> get comments => throw _privateConstructorUsedError;
+  set comments(List<Comment> value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +47,15 @@ abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
-  $Res call({String text, String image, DateTime created_at});
+  $Res call(
+      {String? id,
+      String post_title,
+      String post_body,
+      String image,
+      DateTime created_at,
+      String? post_owner_id,
+      List<React> reacts,
+      List<Comment> comments});
 }
 
 /// @nodoc
@@ -53,14 +71,27 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? id = freezed,
+    Object? post_title = null,
+    Object? post_body = null,
     Object? image = null,
     Object? created_at = null,
+    Object? post_owner_id = freezed,
+    Object? reacts = null,
+    Object? comments = null,
   }) {
     return _then(_value.copyWith(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      post_title: null == post_title
+          ? _value.post_title
+          : post_title // ignore: cast_nullable_to_non_nullable
+              as String,
+      post_body: null == post_body
+          ? _value.post_body
+          : post_body // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -70,6 +101,18 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      post_owner_id: freezed == post_owner_id
+          ? _value.post_owner_id
+          : post_owner_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reacts: null == reacts
+          ? _value.reacts
+          : reacts // ignore: cast_nullable_to_non_nullable
+              as List<React>,
+      comments: null == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
     ) as $Val);
   }
 }
@@ -81,7 +124,15 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       __$$PostImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String image, DateTime created_at});
+  $Res call(
+      {String? id,
+      String post_title,
+      String post_body,
+      String image,
+      DateTime created_at,
+      String? post_owner_id,
+      List<React> reacts,
+      List<Comment> comments});
 }
 
 /// @nodoc
@@ -94,14 +145,27 @@ class __$$PostImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? id = freezed,
+    Object? post_title = null,
+    Object? post_body = null,
     Object? image = null,
     Object? created_at = null,
+    Object? post_owner_id = freezed,
+    Object? reacts = null,
+    Object? comments = null,
   }) {
     return _then(_$PostImpl(
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      post_title: null == post_title
+          ? _value.post_title
+          : post_title // ignore: cast_nullable_to_non_nullable
+              as String,
+      post_body: null == post_body
+          ? _value.post_body
+          : post_body // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -111,6 +175,18 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.created_at
           : created_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      post_owner_id: freezed == post_owner_id
+          ? _value.post_owner_id
+          : post_owner_id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reacts: null == reacts
+          ? _value.reacts
+          : reacts // ignore: cast_nullable_to_non_nullable
+              as List<React>,
+      comments: null == comments
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
     ));
   }
 }
@@ -119,22 +195,39 @@ class __$$PostImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostImpl extends _Post {
   _$PostImpl(
-      {required this.text, required this.image, required this.created_at})
+      {this.id,
+      required this.post_title,
+      required this.post_body,
+      required this.image,
+      required this.created_at,
+      this.post_owner_id,
+      required this.reacts,
+      required this.comments})
       : super._();
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostImplFromJson(json);
 
   @override
-  String text;
+  String? id;
+  @override
+  String post_title;
+  @override
+  String post_body;
   @override
   String image;
   @override
   DateTime created_at;
+  @override
+  String? post_owner_id;
+  @override
+  List<React> reacts;
+  @override
+  List<Comment> comments;
 
   @override
   String toString() {
-    return 'Post(text: $text, image: $image, created_at: $created_at)';
+    return 'Post(id: $id, post_title: $post_title, post_body: $post_body, image: $image, created_at: $created_at, post_owner_id: $post_owner_id, reacts: $reacts, comments: $comments)';
   }
 
   @JsonKey(ignore: true)
@@ -153,22 +246,42 @@ class _$PostImpl extends _Post {
 
 abstract class _Post extends Post {
   factory _Post(
-      {required String text,
+      {String? id,
+      required String post_title,
+      required String post_body,
       required String image,
-      required DateTime created_at}) = _$PostImpl;
+      required DateTime created_at,
+      String? post_owner_id,
+      required List<React> reacts,
+      required List<Comment> comments}) = _$PostImpl;
   _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
   @override
-  String get text;
-  set text(String value);
+  String? get id;
+  set id(String? value);
+  @override
+  String get post_title;
+  set post_title(String value);
+  @override
+  String get post_body;
+  set post_body(String value);
   @override
   String get image;
   set image(String value);
   @override
   DateTime get created_at;
   set created_at(DateTime value);
+  @override
+  String? get post_owner_id;
+  set post_owner_id(String? value);
+  @override
+  List<React> get reacts;
+  set reacts(List<React> value);
+  @override
+  List<Comment> get comments;
+  set comments(List<Comment> value);
   @override
   @JsonKey(ignore: true)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>

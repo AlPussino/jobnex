@@ -242,7 +242,7 @@ class AppTheme {
     //Card
     cardTheme: const CardTheme(
       surfaceTintColor: AppPallete.white,
-      color: AppPallete.onBackgroundColor,
+      color: AppPallete.onBlackBackgroundColor,
     ),
 
     //ListTile

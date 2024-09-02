@@ -44,7 +44,7 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
         },
         builder: (context, state) {
           if (state is AppliedJobsLoading) {
-            return const LoadingWidget(caption: "Loading...");
+            return const LoadingWidget();
           }
           if (state is AppliedJobsFailure) {
             return ErrorWidgets(errorMessage: state.message);
@@ -54,7 +54,7 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
               stream: state.appliedJobs,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LoadingWidget(caption: "Loading...");
+                  return const LoadingWidget();
                 } else if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
                   return const ErrorWidgets(
                       errorMessage: "No Applied Jobs found.");
@@ -72,13 +72,15 @@ class _AppliedJobsPageState extends State<AppliedJobsPage> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const LoadingWidget(caption: "Loading...");
+                          return const LoadingWidget();
                         }
                         final recruitmentData = snapshot.data!.data()!;
                         final recruitmentId = snapshot.data!.id;
                         return JobRecruitmentCard(
-                            recruitmentData: recruitmentData,
-                            recruitmentId: recruitmentId);
+                          recruitmentData: recruitmentData,
+                          recruitmentId: recruitmentId,
+                          index: index,
+                        );
                       },
                     );
                   },

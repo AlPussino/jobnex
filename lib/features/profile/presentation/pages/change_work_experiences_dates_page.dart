@@ -88,7 +88,7 @@ class _ChangeWorkExperiencesDatesPageState
         },
         builder: (context, state) {
           if (state is WorkExperienceLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           return Form(
             key: formKey,

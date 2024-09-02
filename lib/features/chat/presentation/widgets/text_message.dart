@@ -33,6 +33,7 @@ class TextMessage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
               chatData['message'],
+              style: Theme.of(context).primaryTextTheme.titleSmall,
             ),
           ),
         ),

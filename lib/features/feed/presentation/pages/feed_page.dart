@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
@@ -77,7 +78,7 @@ class FeedPagePortrait extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FeedLoading) {
-          return const LoadingWidget(caption: "Adding...");
+          return const LoadingWidget();
         }
         if (state is FeedFailure) {
           return ErrorWidgets(errorMessage: state.message);
@@ -87,7 +88,7 @@ class FeedPagePortrait extends StatelessWidget {
             stream: state.jobRecruitments,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               }
               final recruitmentSnapShot = snapshot.data!.docs;
               if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
@@ -95,16 +96,24 @@ class FeedPagePortrait extends StatelessWidget {
                   errorMessage: "No Job Recruitments found.",
                 );
               }
-              return ListView.builder(
-                itemCount: recruitmentSnapShot.length,
-                itemBuilder: (context, index) {
-                  final recruitmentData = recruitmentSnapShot[index].data();
-                  final recruitmentId = recruitmentSnapShot[index].id;
+              return AnimationLimiter(
+                child: ListView.builder(
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
+                  addSemanticIndexes: false,
+                  shrinkWrap: false,
+                  itemCount: recruitmentSnapShot.length,
+                  itemBuilder: (context, index) {
+                    final recruitmentData = recruitmentSnapShot[index].data();
+                    final recruitmentId = recruitmentSnapShot[index].id;
 
-                  return JobRecruitmentCard(
+                    return JobRecruitmentCard(
                       recruitmentData: recruitmentData,
-                      recruitmentId: recruitmentId);
-                },
+                      recruitmentId: recruitmentId,
+                      index: index,
+                    );
+                  },
+                ),
               );
             },
           );
@@ -135,14 +144,14 @@ class FeedPageLandscape extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FeedLoading) {
-          return const LoadingWidget(caption: "Adding...");
+          return const LoadingWidget();
         }
         if (state is FeedGetAllJobRecruitmentsSuccessState) {
           return StreamBuilder(
             stream: state.jobRecruitments,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               }
               final feedSnapShot = snapshot.data!.docs;
               if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
@@ -164,7 +173,10 @@ class FeedPageLandscape extends StatelessWidget {
                   final feedId = feedSnapShot[index].id;
 
                   return JobRecruitmentCard(
-                      recruitmentData: feedData, recruitmentId: feedId);
+                    recruitmentData: feedData,
+                    recruitmentId: feedId,
+                    index: index,
+                  );
                 },
               );
             },

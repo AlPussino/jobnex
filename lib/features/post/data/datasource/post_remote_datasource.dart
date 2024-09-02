@@ -37,9 +37,19 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
         firebaseStorage: firebaseStorage,
       ).then(
         (value) async {
+          DocumentReference docRef = fireStore.collection('posts').doc();
           Post newpost = post.copyWith(
-              text: post.text, image: value, created_at: post.created_at);
-          await fireStore.collection("posts").add(newpost.toJson());
+            id: docRef.id,
+            post_title: post.post_title,
+            post_body: post.post_body,
+            post_owner_id: fireAuth.currentUser!.uid,
+            image: value,
+            reacts: [],
+            comments: [],
+            created_at: post.created_at,
+          );
+
+          await docRef.set(newpost.toJson());
         },
       );
     } on FirebaseAuthException catch (e) {

@@ -32,7 +32,7 @@ class _ImagesGridPageState extends State<ImagesGridPage> {
           future: widget.assetList[index].thumbnailData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const LoadingWidget(caption: "Loading...");
+              return const LoadingWidget();
             }
             return InkWell(
               onLongPress: () {

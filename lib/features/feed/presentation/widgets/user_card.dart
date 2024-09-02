@@ -11,6 +11,10 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return InkWell(
+      highlightColor: AppPallete.lightBlue,
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       onTap: () {
         Navigator.pushNamed(context, ProfilePage.routeName,
             arguments: userData['user_id']);
@@ -34,9 +38,11 @@ class UserCard extends StatelessWidget {
                 children: [
                   Text(
                     userData['name'],
+                    style: Theme.of(context).primaryTextTheme.titleMedium,
                   ),
                   Text(
                     userData['email'],
+                    style: Theme.of(context).primaryTextTheme.bodySmall,
                   ),
                 ],
               ),

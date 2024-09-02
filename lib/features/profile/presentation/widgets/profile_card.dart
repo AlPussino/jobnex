@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _ProfileCardState extends State<ProfileCard> {
         },
         builder: (context, state) {
           if (state is UserLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           if (state is UserFailure) {
             return ErrorWidgets(errorMessage: state.message);
@@ -88,110 +89,120 @@ class _ProfileCardState extends State<ProfileCard> {
               stream: state.userInfo,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LoadingWidget(caption: "");
+                  return const LoadingWidget();
                 }
                 final snapShotData = snapshot.data!.data();
                 return ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    SizedBox(
-                      height: size.width,
-                      width: size.width,
-                      child: Card(
+                    FadeInLeft(
+                      from: 20,
+                      duration: const Duration(milliseconds: 300),
+                      delay: const Duration(milliseconds: 300),
+                      animate: true,
+                      curve: Curves.easeIn,
+                      child: SizedBox(
+                        height: size.width,
+                        width: size.width,
+                        child: Card(
                           child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Column(
+                            padding: const EdgeInsets.all(8),
+                            child: Stack(
+                              alignment: Alignment.center,
                               children: [
-                                Expanded(
-                                  child: Stack(
-                                    alignment: Alignment.bottomRight,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                            context,
-                                            ViewImagePage.routeName,
-                                            arguments:
-                                                snapShotData['cover_url'],
-                                          );
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                snapShotData!['cover_url'],
-                                            fit: BoxFit.cover,
-                                            width: size.width,
-                                          ),
-                                        ),
-                                      ),
-                                      if (widget.user_id ==
-                                          fireAuth.currentUser!.uid)
-                                        CircleAvatar(
-                                          child: IconButton(
-                                            onPressed: changeCoverImage,
-                                            icon: const Icon(
-                                              Iconsax.camera_bold,
+                                Column(
+                                  children: [
+                                    Expanded(
+                                      child: Stack(
+                                        alignment: Alignment.bottomRight,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                context,
+                                                ViewImagePage.routeName,
+                                                arguments:
+                                                    snapShotData['cover_url'],
+                                              );
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    snapShotData!['cover_url'],
+                                                fit: BoxFit.cover,
+                                                width: size.width,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: SizedBox(
-                                    width: size.width,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(snapShotData['name']),
-                                        Text(
-                                            snapShotData['professional_title']),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Stack(
-                              alignment: Alignment.bottomRight,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, ViewImagePage.routeName,
-                                        arguments: snapShotData['profile_url']);
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 65,
-                                    child: CircleAvatar(
-                                      radius: 60,
-                                      foregroundImage:
-                                          CachedNetworkImageProvider(
-                                        snapShotData['profile_url'],
+                                          if (widget.user_id ==
+                                              fireAuth.currentUser!.uid)
+                                            CircleAvatar(
+                                              child: IconButton(
+                                                onPressed: changeCoverImage,
+                                                icon: const Icon(
+                                                  Iconsax.camera_bold,
+                                                ),
+                                              ),
+                                            ),
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                ),
-                                if (widget.user_id == fireAuth.currentUser!.uid)
-                                  CircleAvatar(
-                                    radius: 20,
-                                    child: IconButton(
-                                      onPressed: changeProfileImage,
-                                      icon: const Icon(
-                                          Iconsax.refresh_circle_bold),
+                                    Expanded(
+                                      child: SizedBox(
+                                        width: size.width,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(snapShotData['name']),
+                                            Text(snapShotData[
+                                                'professional_title']),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                                Stack(
+                                  alignment: Alignment.bottomRight,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, ViewImagePage.routeName,
+                                            arguments:
+                                                snapShotData['profile_url']);
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 65,
+                                        child: CircleAvatar(
+                                          radius: 60,
+                                          foregroundImage:
+                                              CachedNetworkImageProvider(
+                                            snapShotData['profile_url'],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    if (widget.user_id ==
+                                        fireAuth.currentUser!.uid)
+                                      CircleAvatar(
+                                        radius: 20,
+                                        child: IconButton(
+                                          onPressed: changeProfileImage,
+                                          icon: const Icon(
+                                              Iconsax.refresh_circle_bold),
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
+                          ),
                         ),
-                      )),
+                      ),
                     ),
                     SizedBox(height: size.height / 40),
                     widget.user_id != fireAuth.currentUser!.uid
@@ -210,100 +221,122 @@ class _ProfileCardState extends State<ProfileCard> {
                             },
                             builder: (context, state) {
                               if (state is ChatLoading) {
-                                return const LoadingWidget(caption: "");
+                                return const LoadingWidget();
                               }
-                              return Row(
-                                children: [
-                                  const Expanded(
-                                    child: Card(
-                                      child: Padding(
-                                        padding: EdgeInsets.all(15),
-                                        child: Icon(Iconsax.call_bold),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: size.width / 40),
-                                  Expanded(
-                                    child: InkWell(
-                                      onTap: () {
-                                        context.read<ChatBloc>().add(
-                                            ChatCreateChat(
-                                                widget.user_id,
-                                                "Hello 🙌🙌",
-                                                MessageTypeEnum.text));
-                                        //
-                                        Navigator.pushNamed(
-                                          context,
-                                          ChatConversationPage.routeName,
-                                          arguments: {
-                                            "receiverData": snapShotData,
-                                            "chatRoomId": widget.user_id,
-                                          },
-                                        );
-                                      },
-                                      child: const Card(
+                              return FadeInLeft(
+                                from: 40,
+                                duration: const Duration(milliseconds: 300),
+                                delay: const Duration(milliseconds: 300),
+                                animate: true,
+                                curve: Curves.easeIn,
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: Card(
                                         child: Padding(
                                           padding: EdgeInsets.all(15),
-                                          child: Icon(Iconsax.message_bold),
+                                          child: Icon(Iconsax.call_bold),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: size.width / 40),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          context.read<ChatBloc>().add(
+                                              ChatCreateChat(
+                                                  widget.user_id,
+                                                  "Hello 🙌🙌",
+                                                  MessageTypeEnum.text));
+                                          //
+                                          Navigator.pushNamed(
+                                            context,
+                                            ChatConversationPage.routeName,
+                                            arguments: {
+                                              "receiverData": snapShotData,
+                                              "chatRoomId": widget.user_id,
+                                            },
+                                          );
+                                        },
+                                        child: const Card(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(15),
+                                            child: Icon(Iconsax.message_bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           )
                         : const SizedBox(),
-                    ListTile(
-                      title: const Text("Personal Information"),
-                      trailing: widget.user_id == fireAuth.currentUser!.uid
-                          ? IconButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, ChangeContactsPage.routeName,
-                                    arguments: snapShotData);
-                              },
-                              icon: const Icon(Iconsax.card_edit_bold),
-                            )
-                          : const SizedBox(),
+                    FadeInLeft(
+                      from: 60,
+                      duration: const Duration(milliseconds: 300),
+                      delay: const Duration(milliseconds: 300),
+                      animate: true,
+                      curve: Curves.easeIn,
+                      child: ListTile(
+                        title: const Text("Personal Information"),
+                        trailing: widget.user_id == fireAuth.currentUser!.uid
+                            ? IconButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, ChangeContactsPage.routeName,
+                                      arguments: snapShotData);
+                                },
+                                icon: const Icon(Iconsax.card_edit_bold),
+                              )
+                            : const SizedBox(),
+                      ),
                     ),
-                    Card(
-                      child: Container(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: const Icon(Iconsax.profile_circle_bold),
-                              title: const Text("Gender"),
-                              subtitle: Text(snapShotData['gender']),
-                            ),
-                            ListTile(
-                              leading: const Icon(Iconsax.flag_bold),
-                              title: const Text("Nationality"),
-                              subtitle: Text(snapShotData['nationality']),
-                            ),
-                            ListTile(
-                              leading: const Icon(Iconsax.calendar_1_bold),
-                              title: const Text("Birth Date"),
-                              subtitle: Text(
-                                  changeDateFormat(snapShotData['birth_date'])),
-                            ),
-                            ListTile(
-                              leading: const Icon(Iconsax.message_2_bold),
-                              title: const Text("Email"),
-                              subtitle: Text(snapShotData['email']),
-                            ),
-                            ListTile(
-                              leading: const Icon(Iconsax.call_bold),
-                              title: const Text("Mobile Number"),
-                              subtitle: Text(snapShotData['mobile_number']),
-                            ),
-                            ListTile(
-                              leading: const Icon(Iconsax.house_bold),
-                              title: const Text("Address"),
-                              subtitle: Text(snapShotData['address']),
-                            ),
-                          ],
+                    FadeInLeft(
+                      from: 80,
+                      duration: const Duration(milliseconds: 300),
+                      delay: const Duration(milliseconds: 300),
+                      animate: true,
+                      curve: Curves.easeIn,
+                      child: Card(
+                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading:
+                                    const Icon(Iconsax.profile_circle_bold),
+                                title: const Text("Gender"),
+                                subtitle: Text(snapShotData['gender']),
+                              ),
+                              ListTile(
+                                leading: const Icon(Iconsax.flag_bold),
+                                title: const Text("Nationality"),
+                                subtitle: Text(snapShotData['nationality']),
+                              ),
+                              ListTile(
+                                leading: const Icon(Iconsax.calendar_1_bold),
+                                title: const Text("Birth Date"),
+                                subtitle: Text(changeDateFormat(
+                                    snapShotData['birth_date'])),
+                              ),
+                              ListTile(
+                                leading: const Icon(Iconsax.message_2_bold),
+                                title: const Text("Email"),
+                                subtitle: Text(snapShotData['email']),
+                              ),
+                              ListTile(
+                                leading: const Icon(Iconsax.call_bold),
+                                title: const Text("Mobile Number"),
+                                subtitle: Text(snapShotData['mobile_number']),
+                              ),
+                              ListTile(
+                                leading: const Icon(Iconsax.house_bold),
+                                title: const Text("Address"),
+                                subtitle: Text(snapShotData['address']),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     )

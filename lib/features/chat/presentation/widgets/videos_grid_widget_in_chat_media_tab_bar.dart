@@ -45,7 +45,7 @@ class _VideosGridWidgetInChatMediaTabBarState
       },
       builder: (context, state) {
         if (state is ChatLoading) {
-          return const LoadingWidget(caption: "Loading...");
+          return const LoadingWidget();
         }
         if (state is ChatFailure) {
           return ErrorWidgets(errorMessage: state.message);
@@ -55,7 +55,7 @@ class _VideosGridWidgetInChatMediaTabBarState
             stream: state.videos,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               } else if (snapshot.hasError) {
                 return Center(child: Text("${snapshot.error}"));
               } else if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
@@ -150,7 +150,7 @@ class _VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
             width: 150,
             height: 150,
             color: AppPallete.grey,
-            child: const LoadingWidget(caption: ""),
+            child: const LoadingWidget(),
           );
   }
 }

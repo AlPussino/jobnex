@@ -11,6 +11,6 @@ final class PostAddPost extends PostEvent {
 }
 
 final class PostGetPostById extends PostEvent {
-  final int post_id;
+  final String post_id;
   PostGetPostById(this.post_id);
 }

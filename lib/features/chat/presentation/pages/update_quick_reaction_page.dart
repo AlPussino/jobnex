@@ -70,7 +70,7 @@ class _UpdateQuickReactionPageState extends State<UpdateQuickReactionPage> {
         },
         builder: (context, state) {
           if (state is ChatLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           if (state is ChatFailure) {
             return ErrorWidgets(errorMessage: state.message);
@@ -136,26 +136,26 @@ class _UpdateQuickReactionPageState extends State<UpdateQuickReactionPage> {
                     });
                   },
                   onBackspacePressed: () {},
-                  config: const Config(
+                  config: Config(
                     checkPlatformCompatibility: false,
                     emojiViewConfig: EmojiViewConfig(
                       horizontalSpacing: 10,
                       verticalSpacing: 10,
                       emojiSizeMax: 25,
                       gridPadding: EdgeInsets.zero,
-                      backgroundColor: AppPallete.backgroundColor,
+                      backgroundColor: Theme.of(context).canvasColor,
                       columns: 7,
                       buttonMode: ButtonMode.MATERIAL,
                     ),
                     swapCategoryAndBottomBar: false,
-                    bottomActionBarConfig: BottomActionBarConfig(
+                    bottomActionBarConfig: const BottomActionBarConfig(
                       enabled: false,
                     ),
                     categoryViewConfig: CategoryViewConfig(
-                      categoryIcons: CategoryIcons(),
+                      categoryIcons: const CategoryIcons(),
                       recentTabBehavior: RecentTabBehavior.NONE,
                       tabIndicatorAnimDuration: kTabScrollDuration,
-                      backgroundColor: AppPallete.backgroundColor,
+                      backgroundColor: Theme.of(context).canvasColor,
                       iconColorSelected: AppPallete.lightBlue,
                       indicatorColor: AppPallete.lightBlue,
                       showBackspaceButton: false,

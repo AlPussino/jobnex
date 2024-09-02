@@ -32,46 +32,11 @@ class CandidatesList extends StatelessWidget {
               stream: candidate.snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LoadingWidget(caption: "");
+                  return const LoadingWidget();
                 } else if (snapshot.hasError) {
                   return Center(child: Text("${snapshot.error}"));
                 }
 
-                // return InkWell(
-                //   onTap: () {
-                //     Navigator.pushNamed(context, ProfilePage.routeName,
-                //         arguments: snapshot.data!['user_id']);
-                //   },
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //         border: Border.all(color: AppPallete.lightBlue),
-                //         borderRadius: BorderRadius.circular(10)),
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(12),
-                //       child: Row(
-                //         children: [
-                //           CircleAvatar(
-                //             radius: 30,
-                //             backgroundImage: CachedNetworkImageProvider(
-                //                 snapshot.data!['profile_url']),
-                //           ),
-                //           SizedBox(width: size.width / 20),
-                //           Column(
-                //             crossAxisAlignment: CrossAxisAlignment.start,
-                //             children: [
-                //               Text(
-                //                 snapshot.data!['name'],
-                //               ),
-                //               Text(
-                //                 snapshot.data!['email'],
-                //               ),
-                //             ],
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // );
                 return UserCard(userData: snapshot.data!.data()!);
               },
             ),

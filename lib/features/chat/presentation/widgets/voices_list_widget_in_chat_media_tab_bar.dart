@@ -41,7 +41,7 @@ class _VoicesListWidgetInChatMediaTabBarState
       },
       builder: (context, state) {
         if (state is ChatLoading) {
-          return const LoadingWidget(caption: "Loading...");
+          return const LoadingWidget();
         }
         if (state is ChatFailure) {
           return ErrorWidgets(errorMessage: state.message);
@@ -51,7 +51,7 @@ class _VoicesListWidgetInChatMediaTabBarState
             stream: state.voices,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               } else if (snapshot.hasError) {
                 return Center(child: Text("${snapshot.error}"));
               } else if (snapshot.hasData && snapshot.data!.docs.isEmpty) {

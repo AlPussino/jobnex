@@ -10,9 +10,12 @@ class AppPallete {
   static const Color red = Colors.red;
   static const Color lightGrey = Color.fromARGB(255, 122, 119, 119);
   static const Color lightBlue = Color(0xff0F969C);
+  static const Color highLightBlue = Color.fromARGB(121, 156, 222, 226);
   static const Color blueAccent = Color.fromARGB(255, 243, 254, 255);
   static const Color backgroundColor = Color.fromRGBO(23, 23, 27, 1);
-  static const Color onBackgroundColor = Color.fromRGBO(26, 30, 33, 1);
+  static const Color onBlackBackgroundColor = Color.fromRGBO(26, 30, 33, 1);
+  static const Color onWhiteBackgroundColor =
+      Color.fromARGB(255, 238, 238, 238);
 
   // static const Color scaffoldBackgroundColor = Color.fromRGBO(23, 23, 27, 1);
   // static const Color appBarBackgroundColor = Color(0xff1B3358);

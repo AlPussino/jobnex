@@ -6,6 +6,13 @@ class NotificationMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Chip(label: Text(message)));
+    return Center(
+      child: Chip(
+        label: Text(
+          message,
+          style: Theme.of(context).primaryTextTheme.bodySmall,
+        ),
+      ),
+    );
   }
 }

@@ -32,7 +32,7 @@ class _JobRecruiterState extends State<JobRecruiter> {
       },
       builder: (context, state) {
         if (state is UserLoading) {
-          return const LoadingWidget(caption: "");
+          return const LoadingWidget();
         }
 
         if (state is UserSuccess) {
@@ -40,7 +40,7 @@ class _JobRecruiterState extends State<JobRecruiter> {
             stream: state.userInfo,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               }
               final userSnapShot = snapshot.data!.data();
 

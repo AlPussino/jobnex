@@ -111,7 +111,7 @@ class _AudioMessageState extends State<AudioMessage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: widget.chatData['message'][0] == ""
-                ? const LoadingWidget(caption: "")
+                ? const LoadingWidget()
                 : Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
@@ -146,6 +146,9 @@ class _AudioMessageState extends State<AudioMessage> {
                                 )
                               : Text(
                                   formatDuration(audioDuration),
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .bodySmall,
                                 )
                     ],
                   ),

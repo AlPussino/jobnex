@@ -125,7 +125,7 @@ class _ChangeContactsPageState extends State<ChangeContactsPage> {
         },
         builder: (context, state) {
           if (state is UserLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           return Card(
             child: ListView(

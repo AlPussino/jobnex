@@ -73,7 +73,7 @@ class AddRecruitmentPage extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is FeedLoading) {
-                return const LoadingWidget(caption: "Adding...");
+                return const LoadingWidget();
               }
               return ListView(
                 children: [

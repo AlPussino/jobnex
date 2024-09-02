@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:freezed_example/features/post/data/model/comment.dart';
+import 'package:freezed_example/features/post/data/model/react.dart';
 part 'post.freezed.dart';
 part 'post.g.dart';
 
@@ -7,9 +9,14 @@ class Post with _$Post {
   const Post._();
 
   factory Post({
-    required String text,
+    String? id,
+    required String post_title,
+    required String post_body,
     required String image,
     required DateTime created_at,
+    String? post_owner_id,
+    required List<React> reacts,
+    required List<Comment> comments,
   }) = _Post;
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

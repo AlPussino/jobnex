@@ -52,7 +52,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
       },
       builder: (context, state) {
         if (state is ChatLoading) {
-          return const Scaffold(body: LoadingWidget(caption: ""));
+          return const Scaffold(body: LoadingWidget());
         }
         //
         if (state is ChatFailure) {
@@ -63,7 +63,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
             stream: state.chatRoomData,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const LoadingWidget(caption: "");
+                return const LoadingWidget();
               } else if (snapshot.hasError) {
                 return ErrorWidgets(errorMessage: snapshot.error.toString());
               }
@@ -72,10 +72,27 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
 
               return Scaffold(
                 appBar: AppBar(
-                  title: ChatConversationAppBar(
-                    receiverData: widget.receiverData,
-                    chatRoomData: chatRoomData!,
-                    size: size,
+                  title: InkWell(
+                    onTap: () {
+                      !chatRoomData['block'] ||
+                              chatRoomData['block_by'] ==
+                                  fireAuth.currentUser!.uid
+                          ? Navigator.pushNamed(
+                              context,
+                              ChatInformationPage.routeName,
+                              arguments: {
+                                "receiverData": widget.receiverData,
+                                "chatRoomId": widget.chatRoomId,
+                                "chatRoomData": chatRoomData
+                              },
+                            )
+                          : null;
+                    },
+                    child: ChatConversationAppBar(
+                      receiverData: widget.receiverData,
+                      chatRoomData: chatRoomData!,
+                      size: size,
+                    ),
                   ),
                   actions: [
                     IconButton(

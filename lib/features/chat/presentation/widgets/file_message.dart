@@ -43,7 +43,7 @@ class _FileMessageState extends State<FileMessage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: widget.chatData['message'][0] == ""
-                ? const LoadingWidget(caption: "")
+                ? const LoadingWidget()
                 : SizedBox(
                     child: Row(
                       children: [
@@ -67,7 +67,7 @@ class _FileMessageState extends State<FileMessage> {
                             child: CircleAvatar(
                                 radius: double.infinity,
                                 child: isDownloading
-                                    ? const LoadingWidget(caption: "")
+                                    ? const LoadingWidget()
                                     : const Icon(
                                         Iconsax.document_download_bold)),
                           ),
@@ -80,6 +80,7 @@ class _FileMessageState extends State<FileMessage> {
                             softWrap: true,
                             overflow: TextOverflow.fade,
                             maxLines: 2,
+                            style: Theme.of(context).primaryTextTheme.bodySmall,
                           ),
                         ),
                       ],

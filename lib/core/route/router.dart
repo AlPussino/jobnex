@@ -20,6 +20,8 @@ import 'package:freezed_example/features/chat/presentation/pages/view_media_page
 import 'package:freezed_example/features/feed/presentation/pages/add_recruitment_page.dart';
 import 'package:freezed_example/features/feed/presentation/pages/feed_page.dart';
 import 'package:freezed_example/features/feed/presentation/pages/job_recruitment_detail_page.dart';
+import 'package:freezed_example/features/post/presentation/pages/add_post_page.dart';
+import 'package:freezed_example/features/post/presentation/pages/post_detail_page.dart';
 import 'package:freezed_example/features/post/presentation/pages/post_page.dart';
 import 'package:freezed_example/features/profile/presentation/pages/add_work_experiences_page.dart';
 import 'package:freezed_example/features/profile/presentation/pages/change_contacts.page.dart';
@@ -312,6 +314,23 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return PageTransition(
           child: const PostPage(),
           type: PageTransitionType.rightToLeft,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    // Post Detail Screen
+    case PostDetailPage.routeName:
+      final post_id = routeSettings.arguments as String;
+      return PageTransition(
+          child: PostDetailPage(post_id: post_id),
+          type: PageTransitionType.rightToLeft,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    //  Add Post Screen
+    case AddPostPage.routeName:
+      return PageTransition(
+          child: const AddPostPage(),
+          type: PageTransitionType.bottomToTop,
           fullscreenDialog: true,
           duration: const Duration(milliseconds: 300));
 

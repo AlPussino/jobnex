@@ -3,47 +3,13 @@ import 'package:freezed_example/core/theme/app_pallete.dart';
 import 'package:toastification/toastification.dart';
 
 class SnackBars {
-  static void showSuccessSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          backgroundColor: AppPallete.green,
-          content: Text(
-            message,
-            style: Theme.of(context)
-                .primaryTextTheme
-                .bodyMedium!
-                .copyWith(color: AppPallete.green, fontSize: 14),
-          ),
-        ),
-      );
-  }
-
-  static void showErrorSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          backgroundColor: AppPallete.red,
-          content: Text(
-            message,
-            style: Theme.of(context)
-                .primaryTextTheme
-                .bodyMedium!
-                .copyWith(color: AppPallete.red, fontSize: 14),
-          ),
-        ),
-      );
-  }
-
   static void showToastification(
       BuildContext context, String message, ToastificationType type) {
     toastification.show(
       context: context,
       type: type,
       style: ToastificationStyle.flatColored,
-      autoCloseDuration: const Duration(seconds: 5),
+      autoCloseDuration: const Duration(seconds: 3),
       title: Text(message),
       alignment: Alignment.bottomCenter,
       direction: TextDirection.ltr,
@@ -53,7 +19,7 @@ class SnackBars {
       borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
-          color: Color(0x07000000),
+          color: AppPallete.backgroundColor,
           blurRadius: 16,
           offset: Offset(0, 16),
           spreadRadius: 0,

@@ -123,7 +123,6 @@ class _SelectVideosPageState extends State<SelectVideosPage> {
                           "${e.name} (${snapshot.data})",
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 12),
                         );
                       }
                     },
@@ -162,7 +161,7 @@ class _SelectVideosPageState extends State<SelectVideosPage> {
             ],
           ),
           body: videos.isEmpty
-              ? const LoadingWidget(caption: "Loading...")
+              ? const LoadingWidget()
               : VideosGridPage(assetList: videos),
         );
       },

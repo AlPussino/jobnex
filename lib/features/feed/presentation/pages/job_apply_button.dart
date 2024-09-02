@@ -50,7 +50,7 @@ class _JobApplyButtonState extends State<JobApplyButton> {
       },
       builder: (context, state) {
         if (state is FeedLoading) {
-          return const LoadingWidget(caption: "Applying...");
+          return const LoadingWidget();
         }
         return Container(
           decoration: const BoxDecoration(),

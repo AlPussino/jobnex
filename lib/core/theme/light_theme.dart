@@ -20,6 +20,8 @@ class LightTheme {
       ),
       canvasColor: AppPallete.white,
       primaryColor: AppPallete.black,
+      highlightColor: AppPallete.highLightBlue,
+      shadowColor: AppPallete.onWhiteBackgroundColor,
 
       // AppBar
       appBarTheme: const AppBarTheme(
@@ -166,7 +168,7 @@ class LightTheme {
       iconTheme: const IconThemeData(color: AppPallete.lightBlue),
       //Switch
       switchTheme: SwitchThemeData(
-        trackOutlineColor: const WidgetStatePropertyAll(AppPallete.black),
+        trackOutlineColor: const WidgetStatePropertyAll(AppPallete.grey),
         thumbColor: WidgetStateProperty.resolveWith(
           (states) {
             if (states.contains(WidgetState.selected)) {
@@ -179,7 +181,7 @@ class LightTheme {
         trackColor: WidgetStateProperty.resolveWith(
           (states) {
             if (states.contains(WidgetState.selected)) {
-              return AppPallete.white;
+              return AppPallete.blueAccent;
             } else {
               return AppPallete.grey;
             }

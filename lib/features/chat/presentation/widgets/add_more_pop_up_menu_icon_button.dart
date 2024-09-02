@@ -110,7 +110,7 @@ class _AddMorePopUpMenuIconButtonState
               future: getLocation(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LoadingWidget(caption: "");
+                  return const LoadingWidget();
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }

@@ -66,6 +66,10 @@ dependencies:
   latlong2: ^0.9.1
   flutter_circle_color_picker: ^0.3.0
   video_thumbnail: ^0.5.3
+  shimmer: ^3.0.0
+  animate_do: ^3.3.4
+  flutter_staggered_animations: ^1.1.1
+  flutter_animate: ^4.5.0
 
 
 

@@ -125,7 +125,6 @@ class _SelectPhotosPageState extends State<SelectPhotosPage> {
                           "${e.name} (${snapshot.data})",
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          // style: const TextStyle(fontSize: 12),
                         );
                       }
                     },
@@ -164,7 +163,7 @@ class _SelectPhotosPageState extends State<SelectPhotosPage> {
             ],
           ),
           body: _images.isEmpty
-              ? const LoadingWidget(caption: "Loading...")
+              ? const LoadingWidget()
               : ImagesGridPage(assetList: _images),
         );
       },

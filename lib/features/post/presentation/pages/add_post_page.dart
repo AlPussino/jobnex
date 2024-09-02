@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:toastification/toastification.dart';
 
 class AddPostPage extends StatefulWidget {
+  static const routeName = '/add-post-page';
+
   const AddPostPage({super.key});
 
   @override
@@ -18,7 +20,9 @@ class AddPostPage extends StatefulWidget {
 
 class _AddPostPageState extends State<AddPostPage> {
   final formKey = GlobalKey<FormState>();
-  final textController = TextEditingController();
+  final postTitleController = TextEditingController();
+  final postBodyController = TextEditingController();
+
   File? imageFile;
 
   void pickImage() async {
@@ -32,18 +36,23 @@ class _AddPostPageState extends State<AddPostPage> {
   }
 
   void addPost() {
-    context.read<PostBloc>().add(PostAddPost(
-          Post(
-            text: textController.text,
-            image: imageFile!.path,
-            created_at: DateTime.now(),
+    context.read<PostBloc>().add(
+          PostAddPost(
+            Post(
+              post_title: postTitleController.text,
+              post_body: postBodyController.text,
+              image: imageFile!.path,
+              created_at: DateTime.now(),
+              comments: [],
+              reacts: [],
+            ),
           ),
-        ));
+        );
   }
 
   @override
   void dispose() {
-    textController.dispose();
+    postTitleController.dispose();
     super.dispose();
   }
 
@@ -57,7 +66,8 @@ class _AddPostPageState extends State<AddPostPage> {
         body: BlocConsumer<PostBloc, PostState>(
           listener: (context, state) {
             if (state is PostFailure) {
-              SnackBars.showErrorSnackBar(context, state.message);
+              SnackBars.showToastification(
+                  context, state.message, ToastificationType.error);
             }
             if (state is PostAddPostSuccessState) {
               Navigator.pop(context);
@@ -68,7 +78,7 @@ class _AddPostPageState extends State<AddPostPage> {
           builder: (context, state) {
             if (state is PostLoading) {
               return const Center(
-                child: LoadingWidget(caption: "Adding..."),
+                child: LoadingWidget(),
               );
             }
             return Padding(
@@ -82,7 +92,19 @@ class _AddPostPageState extends State<AddPostPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
-                            controller: textController,
+                            controller: postTitleController,
+                            obscureText: false,
+                            decoration: const InputDecoration(
+                              hintText: "What's your title...",
+                            ),
+                            minLines: 1,
+                            maxLines: 2,
+                            onTapOutside: (event) =>
+                                FocusManager.instance.primaryFocus!.unfocus(),
+                          ),
+                          SizedBox(height: size.height / 30),
+                          TextFormField(
+                            controller: postBodyController,
                             obscureText: false,
                             decoration: const InputDecoration(
                               hintText: "What's on you mind...",

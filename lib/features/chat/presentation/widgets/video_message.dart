@@ -35,7 +35,7 @@ class VideoMessage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             child: chatData['message'][0] == ""
-                ? const LoadingWidget(caption: "")
+                ? const LoadingWidget()
                 : VideoWidget(videoUrl: chatData['message'][0]),
           ),
         ),

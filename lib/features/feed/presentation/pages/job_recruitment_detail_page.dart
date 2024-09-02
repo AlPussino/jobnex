@@ -99,28 +99,34 @@ class JobRecruitmentDetailPage extends StatelessWidget {
                                         ]),
                                   ),
                                   Expanded(
-                                    child: TabBarView(children: [
-                                      JobDetail(
-                                        size: size,
-                                        jobRecruitmentData: JobRecruitmentData,
-                                        skillList: skillList,
-                                        jobRecruitmentId: jobRecruitmentId,
-                                      ),
-                                      Oppotunities(
-                                        size: size,
-                                        JobRecruitmentData: JobRecruitmentData,
-                                      ),
-                                      RoleResponsiblities(
-                                        size: size,
-                                        JobRecruitmentData: JobRecruitmentData,
-                                      ),
-                                      if (JobRecruitmentData['recruiter_id'] ==
-                                          fireAuth.currentUser!.uid)
-                                        CandidatesList(
+                                    child: TabBarView(
+                                      children: [
+                                        JobDetail(
+                                          size: size,
+                                          jobRecruitmentData:
+                                              JobRecruitmentData,
+                                          skillList: skillList,
+                                          jobRecruitmentId: jobRecruitmentId,
+                                        ),
+                                        Oppotunities(
+                                          size: size,
+                                          jobRecruitmentData:
+                                              JobRecruitmentData,
+                                        ),
+                                        RoleResponsiblities(
+                                          size: size,
                                           JobRecruitmentData:
                                               JobRecruitmentData,
                                         ),
-                                    ]),
+                                        if (JobRecruitmentData[
+                                                'recruiter_id'] ==
+                                            fireAuth.currentUser!.uid)
+                                          CandidatesList(
+                                            JobRecruitmentData:
+                                                JobRecruitmentData,
+                                          ),
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),

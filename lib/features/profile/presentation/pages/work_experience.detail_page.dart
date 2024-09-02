@@ -116,14 +116,14 @@ class _WorkExperienceDetailPageState extends State<WorkExperienceDetailPage> {
         },
         builder: (context, state) {
           if (state is WorkExperienceLoading) {
-            return const LoadingWidget(caption: "");
+            return const LoadingWidget();
           }
           if (state is WorkExperienceGetWorkExperienceByIdSuccess) {
             return StreamBuilder(
                 stream: state.workExperience,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const LoadingWidget(caption: "");
+                    return const LoadingWidget();
                   }
                   final snapShotData = snapshot.data!.data()!;
 
@@ -163,9 +163,6 @@ class _WorkExperienceDetailPageState extends State<WorkExperienceDetailPage> {
                                           children: [
                                             Text(
                                               snapShotData['job_position'],
-                                              style: Theme.of(context)
-                                                  .primaryTextTheme
-                                                  .bodyMedium,
                                             ),
                                             Text(snapShotData['company_name']),
                                           ],
