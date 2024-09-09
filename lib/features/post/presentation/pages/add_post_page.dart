@@ -39,12 +39,14 @@ class _AddPostPageState extends State<AddPostPage> {
     context.read<PostBloc>().add(
           PostAddPost(
             Post(
+              id: '',
               post_title: postTitleController.text,
               post_body: postBodyController.text,
               image: imageFile!.path,
               created_at: DateTime.now(),
-              comments: [],
+              post_owner_id: '',
               reacts: [],
+              comments: [],
             ),
           ),
         );

@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_example/core/common/widget/error.dart';
 import 'package:freezed_example/core/common/widget/loading.dart';
@@ -8,7 +9,7 @@ import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/core/util/show_snack_bar.dart';
 import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
 import 'package:freezed_example/features/post/presentation/widgets/post_owner.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:freezed_example/features/post/presentation/widgets/react_and_comment_bar.dart';
 import 'package:toastification/toastification.dart';
 
 class PostDetailPage extends StatefulWidget {
@@ -21,11 +22,49 @@ class PostDetailPage extends StatefulWidget {
   State<PostDetailPage> createState() => _PostDetailPageState();
 }
 
-class _PostDetailPageState extends State<PostDetailPage> {
+class _PostDetailPageState extends State<PostDetailPage>
+    with SingleTickerProviderStateMixin {
+  late ScrollController scrollController;
+  late AnimationController animationController;
+  late Animation<double> sizeAnimation;
+
   @override
   void initState() {
     context.read<PostBloc>().add(PostGetPostById(widget.post_id));
+    scrollController = ScrollController();
+    scrollController.addListener(scrollListiner);
+    animationController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+
+    sizeAnimation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeInOut,
+    ));
+    animationController.forward();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListiner);
+    scrollController.dispose();
+    animationController.dispose();
+    super.dispose();
+  }
+
+  void scrollListiner() {
+    if (scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      animationController.reverse();
+    } else if (scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      animationController.forward();
+    }
   }
 
   @override
@@ -68,6 +107,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
                 final post = snapshot.data!;
 
+                //
+
                 return Column(
                   children: [
                     Expanded(
@@ -78,6 +119,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: SingleChildScrollView(
+                              controller: scrollController,
                               physics: const BouncingScrollPhysics(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -91,7 +133,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                     animate: true,
                                     curve: Curves.easeIn,
                                     child: PostOwner(
-                                      post_owner_id: post.post_owner_id!,
+                                      post_owner_id: post.post_owner_id,
                                       created_at:
                                           changeToTimeAgo("${post.created_at}"),
                                     ),
@@ -124,13 +166,13 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                   ),
                                   SizedBox(height: size.height / 20),
                                   FadeInRight(
-                                      from: 80,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      delay: const Duration(milliseconds: 300),
-                                      animate: true,
-                                      curve: Curves.easeIn,
-                                      child: Text(post.post_body)),
+                                    from: 80,
+                                    duration: const Duration(milliseconds: 300),
+                                    delay: const Duration(milliseconds: 300),
+                                    animate: true,
+                                    curve: Curves.easeIn,
+                                    child: Text(post.post_body),
+                                  ),
                                 ],
                               ),
                             ),
@@ -138,19 +180,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.favorite_border),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Iconsax.message_2_outline),
-                        ),
-                      ],
+                    SizeTransition(
+                      sizeFactor: sizeAnimation,
+                      child: ReactAndCommentBar(post: post),
                     ),
                   ],
                 );

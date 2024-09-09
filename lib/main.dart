@@ -36,6 +36,8 @@ void main() async {
         ),
         BlocProvider(
           create: (_) => serviceLocator<UserBloc>(),
+          lazy: false,
+          key: UniqueKey(),
         ),
         BlocProvider(
           create: (_) => serviceLocator<WorkExperienceBloc>(),
@@ -46,6 +48,7 @@ void main() async {
         BlocProvider(
           create: (_) => serviceLocator<PostBloc>(),
         ),
+
         BlocProvider(
           create: (_) => serviceLocator<AppliedJobsBloc>(),
         ),

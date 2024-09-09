@@ -8,6 +8,8 @@ class AppPallete {
   static const Color blue = Colors.blue;
   static const Color white = Colors.white;
   static const Color red = Colors.red;
+  static const Color yellow = Colors.yellow;
+  static const Color pink = Colors.pink;
   static const Color lightGrey = Color.fromARGB(255, 122, 119, 119);
   static const Color lightBlue = Color(0xff0F969C);
   static const Color highLightBlue = Color.fromARGB(121, 156, 222, 226);

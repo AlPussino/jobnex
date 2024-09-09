@@ -8,6 +8,7 @@ import 'package:freezed_example/core/util/change_to_time_ago.dart';
 import 'package:freezed_example/features/post/data/model/post.dart';
 import 'package:freezed_example/features/post/presentation/pages/post_detail_page.dart';
 import 'package:freezed_example/features/post/presentation/widgets/post_owner.dart';
+import 'package:freezed_example/features/post/presentation/widgets/react_and_comment_bar.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -53,18 +54,20 @@ class PostCard extends StatelessWidget {
                   width: size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       PostOwner(
-                        post_owner_id: post.post_owner_id!,
-                        created_at: changeToTimeAgo("${post.created_at}"),
+                        post_owner_id: post.post_owner_id,
+                        created_at: changeToTimeAgo(
+                          "${post.created_at}",
+                        ),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 4,
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,6 +97,7 @@ class PostCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      ReactAndCommentBar(post: post),
                     ],
                   ),
                 ),

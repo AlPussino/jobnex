@@ -7,8 +7,6 @@ sealed class UserState {
 
 final class UserInitial extends UserState {}
 
-final class UserActionState extends UserState {}
-
 final class UserLoading extends UserState {}
 
 final class UserFailure extends UserState {
@@ -35,9 +33,9 @@ final class UserChangeBirthDateSuccess extends UserState {}
 
 final class UserChangeProfessionalTitleSuccess extends UserState {}
 
-final class UserChangeProfileImageSuccess extends UserActionState {}
+final class UserChangeProfileImageSuccess extends UserState {}
 
-final class UserChangeCoverImageSuccess extends UserActionState {}
+final class UserChangeCoverImageSuccess extends UserState {}
 
 final class UserGetUserJobRecruitmentsSuccess extends UserState {
   final Stream<QuerySnapshot<Map<String, dynamic>>> jobRecruitments;

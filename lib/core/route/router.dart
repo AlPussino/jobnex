@@ -21,6 +21,7 @@ import 'package:freezed_example/features/feed/presentation/pages/add_recruitment
 import 'package:freezed_example/features/feed/presentation/pages/feed_page.dart';
 import 'package:freezed_example/features/feed/presentation/pages/job_recruitment_detail_page.dart';
 import 'package:freezed_example/features/post/presentation/pages/add_post_page.dart';
+import 'package:freezed_example/features/post/presentation/pages/comment_list_page.dart';
 import 'package:freezed_example/features/post/presentation/pages/post_detail_page.dart';
 import 'package:freezed_example/features/post/presentation/pages/post_page.dart';
 import 'package:freezed_example/features/profile/presentation/pages/add_work_experiences_page.dart';
@@ -29,6 +30,8 @@ import 'package:freezed_example/features/profile/presentation/pages/change_work_
 import 'package:freezed_example/features/profile/presentation/pages/profile_page.dart';
 import 'package:freezed_example/features/profile/presentation/pages/work_experience.detail_page.dart';
 import 'package:page_transition/page_transition.dart';
+
+import '../../features/post/data/model/post.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -330,6 +333,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case AddPostPage.routeName:
       return PageTransition(
           child: const AddPostPage(),
+          type: PageTransitionType.bottomToTop,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    //  Comment List Screen
+    case CommentListPage.routeName:
+      final post = routeSettings.arguments as Post;
+      return PageTransition(
+          child: CommentListPage(post: post),
           type: PageTransitionType.bottomToTop,
           fullscreenDialog: true,
           duration: const Duration(milliseconds: 300));

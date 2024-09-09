@@ -45,8 +45,11 @@ import 'package:freezed_example/features/post/data/datasource/post_remote_dataso
 import 'package:freezed_example/features/post/data/repository/post_repository_impl.dart';
 import 'package:freezed_example/features/post/domain/repository/post_repository.dart';
 import 'package:freezed_example/features/post/domain/usecase/add_post.dart';
+import 'package:freezed_example/features/post/domain/usecase/comment_post.dart';
 import 'package:freezed_example/features/post/domain/usecase/get_all_posts.dart';
 import 'package:freezed_example/features/post/domain/usecase/get_post_by_id.dart';
+import 'package:freezed_example/features/post/domain/usecase/react_post.dart';
+import 'package:freezed_example/features/post/domain/usecase/reply_comment.dart';
 import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
 import 'package:freezed_example/features/profile/data/datasource/user_remote_datasource.dart';
 import 'package:freezed_example/features/profile/data/repository/user_repository_impl.dart';
@@ -243,12 +246,19 @@ void initPost() {
     ..registerFactory(() => AddPost(serviceLocator()))
     ..registerFactory(() => GetAllPosts(serviceLocator()))
     ..registerFactory(() => GetPostById(serviceLocator()))
+    ..registerFactory(() => ReactPost(serviceLocator()))
+    ..registerFactory(() => CommentPost(serviceLocator()))
+    ..registerFactory(() => ReplyComment(serviceLocator()))
 
     //Bloc
     ..registerFactory(() => PostBloc(
-        addPost: serviceLocator(),
-        getAllPosts: serviceLocator(),
-        getPostById: serviceLocator()));
+          addPost: serviceLocator(),
+          getAllPosts: serviceLocator(),
+          getPostById: serviceLocator(),
+          reactPost: serviceLocator(),
+          commentPost: serviceLocator(),
+          replyComment: serviceLocator(),
+        ));
 }
 
 void initAppliedJobs() {

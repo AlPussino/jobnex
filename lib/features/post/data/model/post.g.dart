@@ -7,12 +7,12 @@ part of 'post.dart';
 // **************************************************************************
 
 _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
-      id: json['id'] as String?,
+      id: json['id'] as String,
       post_title: json['post_title'] as String,
       post_body: json['post_body'] as String,
       image: json['image'] as String,
       created_at: DateTime.parse(json['created_at'] as String),
-      post_owner_id: json['post_owner_id'] as String?,
+      post_owner_id: json['post_owner_id'] as String,
       reacts: (json['reacts'] as List<dynamic>)
           .map((e) => React.fromJson(e as Map<String, dynamic>))
           .toList(),

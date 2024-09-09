@@ -70,8 +70,7 @@ dependencies:
   animate_do: ^3.3.4
   flutter_staggered_animations: ^1.1.1
   flutter_animate: ^4.5.0
-
-
+  flutter_reaction_button: ^3.0.0+3
 
 
 

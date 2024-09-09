@@ -59,7 +59,7 @@ class _ProfileCardState extends State<ProfileCard> {
       padding: const EdgeInsets.all(10),
       child: BlocConsumer<UserBloc, UserState>(
         listenWhen: (previous, current) => current is UserFailure,
-        buildWhen: (previous, current) => current is! UserActionState,
+        buildWhen: (previous, current) => current is UserSuccess,
         listener: (context, state) {
           if (state is UserFailure) {
             SnackBars.showToastification(
