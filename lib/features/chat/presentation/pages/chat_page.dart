@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:JobNex/features/chat/presentation/pages/preview_and_add_story_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,10 +9,12 @@ import 'package:JobNex/core/common/widget/error.dart';
 import 'package:JobNex/core/common/widget/loading.dart';
 import 'package:JobNex/core/util/show_snack_bar.dart';
 import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:JobNex/features/chat/presentation/pages/add_story_page.dart';
 import 'package:JobNex/features/chat/presentation/pages/chat_contact_list_tile.dart';
 import 'package:JobNex/features/chat/presentation/widgets/stories_list.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:image_editor_plus/image_editor_plus.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:toastification/toastification.dart';
 
 class ChatPage extends StatefulWidget {
@@ -22,10 +27,54 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  File? imageFile;
+  Uint8List? image;
+
   @override
   void initState() {
     context.read<ChatBloc>().add(ChatGetChatList());
     super.initState();
+  }
+
+  Future<File> convertUint8ListToFilePath(
+      Uint8List uint8list, String filename) async {
+    final directory = await getTemporaryDirectory();
+    final file = File('${directory.path}/$filename');
+    await file.writeAsBytes(uint8list);
+    return file;
+  }
+
+  void pickImage() async {
+    XFile? pickedXFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedXFile != null) {
+      imageFile = File(pickedXFile.path);
+      imageFile!.readAsBytes().then(
+        (value) async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ImageEditor(
+                image: value,
+              ),
+            ),
+          ).then(
+            (value) {
+              setState(() {
+                image = value;
+                convertUint8ListToFilePath(image!, 'example.jpg').then(
+                  (value) {
+                    Navigator.pushNamed(
+                        context, PreviewAndAddStoryPage.routeName,
+                        arguments: value);
+                  },
+                );
+              });
+            },
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -35,10 +84,7 @@ class _ChatPageState extends State<ChatPage> {
         title: const Text("Chat"),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AddStoryPage.routeName);
-              },
-              icon: const Icon(Iconsax.gallery_add_bold)),
+              onPressed: pickImage, icon: const Icon(Iconsax.gallery_add_bold)),
         ],
       ),
 

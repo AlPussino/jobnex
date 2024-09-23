@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:JobNex/features/chat/presentation/pages/preview_and_add_story_page.dart';
 import 'package:flutter/material.dart';
 import 'package:JobNex/auth_gate.dart';
 import 'package:JobNex/core/common/widget/view_image_page.dart';
@@ -32,7 +35,6 @@ import 'package:JobNex/features/profile/presentation/pages/change_contacts.page.
 import 'package:JobNex/features/profile/presentation/pages/change_work_experiences_dates_page.dart';
 import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 import 'package:JobNex/features/profile/presentation/pages/work_experience.detail_page.dart';
-import 'package:JobNex/features/chat/presentation/pages/add_story_page.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/post/data/model/post.dart';
 
@@ -374,10 +376,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           fullscreenDialog: true,
           duration: const Duration(milliseconds: 300));
 
-    // Add Story Screen
-    case AddStoryPage.routeName:
+   
+    // Preview And Add Story Screen
+    case PreviewAndAddStoryPage.routeName:
+      final imageFile = routeSettings.arguments as File;
       return PageTransition(
-          child: const AddStoryPage(),
+          child: PreviewAndAddStoryPage(imageFile: imageFile),
           type: PageTransitionType.bottomToTop,
           fullscreenDialog: true,
           duration: const Duration(milliseconds: 300));
