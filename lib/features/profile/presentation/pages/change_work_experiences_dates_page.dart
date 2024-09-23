@@ -2,12 +2,12 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/change_date_format.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/auth/presentation/widgets/elevated_buttons.dart';
-import 'package:freezed_example/features/profile/presentation/bloc/work_experience_bloc.dart';
-import 'package:freezed_example/features/profile/presentation/widgets/work_experiences_dates.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/change_date_format.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/auth/presentation/widgets/elevated_buttons.dart';
+import 'package:JobNex/features/profile/presentation/bloc/work_experience_bloc.dart';
+import 'package:JobNex/features/profile/presentation/widgets/work_experiences_dates.dart';
 import 'package:toastification/toastification.dart';
 
 class ChangeWorkExperiencesDatesPage extends StatefulWidget {

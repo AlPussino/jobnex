@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/post/data/model/react.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
-import 'package:freezed_example/features/post/presentation/pages/comment_list_page.dart';
-import 'package:freezed_example/features/post/presentation/widgets/react_icons.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/post/data/model/react.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_bloc.dart';
+import 'package:JobNex/features/post/presentation/pages/comment_list_page.dart';
+import 'package:JobNex/features/post/presentation/widgets/react_icons.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
 import '../../data/model/post.dart';
@@ -58,79 +58,75 @@ class ReactAndCommentBar extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, CommentListPage.routeName,
-                    arguments: post);
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("${post.reacts.length}"),
-                  Text("${post.comments.length} comments"),
-                ],
-              ),
-            ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ReactionButton(
-                  isChecked: true,
-                  toggle: true,
-                  animateBox: true,
-                  boxAnimationDuration: const Duration(milliseconds: 200),
-                  boxPadding: const EdgeInsets.all(2),
-                  hoverDuration: const Duration(milliseconds: 200),
-                  itemsSpacing: 0,
-                  itemAnimationDuration: const Duration(milliseconds: 200),
-                  itemSize: const Size(80, 80),
-                  boxColor: Theme.of(context).canvasColor,
-                  onReactionChanged: (value) {
-                    reactOrUnReactPost(emoji: value!.value);
-                  },
-                  itemScale: 0.9,
-                  reactions: [
-                    ReactionIcons.reaction(
-                      value: 'like',
-                      icon: AntDesign.like_fill,
-                      color: AppPallete.lightBlue,
+                Row(
+                  children: [
+                    ReactionButton(
+                      isChecked: true,
+                      toggle: true,
+                      animateBox: true,
+                      boxAnimationDuration: const Duration(milliseconds: 200),
+                      boxPadding: const EdgeInsets.all(2),
+                      hoverDuration: const Duration(milliseconds: 200),
+                      itemsSpacing: 0,
+                      itemAnimationDuration: const Duration(milliseconds: 200),
+                      itemSize: const Size(60, 60),
+                      boxColor: Theme.of(context).canvasColor,
+                      onReactionChanged: (value) {
+                        reactOrUnReactPost(emoji: value!.value);
+                      },
+                      itemScale: 0.9,
+                      reactions: [
+                        ReactionIcons.reaction(
+                          value: 'like',
+                          icon: AntDesign.like_fill,
+                          color: AppPallete.lightBlue,
+                        ),
+                        ReactionIcons.reaction(
+                          value: 'dislike',
+                          icon: AntDesign.dislike_fill,
+                          color: AppPallete.lightBlue,
+                        ),
+                        ReactionIcons.reaction(
+                          value: 'love',
+                          icon: AntDesign.heart_fill,
+                          color: AppPallete.pink,
+                        ),
+                        ReactionIcons.reaction(
+                          value: 'happy',
+                          icon: AntDesign.smile_fill,
+                          color: AppPallete.yellow,
+                        ),
+                        ReactionIcons.reaction(
+                          value: 'sad',
+                          icon: AntDesign.frown_fill,
+                          color: AppPallete.yellow,
+                        ),
+                      ],
+                      child: IconButton(
+                        onPressed: () => reactOrUnReactPost(emoji: 'like'),
+                        icon: UserReactIcon(
+                            isReacted: isReacted, react: userReact),
+                      ),
                     ),
-                    ReactionIcons.reaction(
-                      value: 'dislike',
-                      icon: AntDesign.dislike_fill,
-                      color: AppPallete.lightBlue,
-                    ),
-                    ReactionIcons.reaction(
-                      value: 'love',
-                      icon: AntDesign.heart_fill,
-                      color: AppPallete.pink,
-                    ),
-                    ReactionIcons.reaction(
-                      value: 'happy',
-                      icon: AntDesign.smile_fill,
-                      color: AppPallete.yellow,
-                    ),
-                    ReactionIcons.reaction(
-                      value: 'sad',
-                      icon: AntDesign.frown_fill,
-                      color: AppPallete.yellow,
-                    ),
+                    Text("${post.reacts.length}"),
                   ],
-                  child: IconButton(
-                    onPressed: () => reactOrUnReactPost(emoji: 'like'),
-                    icon: UserReactIcon(isReacted: isReacted, react: userReact),
-                  ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, CommentListPage.routeName,
-                        arguments: post);
-                  },
-                  icon: const Icon(Iconsax.message_2_outline),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, CommentListPage.routeName,
+                            arguments: post);
+                      },
+                      icon: const Icon(Iconsax.message_2_outline),
+                    ),
+                    Text("${post.comments.length}"),
+                  ],
                 ),
               ],
             ),
@@ -144,8 +140,11 @@ class ReactAndCommentBar extends StatelessWidget {
 class UserReactIcon extends StatelessWidget {
   final bool isReacted;
   final String react;
-  const UserReactIcon(
-      {super.key, required this.isReacted, required this.react});
+  const UserReactIcon({
+    super.key,
+    required this.isReacted,
+    required this.react,
+  });
 
   @override
   Widget build(BuildContext context) {

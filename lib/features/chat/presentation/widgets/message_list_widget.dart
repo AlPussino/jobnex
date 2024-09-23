@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/message_box.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/features/chat/presentation/widgets/message_box.dart';
 import 'package:toastification/toastification.dart';
 
 class MessageListWidget extends StatefulWidget {

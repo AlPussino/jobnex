@@ -3,12 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
-import 'package:freezed_example/features/post/presentation/pages/post_detail_page.dart';
-import 'package:freezed_example/features/post/presentation/widgets/post_owner.dart';
-import 'package:freezed_example/features/post/presentation/widgets/react_and_comment_bar.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
+import 'package:JobNex/features/post/presentation/pages/comment_list_page.dart';
+import 'package:JobNex/features/post/presentation/pages/post_detail_page.dart';
+import 'package:JobNex/features/post/presentation/widgets/post_owner.dart';
+import 'package:JobNex/features/post/presentation/widgets/react_and_comment_bar.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -58,7 +59,7 @@ class PostCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       PostOwner(
-                        post_owner_id: post.post_owner_id,
+                        post: post,
                         created_at: changeToTimeAgo(
                           "${post.created_at}",
                         ),
@@ -97,7 +98,17 @@ class PostCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ReactAndCommentBar(post: post),
+                      InkWell(
+                          highlightColor: AppPallete.lightBlue,
+                          customBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, CommentListPage.routeName,
+                                arguments: post);
+                          },
+                          child: ReactAndCommentBar(post: post)),
                     ],
                   ),
                 ),

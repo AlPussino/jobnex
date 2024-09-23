@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/video_widget.dart';
+import 'package:JobNex/core/common/widget/video_widget.dart';
 
 class ViewVideoPage extends StatelessWidget {
   static const routeName = '/view-video-page';

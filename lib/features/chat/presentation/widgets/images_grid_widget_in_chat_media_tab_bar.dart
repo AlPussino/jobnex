@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/common/widget/view_images_list_page.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/common/widget/view_images_list_page.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:toastification/toastification.dart';
 
 class ImagesGridWidgetInChatMediaTabBar extends StatefulWidget {

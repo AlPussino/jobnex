@@ -78,3 +78,10 @@ final class ChatBlockUser extends ChatEvent {
   final bool is_block;
   ChatBlockUser(this.receiver_id, this.is_block);
 }
+
+final class ChatAddStory extends ChatEvent {
+  final String image;
+  ChatAddStory(this.image);
+}
+
+final class ChatGetAllStories extends ChatEvent {}

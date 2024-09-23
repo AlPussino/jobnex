@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/features/feed/data/model/job_recruitment.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/features/feed/data/model/job_recruitment.dart';
 
 abstract interface class FeedRemoteDataSource {
   Future<void> addJobRecruitment({required JobRecruitment jobRecruitment});

@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toastification/toastification.dart';

@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:freezed_example/core/theme/app_pallete.dart';
+// import 'package:JobNex/core/theme/app_pallete.dart';
 
 // class AppTheme {
 //   static border([Color color = AppPallete.borderColor]) => OutlineInputBorder(
@@ -162,7 +162,7 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
 
 class AppTheme {
   static border([Color color = AppPallete.lightBlue]) => OutlineInputBorder(

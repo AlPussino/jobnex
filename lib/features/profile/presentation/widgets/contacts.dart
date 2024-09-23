@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/features/auth/data/model/user_model.dart';
+import 'package:JobNex/features/auth/data/model/user_model.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class Contacts extends StatelessWidget {

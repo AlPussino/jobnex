@@ -65,3 +65,10 @@ final class ChatBlockUserSuccess extends ChatState {
   final bool is_block;
   const ChatBlockUserSuccess(this.is_block);
 }
+
+final class ChatAddStorySuccess extends ChatState {}
+
+final class ChatGetAllStoriesSuccess extends ChatState {
+  final Stream<List<Story>> stories;
+  const ChatGetAllStoriesSuccess({required this.stories});
+}

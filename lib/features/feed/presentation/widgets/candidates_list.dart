@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/user_card.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/features/feed/presentation/widgets/user_card.dart';
 
 class CandidatesList extends StatelessWidget {
   final Map<String, dynamic> JobRecruitmentData;

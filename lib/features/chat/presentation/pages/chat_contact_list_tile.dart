@@ -4,10 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:freezed_example/core/common/widget/shimmer_list_tile.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_conversation_page.dart';
+import 'package:JobNex/core/common/widget/shimmer_list_tile.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_conversation_page.dart';
 
 class ChatContactListTile extends StatelessWidget {
   final DocumentReference<Map<String, dynamic>> chatSnapshot;
@@ -51,6 +51,10 @@ class ChatContactListTile extends StatelessWidget {
                 }
                 final chatContact = snapshot.data!;
                 return InkWell(
+                  highlightColor: AppPallete.lightBlue,
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(
                       context,

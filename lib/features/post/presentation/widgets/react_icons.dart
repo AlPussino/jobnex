@@ -12,7 +12,7 @@ class ReactionIcons {
       icon: Icon(
         icon,
         color: color,
-        size: 40,
+        size: 30,
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/chat/domain/repository/chat_repository.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/chat/domain/repository/chat_repository.dart';
 
 class UpdateTheme implements FutureUseCase<Null, UpdateThemeParams> {
   final ChatRepository chatRepository;

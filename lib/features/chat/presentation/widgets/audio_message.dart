@@ -2,7 +2,7 @@ import 'package:animated_icon/animated_icon.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
 
 class AudioMessage extends StatefulWidget {
   final Size size;

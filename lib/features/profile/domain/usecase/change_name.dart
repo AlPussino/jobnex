@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/profile/domain/repository/user_repository.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/profile/domain/repository/user_repository.dart';
 
 class ChangeName implements FutureUseCase<Null, ChangeNameParams> {
   final UserRepository userRepository;

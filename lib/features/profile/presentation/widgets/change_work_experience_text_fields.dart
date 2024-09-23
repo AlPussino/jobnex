@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
 
 class ChangeWorkExperienceTextFields extends StatefulWidget {
   final TextEditingController controller;

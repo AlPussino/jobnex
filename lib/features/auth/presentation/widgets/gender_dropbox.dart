@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/features/auth/presentation/provider/sign_up_page_provider.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/features/auth/presentation/provider/sign_up_page_provider.dart';
 
 class GenderDropBox extends StatefulWidget {
   const GenderDropBox({super.key});

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/features/feed/presentation/pages/job_apply_button.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/candidates_list.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/role_responsibilities.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/job_details.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/oppotunities.dart';
+import 'package:JobNex/features/feed/presentation/pages/job_apply_button.dart';
+import 'package:JobNex/features/feed/presentation/widgets/candidates_list.dart';
+import 'package:JobNex/features/feed/presentation/widgets/role_responsibilities.dart';
+import 'package:JobNex/features/feed/presentation/widgets/job_details.dart';
+import 'package:JobNex/features/feed/presentation/widgets/oppotunities.dart';
 
 class JobRecruitmentDetailPage extends StatelessWidget {
   static const routeName = '/job-recruitment-detail-page';

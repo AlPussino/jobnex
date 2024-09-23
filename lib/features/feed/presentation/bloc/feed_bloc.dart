@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/feed/data/model/job_recruitment.dart';
-import 'package:freezed_example/features/feed/domain/usecase/add_job_recruitment.dart';
-import 'package:freezed_example/features/feed/domain/usecase/apply_job.dart';
-import 'package:freezed_example/features/feed/domain/usecase/get_all_job_recruitments.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/feed/data/model/job_recruitment.dart';
+import 'package:JobNex/features/feed/domain/usecase/add_job_recruitment.dart';
+import 'package:JobNex/features/feed/domain/usecase/apply_job.dart';
+import 'package:JobNex/features/feed/domain/usecase/get_all_job_recruitments.dart';
 import '../../domain/usecase/get_candidates.dart';
 part 'feed_event.dart';
 part 'feed_state.dart';

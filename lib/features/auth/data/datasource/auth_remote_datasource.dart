@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/core/util/get_current_address.dart';
-import 'package:freezed_example/core/util/get_current_location.dart';
-import 'package:freezed_example/features/auth/data/model/user_model.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/core/util/get_current_address.dart';
+import 'package:JobNex/core/util/get_current_location.dart';
+import 'package:JobNex/features/auth/data/model/user_model.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<UserCredential?> signUpWithEmailPassword(

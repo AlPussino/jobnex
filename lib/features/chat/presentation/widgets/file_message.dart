@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/download_file.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/download_file.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class FileMessage extends StatefulWidget {

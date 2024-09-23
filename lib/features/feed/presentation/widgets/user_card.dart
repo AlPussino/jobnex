@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/features/profile/presentation/pages/profile_page.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 
 class UserCard extends StatelessWidget {
   final Map<String, dynamic> userData;

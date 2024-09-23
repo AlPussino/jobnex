@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/post/domain/repository/post_repository.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/post/domain/repository/post_repository.dart';
 import '../../data/model/react.dart';
 
 class ReactPost implements FutureUseCase<Null, ReactPostParams> {

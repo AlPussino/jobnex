@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_post_owner_info.dart';
+import 'package:JobNex/features/post/domain/usecase/get_post_owner_info.dart';
 import 'post_owner_event.dart';
 import 'post_owner_state.dart';
 

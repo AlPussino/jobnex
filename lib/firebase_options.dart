@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDYbiR4rHowX5nqVv8MY5SOkZmr2OL3Svo',
-    appId: '1:561074479638:web:4f492fc336687260b24b37',
+    appId: '1:561074479638:web:2ccfea337644c9d2b24b37',
     messagingSenderId: '561074479638',
     projectId: 'together-3',
     authDomain: 'together-3.firebaseapp.com',
     storageBucket: 'together-3.appspot.com',
-    measurementId: 'G-96ZYN3QKTX',
+    measurementId: 'G-VP67QXFNT7',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBtSf0KhivECgE2qsFkYI7PU7_elFUKMQY',
-    appId: '1:561074479638:android:73e4d0f4265190f9b24b37',
+    appId: '1:561074479638:android:d59a6cb6ffc3b3deb24b37',
     messagingSenderId: '561074479638',
     projectId: 'together-3',
     storageBucket: 'together-3.appspot.com',
@@ -60,11 +60,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBZpo4rgwF5P_hByDZlL0AVmDNdienqIOk',
-    appId: '1:561074479638:ios:4bd473be945f0e4cb24b37',
+    appId: '1:561074479638:ios:7c3cd1623ededa04b24b37',
     messagingSenderId: '561074479638',
     projectId: 'together-3',
     storageBucket: 'together-3.appspot.com',
-    iosBundleId: 'com.example.freezedExample',
+    iosBundleId: 'com.example.jobnex',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -78,11 +78,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyDYbiR4rHowX5nqVv8MY5SOkZmr2OL3Svo',
-    appId: '1:561074479638:web:36eb838cc2361389b24b37',
+    appId: '1:561074479638:web:d1941ce1d5fa131cb24b37',
     messagingSenderId: '561074479638',
     projectId: 'together-3',
     authDomain: 'together-3.firebaseapp.com',
     storageBucket: 'together-3.appspot.com',
-    measurementId: 'G-MRZZDJ810D',
+    measurementId: 'G-NXY71CEX89',
   );
+
 }

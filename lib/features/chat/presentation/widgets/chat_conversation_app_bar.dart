@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
 
 class ChatConversationAppBar extends StatelessWidget {
   final Map<String, dynamic> receiverData;

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/audio_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/emoji_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/file_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/images_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/location_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/notification_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/text_message.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/video_message.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/features/chat/presentation/widgets/audio_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/emoji_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/file_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/images_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/location_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/notification_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/text_message.dart';
+import 'package:JobNex/features/chat/presentation/widgets/video_message.dart';
 
 class MessageBox extends StatelessWidget {
   final Map<String, dynamic> chatData;

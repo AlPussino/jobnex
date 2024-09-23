@@ -1,10 +1,10 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/features/post/data/datasource/post_remote_datasource.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
-import 'package:freezed_example/features/post/data/model/react.dart';
-import 'package:freezed_example/features/post/domain/repository/post_repository.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/post/data/datasource/post_remote_datasource.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
+import 'package:JobNex/features/post/data/model/react.dart';
+import 'package:JobNex/features/post/domain/repository/post_repository.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class PostRepositoryImpl implements PostRepository {
@@ -95,6 +95,18 @@ class PostRepositoryImpl implements PostRepository {
       }
       return right(await postRemoteDataSource.replyComment(
           postId: post_id, commentId: comment_id, replyText: replyText));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Null>> deletPost({required String post_id}) async {
+    try {
+      if (!await connectionChecker.hasConnection) {
+        return left(const Failure(Constant.networkErrorMessage));
+      }
+      return right(await postRemoteDataSource.deletePost(post_id: post_id));
     } catch (e) {
       return left(Failure(e.toString()));
     }

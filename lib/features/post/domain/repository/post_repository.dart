@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
 import '../../data/model/react.dart';
 
 abstract interface class PostRepository {
@@ -21,4 +21,6 @@ abstract interface class PostRepository {
     required String comment_id,
     required String replyText,
   });
+
+  Future<Either<Failure, Null>> deletPost({required String post_id});
 }

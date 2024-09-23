@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/core/util/upload_file_list_to_fire_storage.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/core/util/upload_file_list_to_fire_storage.dart';
+import 'package:JobNex/core/util/upload_image_to_fire_storage.dart';
+import 'package:JobNex/features/chat/data/model/story.dart';
+import 'package:JobNex/features/chat/data/model/story_body.dart';
 import 'package:uuid/uuid.dart';
 
 abstract interface class ChatRemoteDataSource {
@@ -53,6 +56,10 @@ abstract interface class ChatRemoteDataSource {
   Future deleteConversation({required String chatroom_id});
 
   Future<bool> blockUser({required String receiver_id, required bool is_block});
+
+  Future addStory({required String image});
+
+  Stream<List<Story>> getAllStories();
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -637,6 +644,64 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         "block_by": is_block ? fireAuth.currentUser!.uid : "",
       });
       return is_block;
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message!);
+    } catch (e) {
+      throw ServerException('$e');
+    }
+  }
+
+  @override
+  Future addStory({required String image}) async {
+    try {
+      final id = const Uuid().v1();
+      await UploadImageToFireStorage(
+        imageFile: File(image),
+        ref: "storyImages/${fireAuth.currentUser!.uid}/$id",
+        firebaseStorage: firebaseStorage,
+      ).then(
+        (value) async {
+          // Story
+          StoryBody newStoryBody = StoryBody(
+            image: value,
+            created_at: DateTime.now(),
+          );
+          Story newStory = Story(
+            story_owner_id: fireAuth.currentUser!.uid,
+            stories: [],
+          );
+
+          //
+          DocumentReference docRef =
+              fireStore.collection('stories').doc(fireAuth.currentUser!.uid);
+
+          final docSnapshot = await docRef.get();
+
+          if (docSnapshot.exists) {
+            await docRef.update({
+              'stories': FieldValue.arrayUnion([newStoryBody.toJson()]),
+            });
+          } else {
+            await docRef.set(newStory.toJson());
+
+            await docRef.update({
+              'stories': FieldValue.arrayUnion([newStoryBody.toJson()]),
+            });
+          }
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message!);
+    } catch (e) {
+      throw ServerException('$e');
+    }
+  }
+
+  @override
+  Stream<List<Story>> getAllStories() {
+    try {
+      return fireStore.collection("stories").snapshots().map(
+          (event) => event.docs.map((e) => Story.fromJson(e.data())).toList());
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
     } catch (e) {

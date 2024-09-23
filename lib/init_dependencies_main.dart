@@ -2,79 +2,82 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/network/connection_checker.dart';
-import 'package:freezed_example/features/applied_jobs/data/datasource/applied_jobs_remote_datasource.dart';
-import 'package:freezed_example/features/applied_jobs/data/repository/applied_jobs_repository_impl.dart';
-import 'package:freezed_example/features/applied_jobs/domain/repository/applied_jobs_repository.dart';
-import 'package:freezed_example/features/applied_jobs/domain/usercase/get_user_applied_jobs.dart';
-import 'package:freezed_example/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
-import 'package:freezed_example/features/auth/data/datasource/auth_remote_datasource.dart';
-import 'package:freezed_example/features/auth/data/respoitory/auth_repository_impl.dart';
-import 'package:freezed_example/features/auth/domain/repository/auth_repository.dart';
-import 'package:freezed_example/features/auth/domain/usecase/log_in_with_email_and_password.dart';
-import 'package:freezed_example/features/auth/domain/usecase/log_out.dart';
-import 'package:freezed_example/features/auth/domain/usecase/sign_up_with_email_and_password.dart';
-import 'package:freezed_example/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:freezed_example/features/chat/data/datasource/chat_remote_datasource.dart';
-import 'package:freezed_example/features/chat/data/repository/chat_repository_impl.dart';
-import 'package:freezed_example/features/chat/domain/repository/chat_repository.dart';
-import 'package:freezed_example/features/chat/domain/usecase/block_user.dart';
-import 'package:freezed_example/features/chat/domain/usecase/create_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/delete_conversation.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_chat_list.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_chat_stream.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_chatroom_data.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_files_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_images_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_videos_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_voices_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/send_file_message.dart';
-import 'package:freezed_example/features/chat/domain/usecase/send_text_message.dart';
-import 'package:freezed_example/features/chat/domain/usecase/update_quick_reaction.dart';
-import 'package:freezed_example/features/chat/domain/usecase/update_theme.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:freezed_example/features/feed/data/datasource/feed_remote_datasource.dart';
-import 'package:freezed_example/features/feed/data/repository/feed_repository_impl.dart';
-import 'package:freezed_example/features/feed/domain/repository/feed_repository.dart';
-import 'package:freezed_example/features/feed/domain/usecase/add_job_recruitment.dart';
-import 'package:freezed_example/features/feed/domain/usecase/apply_job.dart';
-import 'package:freezed_example/features/feed/domain/usecase/get_all_job_recruitments.dart';
-import 'package:freezed_example/features/feed/domain/usecase/get_candidates.dart';
-import 'package:freezed_example/features/feed/presentation/bloc/feed_bloc.dart';
-import 'package:freezed_example/features/post/data/datasource/post_remote_datasource.dart';
-import 'package:freezed_example/features/post/data/repository/post_repository_impl.dart';
-import 'package:freezed_example/features/post/domain/repository/post_repository.dart';
-import 'package:freezed_example/features/post/domain/usecase/add_post.dart';
-import 'package:freezed_example/features/post/domain/usecase/comment_post.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_all_posts.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_post_by_id.dart';
-import 'package:freezed_example/features/post/domain/usecase/react_post.dart';
-import 'package:freezed_example/features/post/domain/usecase/reply_comment.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
-import 'package:freezed_example/features/profile/data/datasource/user_remote_datasource.dart';
-import 'package:freezed_example/features/profile/data/repository/user_repository_impl.dart';
-import 'package:freezed_example/features/profile/domain/repository/user_repository.dart';
-import 'package:freezed_example/features/profile/domain/usecase/add_work_experience.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_address.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_birth_date.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_company_name.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_cover_image.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_gender.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_location.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_position.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_type.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_mobile_number.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_name.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_nationality.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_professional_title.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_profile_image.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_work_experiences_dates.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_user_info.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_user_job_recruitments.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_work_experience_by_id.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_work_experiences.dart';
-import 'package:freezed_example/features/profile/presentation/bloc/user_bloc.dart';
-import 'package:freezed_example/features/profile/presentation/bloc/work_experience_bloc.dart';
+import 'package:JobNex/core/network/connection_checker.dart';
+import 'package:JobNex/features/applied_jobs/data/datasource/applied_jobs_remote_datasource.dart';
+import 'package:JobNex/features/applied_jobs/data/repository/applied_jobs_repository_impl.dart';
+import 'package:JobNex/features/applied_jobs/domain/repository/applied_jobs_repository.dart';
+import 'package:JobNex/features/applied_jobs/domain/usercase/get_user_applied_jobs.dart';
+import 'package:JobNex/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
+import 'package:JobNex/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:JobNex/features/auth/data/respoitory/auth_repository_impl.dart';
+import 'package:JobNex/features/auth/domain/repository/auth_repository.dart';
+import 'package:JobNex/features/auth/domain/usecase/log_in_with_email_and_password.dart';
+import 'package:JobNex/features/auth/domain/usecase/log_out.dart';
+import 'package:JobNex/features/auth/domain/usecase/sign_up_with_email_and_password.dart';
+import 'package:JobNex/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:JobNex/features/chat/data/datasource/chat_remote_datasource.dart';
+import 'package:JobNex/features/chat/data/repository/chat_repository_impl.dart';
+import 'package:JobNex/features/chat/domain/repository/chat_repository.dart';
+import 'package:JobNex/features/chat/domain/usecase/add_story.dart';
+import 'package:JobNex/features/chat/domain/usecase/block_user.dart';
+import 'package:JobNex/features/chat/domain/usecase/create_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/delete_conversation.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_all_stories.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_chat_list.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_chat_stream.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_chatroom_data.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_files_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_images_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_videos_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_voices_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/send_file_message.dart';
+import 'package:JobNex/features/chat/domain/usecase/send_text_message.dart';
+import 'package:JobNex/features/chat/domain/usecase/update_quick_reaction.dart';
+import 'package:JobNex/features/chat/domain/usecase/update_theme.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/features/feed/data/datasource/feed_remote_datasource.dart';
+import 'package:JobNex/features/feed/data/repository/feed_repository_impl.dart';
+import 'package:JobNex/features/feed/domain/repository/feed_repository.dart';
+import 'package:JobNex/features/feed/domain/usecase/add_job_recruitment.dart';
+import 'package:JobNex/features/feed/domain/usecase/apply_job.dart';
+import 'package:JobNex/features/feed/domain/usecase/get_all_job_recruitments.dart';
+import 'package:JobNex/features/feed/domain/usecase/get_candidates.dart';
+import 'package:JobNex/features/feed/presentation/bloc/feed_bloc.dart';
+import 'package:JobNex/features/post/data/datasource/post_remote_datasource.dart';
+import 'package:JobNex/features/post/data/repository/post_repository_impl.dart';
+import 'package:JobNex/features/post/domain/repository/post_repository.dart';
+import 'package:JobNex/features/post/domain/usecase/add_post.dart';
+import 'package:JobNex/features/post/domain/usecase/comment_post.dart';
+import 'package:JobNex/features/post/domain/usecase/delete_post.dart';
+import 'package:JobNex/features/post/domain/usecase/get_all_posts.dart';
+import 'package:JobNex/features/post/domain/usecase/get_post_by_id.dart';
+import 'package:JobNex/features/post/domain/usecase/react_post.dart';
+import 'package:JobNex/features/post/domain/usecase/reply_comment.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_bloc.dart';
+import 'package:JobNex/features/profile/data/datasource/user_remote_datasource.dart';
+import 'package:JobNex/features/profile/data/repository/user_repository_impl.dart';
+import 'package:JobNex/features/profile/domain/repository/user_repository.dart';
+import 'package:JobNex/features/profile/domain/usecase/add_work_experience.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_address.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_birth_date.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_company_name.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_cover_image.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_gender.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_location.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_position.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_type.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_mobile_number.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_name.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_nationality.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_professional_title.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_profile_image.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_work_experiences_dates.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_user_info.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_user_job_recruitments.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_work_experience_by_id.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_work_experiences.dart';
+import 'package:JobNex/features/profile/presentation/bloc/user_bloc.dart';
+import 'package:JobNex/features/profile/presentation/bloc/work_experience_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -249,6 +252,7 @@ void initPost() {
     ..registerFactory(() => ReactPost(serviceLocator()))
     ..registerFactory(() => CommentPost(serviceLocator()))
     ..registerFactory(() => ReplyComment(serviceLocator()))
+    ..registerFactory(() => DeletePost(serviceLocator()))
 
     //Bloc
     ..registerFactory(() => PostBloc(
@@ -258,6 +262,7 @@ void initPost() {
           reactPost: serviceLocator(),
           commentPost: serviceLocator(),
           replyComment: serviceLocator(),
+          deletePost: serviceLocator(),
         ));
 }
 
@@ -315,6 +320,8 @@ void initChat() {
     ..registerFactory(() => GetFilesInChat(serviceLocator()))
     ..registerFactory(() => DeleteConversation(serviceLocator()))
     ..registerFactory(() => BlockUser(serviceLocator()))
+    ..registerFactory(() => AddStory(serviceLocator()))
+    ..registerFactory(() => GetAllStories(serviceLocator()))
 
     //Bloc
     ..registerFactory(() => ChatBloc(
@@ -332,5 +339,7 @@ void initChat() {
           getFilesInChat: serviceLocator(),
           deleteConversation: serviceLocator(),
           blockUser: serviceLocator(),
+          addStory: serviceLocator(),
+          getAllStories: serviceLocator(),
         ));
 }

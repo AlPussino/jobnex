@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/bottom_navigation_bar_item_widget.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_page.dart';
-import 'package:freezed_example/features/applied_jobs/presentation/pages/applied_jobs_page.dart';
-import 'package:freezed_example/features/feed/presentation/pages/feed_page.dart';
-import 'package:freezed_example/features/feed/presentation/provider/home_navigator_provider.dart';
-import 'package:freezed_example/features/post/presentation/pages/post_page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/profile_page.dart';
+import 'package:JobNex/core/common/widget/bottom_navigation_bar_item_widget.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_page.dart';
+import 'package:JobNex/features/applied_jobs/presentation/pages/applied_jobs_page.dart';
+import 'package:JobNex/features/feed/presentation/pages/feed_page.dart';
+import 'package:JobNex/features/feed/presentation/provider/home_navigator_provider.dart';
+import 'package:JobNex/features/post/presentation/pages/post_page.dart';
+import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 

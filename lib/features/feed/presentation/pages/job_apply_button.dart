@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/auth/presentation/widgets/elevated_buttons.dart';
-import 'package:freezed_example/features/feed/presentation/bloc/feed_bloc.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/auth/presentation/widgets/elevated_buttons.dart';
+import 'package:JobNex/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:toastification/toastification.dart';
 
 class JobApplyButton extends StatefulWidget {

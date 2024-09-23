@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/features/post/data/model/comment.dart';
-import 'package:freezed_example/features/post/data/model/react.dart';
+import 'package:JobNex/features/post/data/model/comment.dart';
+import 'package:JobNex/features/post/data/model/react.dart';
 part 'post.freezed.dart';
 part 'post.g.dart';
 

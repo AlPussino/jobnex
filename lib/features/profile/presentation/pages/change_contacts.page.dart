@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/profile/presentation/bloc/user_bloc.dart';
-import 'package:freezed_example/features/profile/presentation/widgets/change_work_experience_text_fields.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/profile/presentation/bloc/user_bloc.dart';
+import 'package:JobNex/features/profile/presentation/widgets/change_work_experience_text_fields.dart';
 import 'package:toastification/toastification.dart';
 
 class ChangeContactsPage extends StatefulWidget {

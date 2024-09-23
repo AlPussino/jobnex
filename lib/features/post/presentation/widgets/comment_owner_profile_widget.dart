@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_post_owner_info.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_bloc.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_event.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_state.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/features/post/domain/usecase/get_post_owner_info.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_bloc.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_event.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_state.dart';
+import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 
 class CommentOrReplyOwnerProfileWidget extends StatelessWidget {
   final String owner_id;
@@ -48,9 +50,19 @@ class CommentOrReplyOwnerProfileWidget extends StatelessWidget {
                 }
                 final user = snapshot.data!.data()!;
 
-                return CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(
-                    user['profile_url'],
+                return InkWell(
+                  highlightColor: AppPallete.lightBlue,
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfilePage.routeName,
+                        arguments: owner_id);
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                      user['profile_url'],
+                    ),
                   ),
                 );
               },

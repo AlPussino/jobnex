@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/common/widget/view_images_list_page.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/common/widget/view_images_list_page.dart';
 
 class ImagesMessage extends StatelessWidget {
   final Size size;

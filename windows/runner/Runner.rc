@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "freezed_example" "\0"
+            VALUE "FileDescription", "JobNex" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "freezed_example" "\0"
+            VALUE "InternalName", "JobNex" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "freezed_example.exe" "\0"
-            VALUE "ProductName", "freezed_example" "\0"
+            VALUE "OriginalFilename", "JobNex.exe" "\0"
+            VALUE "ProductName", "JobNex" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

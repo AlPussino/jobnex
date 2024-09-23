@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/job_recruitment_card.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/applied_jobs/presentation/bloc/applied_jobs_bloc.dart';
+import 'package:JobNex/features/feed/presentation/widgets/job_recruitment_card.dart';
 import 'package:toastification/toastification.dart';
 
 class AppliedJobsPage extends StatefulWidget {

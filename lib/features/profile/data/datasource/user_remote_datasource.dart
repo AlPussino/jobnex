@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/core/util/upload_image_to_fire_storage.dart';
-import 'package:freezed_example/features/profile/data/model/work_experience.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/core/util/upload_image_to_fire_storage.dart';
+import 'package:JobNex/features/profile/data/model/work_experience.dart';
 
 abstract interface class UserRemoteDataSource {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserInfo(

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
 
 class FillInformationPage extends StatefulWidget {
   static const routeName = '/fill-information-page';

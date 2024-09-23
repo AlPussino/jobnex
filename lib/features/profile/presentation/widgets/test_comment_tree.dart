@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comment_tree/widgets/comment_tree_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
 
 class TestCommentTree extends StatefulWidget {
   const TestCommentTree({super.key});

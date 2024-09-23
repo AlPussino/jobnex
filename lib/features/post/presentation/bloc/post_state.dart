@@ -33,3 +33,5 @@ final class PostReactPostSuccessState extends PostState {}
 final class PostCommentPostSuccessState extends PostState {}
 
 final class PostReplyCommentSuccessState extends PostState {}
+
+final class PostDeletePostSuccessState extends PostState {}

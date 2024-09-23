@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/features/auth/domain/usecase/log_in_with_email_and_password.dart';
-import 'package:freezed_example/features/auth/domain/usecase/sign_up_with_email_and_password.dart';
+import 'package:JobNex/features/auth/domain/usecase/log_in_with_email_and_password.dart';
+import 'package:JobNex/features/auth/domain/usecase/sign_up_with_email_and_password.dart';
 import '../../domain/usecase/log_out.dart';
 
 part 'auth_event.dart';

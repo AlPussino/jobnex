@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/job_recruiter.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/features/feed/presentation/widgets/job_recruiter.dart';
 
 class JobDetail extends StatelessWidget {
   final Size size;

@@ -2,10 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/get_current_location.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/get_current_location.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -157,8 +157,8 @@ class _AddMorePopUpMenuIconButtonState
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       icon: const Icon(Iconsax.add_circle_bold),
-      onSelected: (String currentAddress) {
-        switch (currentAddress) {
+      onSelected: (String fileType) {
+        switch (fileType) {
           case "File":
             sendFilesMessage();
             break;

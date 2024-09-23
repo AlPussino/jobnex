@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/common/widget/video_widget.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/common/widget/video_widget.dart';
 
 class VideoMessage extends StatelessWidget {
   final Size size;

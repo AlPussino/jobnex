@@ -1,7 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:freezed_example/features/profile/presentation/widgets/answer_quiz_page.dart';
-// import 'package:freezed_example/features/profile/presentation/widgets/view_detail_answers_page.dart';
+// import 'package:JobNex/features/profile/presentation/widgets/answer_quiz_page.dart';
+// import 'package:JobNex/features/profile/presentation/widgets/view_detail_answers_page.dart';
 // import 'package:page_transition/page_transition.dart';
 
 // class SubmittedAnswers extends StatefulWidget {

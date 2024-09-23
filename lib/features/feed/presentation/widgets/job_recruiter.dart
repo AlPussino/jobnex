@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/feed/presentation/widgets/user_card.dart';
-import 'package:freezed_example/features/profile/presentation/bloc/user_bloc.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/feed/presentation/widgets/user_card.dart';
+import 'package:JobNex/features/profile/presentation/bloc/user_bloc.dart';
 import 'package:toastification/toastification.dart';
 
 class JobRecruiter extends StatefulWidget {

@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_information_page.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/chat_conversation_app_bar.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/chat_inputs.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/message_list_widget.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_information_page.dart';
+import 'package:JobNex/features/chat/presentation/widgets/chat_conversation_app_bar.dart';
+import 'package:JobNex/features/chat/presentation/widgets/chat_inputs.dart';
+import 'package:JobNex/features/chat/presentation/widgets/message_list_widget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
 
@@ -73,6 +74,10 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
               return Scaffold(
                 appBar: AppBar(
                   title: InkWell(
+                    highlightColor: AppPallete.lightBlue,
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     onTap: () {
                       !chatRoomData['block'] ||
                               chatRoomData['block_by'] ==

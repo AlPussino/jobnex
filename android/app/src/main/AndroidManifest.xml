@@ -19,7 +19,7 @@
 
 
     <application
-        android:label="freezed_example"
+        android:label="JobNex"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"

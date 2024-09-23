@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/error/failure.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/error/failure.dart';
+
+import '../../data/model/story.dart';
 
 abstract interface class ChatRepository {
   Future<Either<Failure, Null>> createChat({
@@ -62,4 +64,8 @@ abstract interface class ChatRepository {
     required String receiver_id,
     required bool is_block,
   });
+
+  Future<Either<Failure, Null>> addStory({required String image});
+
+  Future<Either<Failure, Stream<List<Story>>>> getAllStories();
 }

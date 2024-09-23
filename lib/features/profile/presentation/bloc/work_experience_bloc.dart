@@ -1,15 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/features/profile/data/model/work_experience.dart';
-import 'package:freezed_example/features/profile/domain/usecase/add_work_experience.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_company_name.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_location.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_position.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_job_type.dart';
-import 'package:freezed_example/features/profile/domain/usecase/change_work_experiences_dates.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_work_experience_by_id.dart';
-import 'package:freezed_example/features/profile/domain/usecase/get_work_experiences.dart';
+import 'package:JobNex/features/profile/data/model/work_experience.dart';
+import 'package:JobNex/features/profile/domain/usecase/add_work_experience.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_company_name.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_location.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_position.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_job_type.dart';
+import 'package:JobNex/features/profile/domain/usecase/change_work_experiences_dates.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_work_experience_by_id.dart';
+import 'package:JobNex/features/profile/domain/usecase/get_work_experiences.dart';
 
 part 'work_experience_event.dart';
 part 'work_experience_state.dart';

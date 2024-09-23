@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/images_grid_widget_in_chat_media_tab_bar.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/videos_grid_widget_in_chat_media_tab_bar.dart';
-import 'package:freezed_example/features/chat/presentation/widgets/voices_list_widget_in_chat_media_tab_bar.dart';
+import 'package:JobNex/features/chat/presentation/widgets/images_grid_widget_in_chat_media_tab_bar.dart';
+import 'package:JobNex/features/chat/presentation/widgets/videos_grid_widget_in_chat_media_tab_bar.dart';
+import 'package:JobNex/features/chat/presentation/widgets/voices_list_widget_in_chat_media_tab_bar.dart';
 import '../widgets/files_grid_widget_in_chat_media_tab_bar.dart';
 
 class ViewMediaPage extends StatefulWidget {

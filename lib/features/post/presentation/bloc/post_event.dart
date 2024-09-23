@@ -33,3 +33,8 @@ final class PostReplyComment extends PostEvent {
   final String replyText;
   PostReplyComment(this.post_id, this.comment_id, this.replyText);
 }
+
+final class PostDeletePost extends PostEvent {
+  final String post_id;
+  PostDeletePost(this.post_id);
+}

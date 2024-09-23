@@ -1,6 +1,6 @@
 {
-    "name": "freezed_example",
-    "short_name": "freezed_example",
+    "name": "JobNex",
+    "short_name": "JobNex",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

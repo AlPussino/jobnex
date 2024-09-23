@@ -3,13 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/core/util/upload_image_to_fire_storage.dart';
-import 'package:freezed_example/features/post/data/model/comment.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
-import 'package:freezed_example/features/post/data/model/react.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/core/util/upload_image_to_fire_storage.dart';
+import 'package:JobNex/features/post/data/model/comment.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
+import 'package:JobNex/features/post/data/model/react.dart';
 import 'package:uuid/uuid.dart';
-
 import '../model/reply.dart';
 
 abstract interface class PostRemoteDataSource {
@@ -26,6 +25,7 @@ abstract interface class PostRemoteDataSource {
     required String commentId,
     required String replyText,
   });
+  Future deletePost({required String post_id});
 }
 
 class PostRemoteDataSourceImpl implements PostRemoteDataSource {
@@ -190,6 +190,20 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
           await postDocRef.update({'comments': comments});
         }
       }
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message!);
+    } catch (e) {
+      throw ServerException('$e');
+    }
+  }
+
+  @override
+  Future deletePost({required String post_id}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('posts')
+          .doc(post_id)
+          .delete();
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
     } catch (e) {

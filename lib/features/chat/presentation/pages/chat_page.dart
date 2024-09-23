@@ -2,11 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_contact_list_tile.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:JobNex/features/chat/presentation/pages/add_story_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_contact_list_tile.dart';
+import 'package:JobNex/features/chat/presentation/widgets/stories_list.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
 
 class ChatPage extends StatefulWidget {
@@ -28,7 +31,16 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Chat")),
+      appBar: AppBar(
+        title: const Text("Chat"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AddStoryPage.routeName);
+              },
+              icon: const Icon(Iconsax.gallery_add_bold)),
+        ],
+      ),
 
       //
       body: BlocConsumer<ChatBloc, ChatState>(
@@ -58,22 +70,35 @@ class _ChatPageState extends State<ChatPage> {
                   return const ErrorWidgets(errorMessage: "No Chat found.");
                 }
                 final chatListSnapShot = snapshot.data!.docs;
-
-                return AnimationLimiter(
-                  child: ListView.builder(
-                    itemCount: chatListSnapShot.length,
-                    itemBuilder: (context, index) {
+                return SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       //
-                      final chatListData = chatListSnapShot[index].data();
-                      DocumentReference<Map<String, dynamic>> chatContact =
-                          chatListData['chat_contact'];
+                      const StoriesList(),
 
-                      return ChatContactListTile(
-                        chatSnapshot: chatContact,
-                        lastMessage: chatListData['last_message'],
-                        index: index,
-                      );
-                    },
+                      //
+                      AnimationLimiter(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: chatListSnapShot.length,
+                          itemBuilder: (context, index) {
+                            //x
+                            final chatListData = chatListSnapShot[index].data();
+                            DocumentReference<Map<String, dynamic>>
+                                chatContact = chatListData['chat_contact'];
+
+                            return ChatContactListTile(
+                              chatSnapshot: chatContact,
+                              lastMessage: chatListData['last_message'],
+                              index: index,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },

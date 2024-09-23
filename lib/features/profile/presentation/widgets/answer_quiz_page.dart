@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:freezed_example/features/profile/presentation/widgets/submitted_answers_page.dart';
+// import 'package:JobNex/features/profile/presentation/widgets/submitted_answers_page.dart';
 
 // class AnswerQuizPage extends StatefulWidget {
 //   const AnswerQuizPage({super.key});

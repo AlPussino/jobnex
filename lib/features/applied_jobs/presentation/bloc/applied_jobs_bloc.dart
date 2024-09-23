@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/features/applied_jobs/domain/usercase/get_user_applied_jobs.dart';
+import 'package:JobNex/features/applied_jobs/domain/usercase/get_user_applied_jobs.dart';
 part 'applied_jobs_event.dart';
 part 'applied_jobs_state.dart';
 

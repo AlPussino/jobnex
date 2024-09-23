@@ -3,13 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
-import 'package:freezed_example/features/post/presentation/widgets/post_owner.dart';
-import 'package:freezed_example/features/post/presentation/widgets/react_and_comment_bar.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_bloc.dart';
+import 'package:JobNex/features/post/presentation/pages/comment_list_page.dart';
+import 'package:JobNex/features/post/presentation/widgets/post_owner.dart';
+import 'package:JobNex/features/post/presentation/widgets/react_and_comment_bar.dart';
 import 'package:toastification/toastification.dart';
 
 class PostDetailPage extends StatefulWidget {
@@ -133,7 +135,7 @@ class _PostDetailPageState extends State<PostDetailPage>
                                     animate: true,
                                     curve: Curves.easeIn,
                                     child: PostOwner(
-                                      post_owner_id: post.post_owner_id,
+                                      post: post,
                                       created_at:
                                           changeToTimeAgo("${post.created_at}"),
                                     ),
@@ -182,7 +184,17 @@ class _PostDetailPageState extends State<PostDetailPage>
                     ),
                     SizeTransition(
                       sizeFactor: sizeAnimation,
-                      child: ReactAndCommentBar(post: post),
+                      child: InkWell(
+                          highlightColor: AppPallete.lightBlue,
+                          customBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, CommentListPage.routeName,
+                                arguments: post);
+                          },
+                          child: ReactAndCommentBar(post: post)),
                     ),
                   ],
                 );

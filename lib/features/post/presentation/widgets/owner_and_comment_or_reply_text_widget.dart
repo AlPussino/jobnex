@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/core/common/widget/error.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/common/widget/text_form_fields.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
-import 'package:freezed_example/features/post/data/model/reply.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_post_owner_info.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_bloc.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_bloc.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_event.dart';
-import 'package:freezed_example/features/post/presentation/bloc/post_owner_state.dart';
-import 'package:freezed_example/features/post/presentation/provider/reply_text_field_provider.dart';
+import 'package:JobNex/core/common/widget/error.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
+import 'package:JobNex/features/post/data/model/reply.dart';
+import 'package:JobNex/features/post/domain/usecase/get_post_owner_info.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_bloc.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_event.dart';
+import 'package:JobNex/features/post/presentation/bloc/post_owner_state.dart';
+import 'package:JobNex/features/post/presentation/provider/reply_text_field_provider.dart';
+import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 
 class OwnerAndCommentOrReplyTextWidget extends StatefulWidget {
   final String owner_id;
   final String commentOrReply;
-  final TextEditingController textFieldController;
   final String post_id;
   final String comment_id;
   final bool isComment;
@@ -23,11 +22,13 @@ class OwnerAndCommentOrReplyTextWidget extends StatefulWidget {
   final List<Reply> replies;
   final VoidCallback showOrNotReplies;
   final DateTime created_at;
+  final TextEditingController textFieldController;
+  final FocusNode textFieldFocusNode;
+
   const OwnerAndCommentOrReplyTextWidget({
     super.key,
     required this.owner_id,
     required this.commentOrReply,
-    required this.textFieldController,
     required this.post_id,
     required this.comment_id,
     required this.isComment,
@@ -35,6 +36,8 @@ class OwnerAndCommentOrReplyTextWidget extends StatefulWidget {
     required this.showReplies,
     required this.replies,
     required this.created_at,
+    required this.textFieldController,
+    required this.textFieldFocusNode,
   });
 
   @override
@@ -45,36 +48,18 @@ class OwnerAndCommentOrReplyTextWidget extends StatefulWidget {
 class _OwnerAndCommentOrReplyTextWidgetState
     extends State<OwnerAndCommentOrReplyTextWidget> {
   late bool is_replies_showed;
-  final TextEditingController replyController = TextEditingController();
-  bool showReplyTextField = false;
 
   @override
   void initState() {
     is_replies_showed = widget.showReplies;
+    widget.textFieldController.addListener(
+      () {
+        widget.textFieldController.text.isEmpty
+            ? context.read<ReplyTextFieldProvider>().clearCommentId()
+            : null;
+      },
+    );
     super.initState();
-  }
-
-  void replyComment() {
-    context.read<PostBloc>().add(PostReplyComment(
-        widget.post_id, widget.comment_id, replyController.text));
-    replyController.clear();
-    setState(() {
-      showReplyTextField = !showReplyTextField;
-    });
-    context.read<ReplyTextFieldProvider>().toggleReplyTextField();
-  }
-
-  void toggleReplyTextField(BuildContext context) {
-    context.read<ReplyTextFieldProvider>().toggleReplyTextField();
-    setState(() {
-      showReplyTextField = !showReplyTextField;
-    });
-  }
-
-  @override
-  void dispose() {
-    replyController.dispose();
-    super.dispose();
   }
 
   @override
@@ -114,19 +99,28 @@ class _OwnerAndCommentOrReplyTextWidgetState
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: size.height / 60),
                     Card(
+                      borderOnForeground: true,
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
+                        margin: const EdgeInsets.all(20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("${user['name']}"),
+                                InkWell(
+                                    highlightColor: AppPallete.lightBlue,
+                                    customBorder: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, ProfilePage.routeName,
+                                          arguments: user['user_id']);
+                                    },
+                                    child: Text("${user['name']}")),
                                 Text(changeToTimeAgo("${widget.created_at}")),
                               ],
                             ),
@@ -135,46 +129,40 @@ class _OwnerAndCommentOrReplyTextWidgetState
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        InkWell(
-                            onTap: () => toggleReplyTextField(context),
-                            child:
-                                Text(!showReplyTextField ? "reply" : "close")),
-                        SizedBox(width: size.width / 20),
-                        if (widget.isComment && widget.replies.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
                           InkWell(
+                            onTap: () {
+                              widget.textFieldFocusNode.requestFocus();
+                              context
+                                  .read<ReplyTextFieldProvider>()
+                                  .replyToComment(widget.comment_id);
+                              widget.textFieldController.text =
+                                  '${user['name']} :';
+                            },
+                            child: const Text("reply"),
+                          ),
+                          SizedBox(width: size.width / 10),
+                          if (widget.isComment && widget.replies.isNotEmpty)
+                            InkWell(
                               onTap: () {
                                 widget.showOrNotReplies();
                                 setState(() {
                                   is_replies_showed = !is_replies_showed;
                                 });
                               },
-                              child: Text(is_replies_showed
-                                  ? "show less"
-                                  : "show more")),
-                      ],
-                    ),
-                    if (showReplyTextField)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextFormFields(
-                                hintText: 'Write reply...',
-                                controller: replyController,
-                                isObscureText: false,
+                              child: Text(
+                                is_replies_showed
+                                    ? "hide replies"
+                                    : "show replies",
                               ),
                             ),
-                            IconButton(
-                              onPressed: replyComment,
-                              icon: const Icon(Icons.send),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
+                    ),
                   ],
                 );
               },

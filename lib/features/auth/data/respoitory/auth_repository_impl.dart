@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
-import 'package:freezed_example/core/error/exception.dart';
-import 'package:freezed_example/core/error/failure.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
+import 'package:JobNex/core/error/exception.dart';
+import 'package:JobNex/core/error/failure.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:freezed_example/features/auth/data/datasource/auth_remote_datasource.dart';
-import 'package:freezed_example/features/auth/domain/repository/auth_repository.dart';
+import 'package:JobNex/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:JobNex/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;

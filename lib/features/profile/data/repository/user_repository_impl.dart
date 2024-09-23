@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/features/profile/data/model/work_experience.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/profile/data/model/work_experience.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../domain/repository/user_repository.dart';
 import '../datasource/user_remote_datasource.dart';

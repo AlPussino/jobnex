@@ -1,6 +1,6 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoWidget extends StatefulWidget {

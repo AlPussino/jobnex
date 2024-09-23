@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/util/show_snack_bar.dart';
-import 'package:freezed_example/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:freezed_example/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:freezed_example/features/auth/presentation/widgets/elevated_buttons.dart';
-import 'package:freezed_example/core/common/widget/text_form_fields.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/util/show_snack_bar.dart';
+import 'package:JobNex/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:JobNex/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:JobNex/features/auth/presentation/widgets/elevated_buttons.dart';
+import 'package:JobNex/core/common/widget/text_form_fields.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_example/features/bottom_navigation_bar_page.dart';
+import 'package:JobNex/features/bottom_navigation_bar_page.dart';
 import 'package:toastification/toastification.dart';
 
 class LoginPage extends StatelessWidget {

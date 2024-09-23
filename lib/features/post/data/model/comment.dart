@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/features/post/data/model/reply.dart';
+import 'package:JobNex/features/post/data/model/reply.dart';
 part 'comment.freezed.dart';
 part 'comment.g.dart';
 

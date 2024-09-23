@@ -2,18 +2,21 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/chat/domain/usecase/create_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/delete_conversation.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_chat_list.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_chatroom_data.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_files_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_images_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_videos_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/get_voices_in_chat.dart';
-import 'package:freezed_example/features/chat/domain/usecase/send_text_message.dart';
-import 'package:freezed_example/features/chat/domain/usecase/update_theme.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/chat/data/model/story.dart';
+import 'package:JobNex/features/chat/domain/usecase/add_story.dart';
+import 'package:JobNex/features/chat/domain/usecase/create_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/delete_conversation.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_all_stories.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_chat_list.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_chatroom_data.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_files_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_images_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_videos_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/get_voices_in_chat.dart';
+import 'package:JobNex/features/chat/domain/usecase/send_text_message.dart';
+import 'package:JobNex/features/chat/domain/usecase/update_theme.dart';
 import '../../domain/usecase/block_user.dart';
 import '../../domain/usecase/get_chat_stream.dart';
 import '../../domain/usecase/send_file_message.dart';
@@ -37,6 +40,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final GetFilesInChat _getFilesInChat;
   final DeleteConversation _deleteConversation;
   final BlockUser _blockUser;
+  final AddStory _addStory;
+  final GetAllStories _getAllStories;
+
   ChatBloc({
     required CreateChat createChat,
     required GetChatList getChatList,
@@ -52,6 +58,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     required GetFilesInChat getFilesInChat,
     required DeleteConversation deleteConversation,
     required BlockUser blockUser,
+    required AddStory addStory,
+    required GetAllStories getAllStories,
   })  : _createChat = createChat,
         _getChatList = getChatList,
         _getChatStream = getChatStream,
@@ -66,6 +74,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         _getFilesInChat = getFilesInChat,
         _deleteConversation = deleteConversation,
         _blockUser = blockUser,
+        _addStory = addStory,
+        _getAllStories = getAllStories,
         super(ChatInitial()) {
     on<ChatEvent>((_, emit) => emit(ChatLoading()));
     on<ChatCreateChat>(onChatCreateChat);
@@ -82,6 +92,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<ChatGetFilesInChat>(onChatGetFilesInChat);
     on<ChatDeleteConversation>(onChatDeleteConversation);
     on<ChatBlockUser>(onChatBlockUser);
+    on<ChatAddStory>(onChatAddStory);
+    on<ChatGetAllStories>(onChatGetAllStories);
   }
 
   void onChatCreateChat(ChatCreateChat event, Emitter<ChatState> emit) async {
@@ -196,5 +208,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         receiver_id: event.receiver_id, is_block: event.is_block));
     response.fold((failure) => emit(ChatFailure(failure.message)),
         (is_block) => emit(ChatBlockUserSuccess(is_block)));
+  }
+
+  void onChatAddStory(ChatAddStory event, Emitter<ChatState> emit) async {
+    final response = await _addStory.call(AddStoryParams(image: event.image));
+
+    response.fold((failure) => emit(ChatFailure(failure.message)),
+        (_) => emit(ChatAddStorySuccess()));
+  }
+
+  void onChatGetAllStories(
+      ChatGetAllStories event, Emitter<ChatState> emit) async {
+    final response = await _getAllStories.call(NoParams());
+
+    response.fold((failure) => emit(ChatFailure(failure.message)),
+        (stories) => emit(ChatGetAllStoriesSuccess(stories: stories)));
   }
 }

@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/core/util/change_to_time_ago.dart';
-import 'package:freezed_example/features/feed/presentation/pages/job_recruitment_detail_page.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/core/util/change_to_time_ago.dart';
+import 'package:JobNex/features/feed/presentation/pages/job_recruitment_detail_page.dart';
 
 class JobRecruitmentCard extends StatelessWidget {
   final Map<String, dynamic> recruitmentData;

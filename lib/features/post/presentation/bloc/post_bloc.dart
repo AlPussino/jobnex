@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:freezed_example/core/usecase/usecase.dart';
-import 'package:freezed_example/features/post/data/model/post.dart';
-import 'package:freezed_example/features/post/data/model/react.dart';
-import 'package:freezed_example/features/post/domain/usecase/add_post.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_all_posts.dart';
-import 'package:freezed_example/features/post/domain/usecase/get_post_by_id.dart';
-import 'package:freezed_example/features/post/domain/usecase/react_post.dart';
+import 'package:JobNex/core/usecase/usecase.dart';
+import 'package:JobNex/features/post/data/model/post.dart';
+import 'package:JobNex/features/post/data/model/react.dart';
+import 'package:JobNex/features/post/domain/usecase/add_post.dart';
+import 'package:JobNex/features/post/domain/usecase/get_all_posts.dart';
+import 'package:JobNex/features/post/domain/usecase/get_post_by_id.dart';
+import 'package:JobNex/features/post/domain/usecase/react_post.dart';
 import '../../domain/usecase/comment_post.dart';
+import '../../domain/usecase/delete_post.dart';
 import '../../domain/usecase/reply_comment.dart';
 
 part 'post_event.dart';
@@ -21,6 +22,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   final ReactPost _reactPost;
   final CommentPost _commentPost;
   final ReplyComment _replyComment;
+  final DeletePost _deletePost;
 
   PostBloc({
     required AddPost addPost,
@@ -29,12 +31,14 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     required ReactPost reactPost,
     required CommentPost commentPost,
     required ReplyComment replyComment,
+    required DeletePost deletePost,
   })  : _addPost = addPost,
         _getAllPosts = getAllPosts,
         _getPostById = getPostById,
         _reactPost = reactPost,
         _commentPost = commentPost,
         _replyComment = replyComment,
+        _deletePost = deletePost,
         super(PostInitial()) {
     on<PostEvent>((_, emit) => emit(PostLoading()));
     on<PostGetAllPost>(onPostGetAllPosts);
@@ -43,6 +47,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     on<PostReactPost>(onPostReactPost);
     on<PostCommentPost>(onPostCommentPost);
     on<PostReplyComment>(onPostReplyComment);
+    on<PostDeletePost>(onPostDeletePost);
   }
 
   FutureOr<void> onPostGetAllPosts(
@@ -94,5 +99,13 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
     response.fold((failure) => emit(PostFailure(failure.message)),
         (_) => emit(PostReplyCommentSuccessState()));
+  }
+
+  void onPostDeletePost(PostDeletePost event, Emitter<PostState> emit) async {
+    final response =
+        await _deletePost.call(DeletePostParams(post_id: event.post_id));
+
+    response.fold((failure) => emit(PostFailure(failure.message)),
+        (_) => emit(PostDeletePostSuccessState()));
   }
 }

@@ -7,9 +7,66 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:561074479638:android:62fc37f05a555c9cb24b37",
+        "android_client_info": {
+          "package_name": "com.example.flutter_vercel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtSf0KhivECgE2qsFkYI7PU7_elFUKMQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:561074479638:android:73e4d0f4265190f9b24b37",
         "android_client_info": {
           "package_name": "com.example.freezed_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtSf0KhivECgE2qsFkYI7PU7_elFUKMQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561074479638:android:d59a6cb6ffc3b3deb24b37",
+        "android_client_info": {
+          "package_name": "com.example.jobnex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtSf0KhivECgE2qsFkYI7PU7_elFUKMQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561074479638:android:bbe61937f9e68dd9b24b37",
+        "android_client_info": {
+          "package_name": "com.jobnex.package.name"
         }
       },
       "oauth_client": [],

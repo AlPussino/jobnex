@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
-import 'package:freezed_example/core/common/enum/message_type_enum.dart';
-import 'package:freezed_example/core/error/failure.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
+import 'package:JobNex/core/common/enum/message_type_enum.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/chat/data/model/story.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:freezed_example/features/chat/data/datasource/chat_remote_datasource.dart';
-import 'package:freezed_example/features/chat/domain/repository/chat_repository.dart';
+import 'package:JobNex/features/chat/data/datasource/chat_remote_datasource.dart';
+import 'package:JobNex/features/chat/domain/repository/chat_repository.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
   final ChatRemoteDataSource chatRemoteDataSource;
@@ -222,6 +223,30 @@ class ChatRepositoryImpl implements ChatRepository {
       }
       return right(await chatRemoteDataSource.blockUser(
           receiver_id: receiver_id, is_block: is_block));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Null>> addStory({required String image}) async {
+    try {
+      if (!await connectionChecker.hasConnection) {
+        return left(const Failure(Constant.networkErrorMessage));
+      }
+      return right(await chatRemoteDataSource.addStory(image: image));
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Stream<List<Story>>>> getAllStories() async {
+    try {
+      if (!await connectionChecker.hasConnection) {
+        return left(const Failure(Constant.networkErrorMessage));
+      }
+      return right(chatRemoteDataSource.getAllStories());
     } catch (e) {
       return left(Failure(e.toString()));
     }

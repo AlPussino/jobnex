@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/common/widget/loading.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/features/chat/presentation/provider/media_provider.dart';
+import 'package:JobNex/core/common/widget/loading.dart';
+import 'package:JobNex/core/theme/app_pallete.dart';
+import 'package:JobNex/features/chat/presentation/provider/media_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 

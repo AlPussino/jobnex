@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "freezed_example",
+            "name": "JobNex",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "freezed_example (profile mode)",
+            "name": "JobNex (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "freezed_example (release mode)",
+            "name": "JobNex (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

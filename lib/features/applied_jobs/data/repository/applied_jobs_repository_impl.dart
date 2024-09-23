@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/common/constant/constant.dart';
+import 'package:JobNex/core/common/constant/constant.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/features/applied_jobs/data/datasource/applied_jobs_remote_datasource.dart';
-import 'package:freezed_example/features/applied_jobs/domain/repository/applied_jobs_repository.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/applied_jobs/data/datasource/applied_jobs_remote_datasource.dart';
+import 'package:JobNex/features/applied_jobs/domain/repository/applied_jobs_repository.dart';
 
 class AppliedJobsRepositoryImpl implements AppliedJobsRepository {
   final AppliedJobsRemoteDataSource appliedJobsRemoteDataSource;

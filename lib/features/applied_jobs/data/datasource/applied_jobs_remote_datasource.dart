@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freezed_example/core/error/exception.dart';
+import 'package:JobNex/core/error/exception.dart';
 
 abstract interface class AppliedJobsRemoteDataSource {
   Stream<QuerySnapshot<Map<String, dynamic>>> getUserAppliedJobs(

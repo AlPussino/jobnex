@@ -1,4 +1,4 @@
-# freezed_example
+# JobNex
 
 A new Flutter project.
 

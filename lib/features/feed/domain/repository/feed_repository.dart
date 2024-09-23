@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_example/core/error/failure.dart';
-import 'package:freezed_example/features/feed/data/model/job_recruitment.dart';
+import 'package:JobNex/core/error/failure.dart';
+import 'package:JobNex/features/feed/data/model/job_recruitment.dart';
 
 abstract interface class FeedRepository {
   Future<Either<Failure, void>> addRecruitment({

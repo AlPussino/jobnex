@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_example/auth_gate.dart';
-import 'package:freezed_example/core/common/widget/view_image_page.dart';
-import 'package:freezed_example/core/common/widget/view_images_list_page.dart';
-import 'package:freezed_example/core/common/widget/view_video_page.dart';
-import 'package:freezed_example/features/auth/presentation/pages/fill_information_page.dart';
-import 'package:freezed_example/features/auth/presentation/pages/login_page.dart';
-import 'package:freezed_example/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:freezed_example/features/bottom_navigation_bar_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_conversation_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_information_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/chat_page.dart';
-import 'package:freezed_example/features/applied_jobs/presentation/pages/applied_jobs_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/photos_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/select_photos_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/select_videos_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/update_quick_reaction_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/update_theme_page.dart';
-import 'package:freezed_example/features/chat/presentation/pages/view_media_page.dart';
-import 'package:freezed_example/features/feed/presentation/pages/add_recruitment_page.dart';
-import 'package:freezed_example/features/feed/presentation/pages/feed_page.dart';
-import 'package:freezed_example/features/feed/presentation/pages/job_recruitment_detail_page.dart';
-import 'package:freezed_example/features/post/presentation/pages/add_post_page.dart';
-import 'package:freezed_example/features/post/presentation/pages/comment_list_page.dart';
-import 'package:freezed_example/features/post/presentation/pages/post_detail_page.dart';
-import 'package:freezed_example/features/post/presentation/pages/post_page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/add_work_experiences_page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/change_contacts.page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/change_work_experiences_dates_page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/profile_page.dart';
-import 'package:freezed_example/features/profile/presentation/pages/work_experience.detail_page.dart';
+import 'package:JobNex/auth_gate.dart';
+import 'package:JobNex/core/common/widget/view_image_page.dart';
+import 'package:JobNex/core/common/widget/view_images_list_page.dart';
+import 'package:JobNex/core/common/widget/view_video_page.dart';
+import 'package:JobNex/features/auth/presentation/pages/fill_information_page.dart';
+import 'package:JobNex/features/auth/presentation/pages/login_page.dart';
+import 'package:JobNex/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:JobNex/features/bottom_navigation_bar_page.dart';
+import 'package:JobNex/features/chat/data/model/story_body.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_conversation_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_information_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/chat_page.dart';
+import 'package:JobNex/features/applied_jobs/presentation/pages/applied_jobs_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/photos_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/select_photos_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/select_videos_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/update_quick_reaction_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/update_theme_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/view_media_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/view_story_page.dart';
+import 'package:JobNex/features/feed/presentation/pages/add_recruitment_page.dart';
+import 'package:JobNex/features/feed/presentation/pages/feed_page.dart';
+import 'package:JobNex/features/feed/presentation/pages/job_recruitment_detail_page.dart';
+import 'package:JobNex/features/post/presentation/pages/add_post_page.dart';
+import 'package:JobNex/features/post/presentation/pages/comment_list_page.dart';
+import 'package:JobNex/features/post/presentation/pages/post_detail_page.dart';
+import 'package:JobNex/features/post/presentation/pages/post_page.dart';
+import 'package:JobNex/features/post/presentation/pages/reacts_owners_list_page.dart';
+import 'package:JobNex/features/profile/presentation/pages/add_work_experiences_page.dart';
+import 'package:JobNex/features/profile/presentation/pages/change_contacts.page.dart';
+import 'package:JobNex/features/profile/presentation/pages/change_work_experiences_dates_page.dart';
+import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
+import 'package:JobNex/features/profile/presentation/pages/work_experience.detail_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/add_story_page.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../features/post/data/model/post.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -342,6 +345,39 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       final post = routeSettings.arguments as Post;
       return PageTransition(
           child: CommentListPage(post: post),
+          type: PageTransitionType.bottomToTop,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    //  Reacts Owners List Screen
+    case ReactsOwnersListPage.routeName:
+      final post = routeSettings.arguments as Post;
+      return PageTransition(
+          child: ReactsOwnersListPage(post: post),
+          type: PageTransitionType.bottomToTop,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    //  View Story Screen
+    case ViewStoryPage.routeName:
+      final arguments = routeSettings.arguments as Map<String, dynamic>;
+      List<StoryBody> storyBodies = arguments['story_bodies'];
+      String story_owner_name = arguments['story_owner_name'];
+      String story_owner_profile = arguments['story_owner_profile'];
+      return PageTransition(
+          child: ViewStoryPage(
+            storyBodies: storyBodies,
+            story_owner_name: story_owner_name,
+            story_owner_profile: story_owner_profile,
+          ),
+          type: PageTransitionType.rightToLeft,
+          fullscreenDialog: true,
+          duration: const Duration(milliseconds: 300));
+
+    // Add Story Screen
+    case AddStoryPage.routeName:
+      return PageTransition(
+          child: const AddStoryPage(),
           type: PageTransitionType.bottomToTop,
           fullscreenDialog: true,
           duration: const Duration(milliseconds: 300));

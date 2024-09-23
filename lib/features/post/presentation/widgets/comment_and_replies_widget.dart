@@ -1,21 +1,23 @@
 import 'package:comment_tree/widgets/comment_tree_widget.dart';
-import 'package:comment_tree/widgets/tree_theme_data.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_example/core/theme/app_pallete.dart';
-import 'package:freezed_example/features/post/data/model/comment.dart';
-import 'package:freezed_example/features/post/presentation/widgets/owner_and_comment_or_reply_text_widget.dart';
-import 'package:freezed_example/features/post/presentation/widgets/comment_owner_profile_widget.dart';
+import 'package:JobNex/features/post/data/model/comment.dart';
+import 'package:JobNex/features/post/presentation/widgets/owner_and_comment_or_reply_text_widget.dart';
+import 'package:JobNex/features/post/presentation/widgets/comment_owner_profile_widget.dart';
 import '../../data/model/reply.dart';
 
 class CommentAndRepliesWidget extends StatefulWidget {
-  final TextEditingController textFieldController;
   final Comment comment;
   final String post_id;
+  final String post_owner_id;
+  final TextEditingController textFieldController;
+  final FocusNode textFieldFocusNode;
   const CommentAndRepliesWidget({
     super.key,
-    required this.textFieldController,
     required this.comment,
     required this.post_id,
+    required this.post_owner_id,
+    required this.textFieldController,
+    required this.textFieldFocusNode,
   });
 
   @override
@@ -48,7 +50,6 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
         return OwnerAndCommentOrReplyTextWidget(
           owner_id: widget.comment.comment_owner_id,
           commentOrReply: widget.comment.comment,
-          textFieldController: widget.textFieldController,
           post_id: widget.post_id,
           comment_id: widget.comment.comment_id,
           isComment: true,
@@ -56,6 +57,8 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
           showReplies: showReplies,
           replies: widget.comment.replies,
           created_at: widget.comment.created_at,
+          textFieldController: widget.textFieldController,
+          textFieldFocusNode: widget.textFieldFocusNode,
         );
       },
       showReplies
@@ -77,7 +80,6 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
         return OwnerAndCommentOrReplyTextWidget(
           owner_id: value.reply_owner_id,
           commentOrReply: value.reply,
-          textFieldController: widget.textFieldController,
           post_id: widget.post_id,
           comment_id: widget.comment.comment_id,
           isComment: false,
@@ -85,10 +87,10 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
           showReplies: showReplies,
           replies: widget.comment.replies,
           created_at: value.created_at,
+          textFieldController: widget.textFieldController,
+          textFieldFocusNode: widget.textFieldFocusNode,
         );
       },
-      treeThemeData:
-          const TreeThemeData(lineWidth: 0.5, lineColor: AppPallete.lightBlue),
     );
   }
 }
