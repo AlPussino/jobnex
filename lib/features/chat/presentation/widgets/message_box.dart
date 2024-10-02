@@ -1,6 +1,6 @@
+import 'package:JobNex/features/chat/presentation/widgets/voice_message.dart';
 import 'package:flutter/material.dart';
 import 'package:JobNex/core/common/enum/message_type_enum.dart';
-import 'package:JobNex/features/chat/presentation/widgets/audio_message.dart';
 import 'package:JobNex/features/chat/presentation/widgets/emoji_message.dart';
 import 'package:JobNex/features/chat/presentation/widgets/file_message.dart';
 import 'package:JobNex/features/chat/presentation/widgets/images_message.dart';
@@ -12,8 +12,11 @@ import 'package:JobNex/features/chat/presentation/widgets/video_message.dart';
 class MessageBox extends StatelessWidget {
   final Map<String, dynamic> chatData;
   final Map<String, dynamic> chatListData;
-  const MessageBox(
-      {super.key, required this.chatData, required this.chatListData});
+  const MessageBox({
+    super.key,
+    required this.chatData,
+    required this.chatListData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ Widget buildMessageWidget(
         chatListData: chatListData,
       );
     case MessageTypeEnum.audio:
-      return AudioMessage(
+      return VoiceMessage(
         size: size,
         chatData: chatData,
         chatListData: chatListData,
@@ -58,15 +61,26 @@ Widget buildMessageWidget(
       );
     case MessageTypeEnum.video:
       return VideoMessage(
-          size: size, chatData: chatData, chatListData: chatListData);
+        size: size,
+        chatData: chatData,
+        chatListData: chatListData,
+      );
     case MessageTypeEnum.location:
       return LocationMessage(
-          size: size, chatData: chatData, chatListData: chatListData);
+        size: size,
+        chatData: chatData,
+        chatListData: chatListData,
+      );
     case MessageTypeEnum.emoji:
       return EmojiMessage(
-          size: size, chatData: chatData, chatListData: chatListData);
+        size: size,
+        chatData: chatData,
+        chatListData: chatListData,
+      );
     case MessageTypeEnum.notification:
-      return NotificationMessage(message: chatData['message']);
+      return NotificationMessage(
+        message: chatData['message'],
+      );
     default:
       return const SizedBox.shrink();
   }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:JobNex/features/chat/data/model/chat_reply.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -28,6 +29,7 @@ abstract interface class ChatRemoteDataSource {
     required String receiver_id,
     required String message,
     required MessageTypeEnum messageType,
+    required ChatReply? chatReply,
   });
 
   Future sendFileMessage({
@@ -147,6 +149,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     required String message,
     required MessageTypeEnum messageType,
     required String messageId,
+    required ChatReply? chatReply,
   }) async {
     await fireStore
         .collection("users")
@@ -163,6 +166,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       "message": message,
       "message_type": messageType.type,
       "time_sent": DateTime.now(),
+      "reply_to": chatReply?.toJson(),
     });
 
     await fireStore
@@ -180,6 +184,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       "message": message,
       "message_type": messageType.type,
       "time_sent": DateTime.now(),
+      "reply_to": chatReply?.toJson(),
     });
   }
 
@@ -280,6 +285,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             message: message,
             messageType: messageType,
             messageId: messageId,
+            chatReply: null,
           );
         }
       },
@@ -344,6 +350,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
     required String receiver_id,
     required String message,
     required MessageTypeEnum messageType,
+    required ChatReply? chatReply,
   }) async {
     try {
       await updateDataToChatCollection(
@@ -361,6 +368,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         message: message,
         messageType: messageType,
         messageId: messageId,
+        chatReply: chatReply,
       );
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
@@ -436,9 +444,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         "theme": theme,
       });
       sendTextMessage(
-          message: "updated theme",
-          messageType: MessageTypeEnum.notification,
-          receiver_id: receiver_id);
+        message: "updated theme",
+        messageType: MessageTypeEnum.notification,
+        receiver_id: receiver_id,
+        chatReply: null,
+      );
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
     } catch (e) {
@@ -485,9 +495,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         "quick_react": quickReact,
       });
       sendTextMessage(
-          receiver_id: receiver_id,
-          message: 'updated quick react',
-          messageType: MessageTypeEnum.notification);
+        receiver_id: receiver_id,
+        message: 'updated quick react',
+        messageType: MessageTypeEnum.notification,
+        chatReply: null,
+      );
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
     } catch (e) {
@@ -610,9 +622,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
       await receiverBatch.commit();
       sendTextMessage(
-          receiver_id: chatroom_id,
-          message: "deleted chat history",
-          messageType: MessageTypeEnum.notification);
+        receiver_id: chatroom_id,
+        message: "deleted chat history",
+        messageType: MessageTypeEnum.notification,
+        chatReply: null,
+      );
     } on FirebaseAuthException catch (e) {
       throw ServerException(e.message!);
     } catch (e) {

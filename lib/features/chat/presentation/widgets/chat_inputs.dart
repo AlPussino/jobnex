@@ -100,16 +100,25 @@ class _ChatInputsState extends State<ChatInputs> {
 
   void sendTextMessage() async {
     if (widget.messageController.text.isEmpty) {
-      context.read<ChatBloc>().add(ChatSendTextMessage(
-          widget.receiverData['user_id'],
-          widget.chatListData['quick_react'],
-          MessageTypeEnum.emoji));
+      context.read<ChatBloc>().add(
+            ChatSendTextMessage(
+              widget.receiverData['user_id'],
+              widget.chatListData['quick_react'],
+              MessageTypeEnum.emoji,
+              context.read<ChatInputProvider>().reply,
+            ),
+          );
     } else {
-      context.read<ChatBloc>().add(ChatSendTextMessage(
-          widget.receiverData['user_id'],
-          widget.messageController.text,
-          MessageTypeEnum.text));
+      context.read<ChatBloc>().add(
+            ChatSendTextMessage(
+              widget.receiverData['user_id'],
+              widget.messageController.text,
+              MessageTypeEnum.text,
+              context.read<ChatInputProvider>().reply,
+            ),
+          );
       widget.messageController.clear();
+      context.read<ChatInputProvider>().clearReply();
     }
   }
 
@@ -188,214 +197,204 @@ class _ChatInputsState extends State<ChatInputs> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    return ChangeNotifierProvider(
-      create: (context) => ChatInputProvider(),
-      lazy: true,
-      builder: (context, child) {
-        return Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
+
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (context.watch<ChatInputProvider>().inputTexts.isEmpty)
-                    Row(
-                      children: [
-                        Draggable(
-                          data: "mic",
-                          feedback: CircleAvatar(
-                              backgroundColor:
-                                  Color(widget.chatListData['theme']),
-                              child: const Icon(
-                                Iconsax.microphone_2_bold,
-                                color: AppPallete.white,
-                              )),
-                          onDragStarted: () {
-                            startAudioRecording();
-                            setState(() {
-                              isRecording = true;
-                            });
-                          },
-                          onDragEnd: (details) {
-                            if (isRecording) {
-                              log('Voice message sent!');
-                              sendAudioMessage();
-                              setState(() {
-                                stopAudioRecording();
-                                isRecording = false;
-                              });
-                            }
-                          },
-                          childWhenDragging: Card(
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  AnimateIcon(
-                                    key: UniqueKey(),
-                                    onTap: () {},
-                                    iconType: IconType.continueAnimation,
-                                    color: Theme.of(context).primaryColor,
-                                    animateIcon: AnimateIcons.loading3,
-                                  ),
-                                  SizedBox(width: size.width / 20),
-                                  Text(formatDuration(durationInSeconds)),
-                                  SizedBox(width: size.width / 20),
-                                  if (isRecording)
-                                    DragTarget(
-                                      builder: (context, candidateData,
-                                          rejectedData) {
-                                        return CircleAvatar(
-                                          radius:
-                                              candidateData.isEmpty ? 20 : 30,
-                                          backgroundColor: AppPallete.red,
-                                          child: const Icon(
-                                            Icons.delete,
-                                            color: AppPallete.white,
-                                            size: 20,
-                                          ),
-                                        );
-                                      },
-                                      onAcceptWithDetails: (data) {
-                                        setState(() {
-                                          stopAudioRecording();
-                                          isRecording = false;
-                                        });
-                                        log('Recording canceled');
-                                      },
-                                    ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          child: CircleAvatar(
-                              backgroundColor:
-                                  Color(widget.chatListData['theme']),
-                              child: const Icon(
-                                Iconsax.microphone_2_bold,
-                                color: AppPallete.white,
-                              )),
-                        ),
-
-                        //
-                        if (!isRecording)
-                          AddMorePopUpMenuIconButton(
-                              receiverData: widget.receiverData),
-
-                        if (!isRecording)
-                          IconButton(
-                            onPressed: sendCameraMessage,
-                            icon: const Icon(Iconsax.camera_bold),
-                          ),
-                        if (!isRecording)
-                          IconButton(
-                            onPressed: sendImagesMessage,
-                            // onPressed: sendFileMessage,
-                            icon: const Icon(Iconsax.gallery_bold),
-                          ),
-                      ],
-                    ),
-                  if (!isRecording)
-                    Expanded(
-                      child: TextFormField(
-                        autofocus: false,
-                        controller: widget.messageController,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(8),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                  width: 2,
-                                  color: Color(widget.chatListData['theme']))),
-                          suffixIcon: IconButton(
-                            onPressed: () async {
-                              FocusManager.instance.primaryFocus!.unfocus();
-                              await Future.delayed(
-                                      const Duration(milliseconds: 50))
-                                  .then(
-                                (value) {
-                                  setState(() {
-                                    showEmoji = !showEmoji;
-                                  });
-                                },
-                              );
-                            },
-                            icon: const Icon(Iconsax.emoji_happy_bold),
-                          ),
-                        ),
-                        minLines: 1,
-                        maxLines: 4,
-                        onTap: () {
-                          setState(() {
-                            showEmoji = false;
-                          });
-                        },
-                        onChanged: (value) {
-                          context.read<ChatInputProvider>().userTypes(value);
-                        },
-                      ),
-                    ),
-                  if (!isRecording)
-                    IconButton(
-                      onPressed: () {
-                        sendTextMessage();
-                        context.read<ChatInputProvider>().sentText();
+              if (context.watch<ChatInputProvider>().inputTexts.isEmpty)
+                Row(
+                  children: [
+                    Draggable(
+                      data: "mic",
+                      feedback: CircleAvatar(
+                          backgroundColor: Color(widget.chatListData['theme']),
+                          child: const Icon(
+                            Iconsax.microphone_2_bold,
+                            color: AppPallete.white,
+                          )),
+                      onDragStarted: () {
+                        startAudioRecording();
+                        setState(() {
+                          isRecording = true;
+                        });
                       },
-                      icon:
-                          context.watch<ChatInputProvider>().inputTexts.isEmpty
-                              ? Text(widget.chatListData['quick_react'],
-                                  style: const TextStyle(fontSize: 25))
-                              : const Icon(Iconsax.send_2_bulk),
+                      onDragEnd: (details) {
+                        if (isRecording) {
+                          log('Voice message sent!');
+                          sendAudioMessage();
+                          setState(() {
+                            stopAudioRecording();
+                            isRecording = false;
+                          });
+                        }
+                      },
+                      childWhenDragging: Card(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              AnimateIcon(
+                                key: UniqueKey(),
+                                onTap: () {},
+                                iconType: IconType.continueAnimation,
+                                color: Theme.of(context).primaryColor,
+                                animateIcon: AnimateIcons.loading3,
+                              ),
+                              SizedBox(width: size.width / 20),
+                              Text(formatDuration(durationInSeconds)),
+                              SizedBox(width: size.width / 20),
+                              if (isRecording)
+                                DragTarget(
+                                  builder:
+                                      (context, candidateData, rejectedData) {
+                                    return CircleAvatar(
+                                      radius: candidateData.isEmpty ? 20 : 30,
+                                      backgroundColor: AppPallete.red,
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: AppPallete.white,
+                                        size: 20,
+                                      ),
+                                    );
+                                  },
+                                  onAcceptWithDetails: (data) {
+                                    setState(() {
+                                      stopAudioRecording();
+                                      isRecording = false;
+                                    });
+                                    log('Recording canceled');
+                                  },
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: CircleAvatar(
+                          backgroundColor: Color(widget.chatListData['theme']),
+                          child: const Icon(
+                            Iconsax.microphone_2_bold,
+                            color: AppPallete.white,
+                          )),
                     ),
-                ],
-              ),
 
-              //
-              if (showEmoji)
-                AnimatedContainer(
-                  duration: const Duration(seconds: 3),
-                  alignment: Alignment.bottomCenter,
-                  curve: Curves.bounceInOut,
-                  child: EmojiPicker(
-                    onEmojiSelected: (category, emoji) {
-                      context.read<ChatInputProvider>().userTypes(emoji.emoji);
-                    },
-                    onBackspacePressed: () {},
-                    textEditingController: widget.messageController,
-                    config: Config(
-                      checkPlatformCompatibility: true,
-                      emojiViewConfig: EmojiViewConfig(
-                        horizontalSpacing: 10,
-                        verticalSpacing: 10,
-                        emojiSizeMax: 25,
-                        gridPadding: EdgeInsets.zero,
-                        backgroundColor: Theme.of(context).canvasColor,
-                        columns: 7,
-                        buttonMode: ButtonMode.CUPERTINO,
+                    //
+                    if (!isRecording)
+                      AddMorePopUpMenuIconButton(
+                          receiverData: widget.receiverData),
+
+                    if (!isRecording)
+                      IconButton(
+                        onPressed: sendCameraMessage,
+                        icon: const Icon(Iconsax.camera_bold),
                       ),
-                      swapCategoryAndBottomBar: false,
-                      bottomActionBarConfig: const BottomActionBarConfig(
-                        enabled: false,
+                    if (!isRecording)
+                      IconButton(
+                        onPressed: sendImagesMessage,
+                        // onPressed: sendFileMessage,
+                        icon: const Icon(Iconsax.gallery_bold),
                       ),
-                      categoryViewConfig: CategoryViewConfig(
-                        categoryIcons: const CategoryIcons(),
-                        recentTabBehavior: RecentTabBehavior.NONE,
-                        tabIndicatorAnimDuration: kTabScrollDuration,
-                        backgroundColor: Theme.of(context).canvasColor,
-                        iconColorSelected: AppPallete.lightBlue,
-                        indicatorColor: AppPallete.lightBlue,
-                        showBackspaceButton: true,
-                        backspaceColor: AppPallete.lightBlue,
-                        dividerColor: AppPallete.grey,
+                  ],
+                ),
+              if (!isRecording)
+                Expanded(
+                  child: TextFormField(
+                    autofocus: false,
+                    controller: widget.messageController,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(8),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                              width: 2,
+                              color: Color(widget.chatListData['theme']))),
+                      suffixIcon: IconButton(
+                        onPressed: () async {
+                          FocusManager.instance.primaryFocus!.unfocus();
+                          await Future.delayed(const Duration(milliseconds: 50))
+                              .then(
+                            (value) {
+                              setState(() {
+                                showEmoji = !showEmoji;
+                              });
+                            },
+                          );
+                        },
+                        icon: const Icon(Iconsax.emoji_happy_bold),
                       ),
                     ),
+                    minLines: 1,
+                    maxLines: 4,
+                    onTap: () {
+                      setState(() {
+                        showEmoji = false;
+                      });
+                    },
+                    onChanged: (value) {
+                      context.read<ChatInputProvider>().userTypes(value);
+                    },
                   ),
+                ),
+              if (!isRecording)
+                IconButton(
+                  onPressed: () {
+                    sendTextMessage();
+                    context.read<ChatInputProvider>().sentText();
+                  },
+                  icon: context.watch<ChatInputProvider>().inputTexts.isEmpty
+                      ? Text(widget.chatListData['quick_react'],
+                          style: const TextStyle(fontSize: 25))
+                      : const Icon(Iconsax.send_2_bulk),
                 ),
             ],
           ),
-        );
-      },
+
+          //
+          if (showEmoji)
+            AnimatedContainer(
+              duration: const Duration(seconds: 3),
+              alignment: Alignment.bottomCenter,
+              curve: Curves.bounceInOut,
+              child: EmojiPicker(
+                onEmojiSelected: (category, emoji) {
+                  context.read<ChatInputProvider>().userTypes(emoji.emoji);
+                },
+                onBackspacePressed: () {},
+                textEditingController: widget.messageController,
+                config: Config(
+                  checkPlatformCompatibility: true,
+                  emojiViewConfig: EmojiViewConfig(
+                    horizontalSpacing: 10,
+                    verticalSpacing: 10,
+                    emojiSizeMax: 25,
+                    gridPadding: EdgeInsets.zero,
+                    backgroundColor: Theme.of(context).canvasColor,
+                    columns: 7,
+                    buttonMode: ButtonMode.CUPERTINO,
+                  ),
+                  swapCategoryAndBottomBar: false,
+                  bottomActionBarConfig: const BottomActionBarConfig(
+                    enabled: false,
+                  ),
+                  categoryViewConfig: CategoryViewConfig(
+                    categoryIcons: const CategoryIcons(),
+                    recentTabBehavior: RecentTabBehavior.NONE,
+                    tabIndicatorAnimDuration: kTabScrollDuration,
+                    backgroundColor: Theme.of(context).canvasColor,
+                    iconColorSelected: AppPallete.lightBlue,
+                    indicatorColor: AppPallete.lightBlue,
+                    showBackspaceButton: true,
+                    backspaceColor: AppPallete.lightBlue,
+                    dividerColor: AppPallete.grey,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -1,17 +1,13 @@
-import 'dart:developer';
-import 'dart:typed_data';
+import 'package:JobNex/features/chat/presentation/widgets/video_thumbnail_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:JobNex/core/common/widget/error.dart';
 import 'package:JobNex/core/common/widget/loading.dart';
 import 'package:JobNex/core/common/widget/view_video_page.dart';
-import 'package:JobNex/core/theme/app_pallete.dart';
 import 'package:JobNex/core/util/show_snack_bar.dart';
 import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 
 class VideosGridWidgetInChatMediaTabBar extends StatefulWidget {
   final String chatRoomId;
@@ -88,7 +84,10 @@ class _VideosGridWidgetInChatMediaTabBarState
                       Navigator.pushNamed(context, ViewVideoPage.routeName,
                           arguments: videosUrls[index]);
                     },
-                    child: VideoThumbnailWidget(videoUrl: videosUrls[index]),
+                    child: VideoThumbnailImage(
+                      videoUrl: videosUrls[index],
+                      isChat: false,
+                    ),
                   );
                 },
               );
@@ -98,59 +97,5 @@ class _VideosGridWidgetInChatMediaTabBarState
         return const SizedBox.shrink();
       },
     );
-  }
-}
-
-class VideoThumbnailWidget extends StatefulWidget {
-  final String videoUrl;
-  const VideoThumbnailWidget({super.key, required this.videoUrl});
-
-  @override
-  State<VideoThumbnailWidget> createState() => _VideoThumbnailWidgetState();
-}
-
-class _VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
-  Uint8List? _thumbnailBytes;
-
-  @override
-  void initState() {
-    super.initState();
-    _generateThumbnail();
-  }
-
-  Future<void> _generateThumbnail() async {
-    try {
-      final Uint8List? thumbnail = await VideoThumbnail.thumbnailData(
-        video: widget.videoUrl,
-        imageFormat: ImageFormat.JPEG,
-        maxHeight: 150,
-        quality: 75,
-      );
-
-      setState(() {
-        _thumbnailBytes = thumbnail;
-      });
-    } catch (e) {
-      log("Error generating thumbnail: $e");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _thumbnailBytes != null
-        ? Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned.fill(
-                  child: Image.memory(_thumbnailBytes!, fit: BoxFit.cover)),
-              const Icon(Iconsax.video_circle_bold),
-            ],
-          )
-        : Container(
-            width: 150,
-            height: 150,
-            color: AppPallete.grey,
-            child: const LoadingWidget(),
-          );
   }
 }

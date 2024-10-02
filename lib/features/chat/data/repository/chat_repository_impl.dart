@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:JobNex/features/chat/data/model/chat_reply.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:JobNex/core/common/constant/constant.dart';
@@ -68,6 +69,7 @@ class ChatRepositoryImpl implements ChatRepository {
     required String receiver_id,
     required String message,
     required MessageTypeEnum messageType,
+    required ChatReply? chatReply,
   }) async {
     try {
       if (!await connectionChecker.hasConnection) {
@@ -77,6 +79,7 @@ class ChatRepositoryImpl implements ChatRepository {
         receiver_id: receiver_id,
         message: message,
         messageType: messageType,
+        chatReply: chatReply,
       ));
     } catch (e) {
       return left(Failure(e.toString()));

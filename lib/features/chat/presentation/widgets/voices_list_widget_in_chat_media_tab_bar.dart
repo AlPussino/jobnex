@@ -1,10 +1,10 @@
+import 'package:JobNex/features/chat/presentation/widgets/voice_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:JobNex/core/common/widget/error.dart';
 import 'package:JobNex/core/common/widget/loading.dart';
 import 'package:JobNex/core/util/show_snack_bar.dart';
 import 'package:JobNex/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:JobNex/features/chat/presentation/widgets/audio_message.dart';
 import 'package:toastification/toastification.dart';
 
 class VoicesListWidgetInChatMediaTabBar extends StatefulWidget {
@@ -62,7 +62,12 @@ class _VoicesListWidgetInChatMediaTabBarState
                 itemCount: voicesList.length,
                 itemBuilder: (context, index) {
                   final chatStreamData = voicesList[index].data();
-                  return AudioMessage(
+                  // return AudioMessage(
+                  //   size: size,
+                  //   chatData: chatStreamData,
+                  //   chatListData: widget.chatRoomData,
+                  // );
+                  return VoiceMessage(
                     size: size,
                     chatData: chatStreamData,
                     chatListData: widget.chatRoomData,

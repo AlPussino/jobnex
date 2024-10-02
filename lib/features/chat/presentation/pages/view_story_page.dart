@@ -32,7 +32,6 @@ class _ViewStoryPageState extends State<ViewStoryPage> {
         showReplyButton: false,
         showBackIcon: false,
         showMenuIcon: false,
-        caption: "This is very beautiful STORY",
         createdAt: widget.storyBodies[initialIndex].created_at,
         enableOnHoldHide: true,
         userInfo: UserInfo(
@@ -44,7 +43,7 @@ class _ViewStoryPageState extends State<ViewStoryPage> {
             (e) => StoryItem(
               url: e.image,
               type: StoryItemType.image,
-              duration: 300,
+              duration: 3,
             ),
           )
         ],

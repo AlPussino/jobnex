@@ -1,3 +1,6 @@
+import 'package:JobNex/features/chat/presentation/pages/text_video_call_page.dart';
+import 'package:JobNex/features/chat/presentation/widgets/preview_reply_widget.dart';
+import 'package:JobNex/features/chat/presentation/provider/chat_input_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +14,7 @@ import 'package:JobNex/features/chat/presentation/widgets/chat_conversation_app_
 import 'package:JobNex/features/chat/presentation/widgets/chat_inputs.dart';
 import 'package:JobNex/features/chat/presentation/widgets/message_list_widget.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 class ChatConversationPage extends StatefulWidget {
@@ -36,6 +40,8 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
     context.read<ChatBloc>().add(ChatGetChatRoomData(widget.chatRoomId));
     super.initState();
   }
+
+  void makeCall() {}
 
   @override
   Widget build(BuildContext context) {
@@ -68,89 +74,110 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
               } else if (snapshot.hasError) {
                 return ErrorWidgets(errorMessage: snapshot.error.toString());
               }
+              final chatRoomData = snapshot.data!.data()!;
 
-              final chatRoomData = snapshot.data!.data();
-
-              return Scaffold(
-                appBar: AppBar(
-                  title: InkWell(
-                    highlightColor: AppPallete.lightBlue,
-                    customBorder: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    onTap: () {
-                      !chatRoomData['block'] ||
-                              chatRoomData['block_by'] ==
-                                  fireAuth.currentUser!.uid
-                          ? Navigator.pushNamed(
-                              context,
-                              ChatInformationPage.routeName,
-                              arguments: {
-                                "receiverData": widget.receiverData,
-                                "chatRoomId": widget.chatRoomId,
-                                "chatRoomData": chatRoomData
-                              },
-                            )
-                          : null;
-                    },
-                    child: ChatConversationAppBar(
-                      receiverData: widget.receiverData,
-                      chatRoomData: chatRoomData!,
-                      size: size,
-                    ),
-                  ),
-                  actions: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Iconsax.call_bold),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Iconsax.video_bold),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        !chatRoomData['block'] ||
-                                chatRoomData['block_by'] ==
-                                    fireAuth.currentUser!.uid
-                            ? Navigator.pushNamed(
-                                context,
-                                ChatInformationPage.routeName,
-                                arguments: {
-                                  "receiverData": widget.receiverData,
-                                  "chatRoomId": widget.chatRoomId,
-                                  "chatRoomData": chatRoomData
-                                },
-                              )
-                            : null;
-                      },
-                      icon: const Icon(Iconsax.info_circle_bold),
-                    ),
-                  ],
-                ),
-                body: Column(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: MessageListWidget(
+              return ChangeNotifierProvider(
+                create: (context) => ChatInputProvider(),
+                lazy: true,
+                builder: (context, child) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: InkWell(
+                        enableFeedback: true,
+                        highlightColor: AppPallete.lightBlue,
+                        customBorder: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onTap: () {
+                          !chatRoomData['block'] ||
+                                  chatRoomData['block_by'] ==
+                                      fireAuth.currentUser!.uid
+                              ? Navigator.pushNamed(
+                                  context,
+                                  ChatInformationPage.routeName,
+                                  arguments: {
+                                    "receiverData": widget.receiverData,
+                                    "chatRoomId": widget.chatRoomId,
+                                    "chatRoomData": chatRoomData
+                                  },
+                                )
+                              : null;
+                        },
+                        child: ChatConversationAppBar(
                           receiverData: widget.receiverData,
-                          messageController: messageController,
                           chatRoomData: chatRoomData,
+                          size: size,
                         ),
                       ),
+                      actions: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Iconsax.call_bold),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TestVideoCallPage(
+                                  receiverData: widget.receiverData,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Iconsax.video_bold),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            !chatRoomData['block'] ||
+                                    chatRoomData['block_by'] ==
+                                        fireAuth.currentUser!.uid
+                                ? Navigator.pushNamed(
+                                    context,
+                                    ChatInformationPage.routeName,
+                                    arguments: {
+                                      "receiverData": widget.receiverData,
+                                      "chatRoomId": widget.chatRoomId,
+                                      "chatRoomData": chatRoomData
+                                    },
+                                  )
+                                : null;
+                          },
+                          icon: const Icon(Iconsax.info_circle_bold),
+                        ),
+                      ],
                     ),
-                    !chatRoomData['block']
-                        ? ChatInputs(
-                            receiverData: widget.receiverData,
-                            messageController: messageController,
-                            chatListData: chatRoomData,
-                          )
-                        : Card(
-                            child: Text(
-                                "${chatRoomData['block_by'] == fireAuth.currentUser!.uid ? "You" : "Other"} blocked."),
+                    body: Column(
+                      children: [
+                        // Messages List
+                        Expanded(
+                          child: Center(
+                            child: MessageListWidget(
+                              receiverData: widget.receiverData,
+                              messageController: messageController,
+                              chatRoomData: chatRoomData,
+                            ),
                           ),
-                  ],
-                ),
+                        ),
+
+                        // Preview Reply
+                        PreviewReplyWidget(receiverData: widget.receiverData),
+
+                        // Chat Inputs
+                        !chatRoomData['block']
+                            ? ChatInputs(
+                                receiverData: widget.receiverData,
+                                messageController: messageController,
+                                chatListData: chatRoomData,
+                              )
+                            : Card(
+                                child: Text(
+                                    "${chatRoomData['block_by'] == fireAuth.currentUser!.uid ? "You" : "Other"} blocked."),
+                              ),
+                      ],
+                    ),
+                  );
+                },
               );
             },
           );

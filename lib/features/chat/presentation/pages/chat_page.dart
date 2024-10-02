@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:JobNex/features/chat/presentation/pages/preview_and_add_story_page.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,15 +124,23 @@ class _ChatPageState extends State<ChatPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //
-                      const StoriesList(),
+                      FadeInLeft(
+                        from: 40,
+                        duration: const Duration(milliseconds: 300),
+                        delay: const Duration(milliseconds: 300),
+                        animate: true,
+                        curve: Curves.easeIn,
+                        child: const StoriesList(),
+                      ),
 
                       //
                       AnimationLimiter(
                         child: ListView.builder(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: chatListSnapShot.length,
                           itemBuilder: (context, index) {
-                            //x
+                            //
                             final chatListData = chatListSnapShot[index].data();
                             DocumentReference<Map<String, dynamic>>
                                 chatContact = chatListData['chat_contact'];

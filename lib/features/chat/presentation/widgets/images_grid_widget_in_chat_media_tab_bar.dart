@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:JobNex/core/common/widget/cached_network_image_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,11 +90,7 @@ class _ImagesGridWidgetInChatMediaTabBarState
                         },
                       );
                     },
-                    child: CachedNetworkImage(
-                      imageUrl: imageUrls[index],
-                      cacheKey: imageUrls[index],
-                      fit: BoxFit.cover,
-                    ),
+                    child: CachedNetworkImageWidget(imageUrl: imageUrls[index]),
                   );
                 },
               );

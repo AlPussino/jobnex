@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:JobNex/features/chat/data/model/chat_reply.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:JobNex/core/common/enum/message_type_enum.dart';
@@ -23,6 +24,7 @@ abstract interface class ChatRepository {
     required String receiver_id,
     required String message,
     required MessageTypeEnum messageType,
+    required ChatReply? chatReply,
   });
 
   Future<Either<Failure, Null>> sendFileMessage({

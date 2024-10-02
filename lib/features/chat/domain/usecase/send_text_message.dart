@@ -4,6 +4,8 @@ import 'package:JobNex/core/error/failure.dart';
 import 'package:JobNex/core/usecase/usecase.dart';
 import 'package:JobNex/features/chat/domain/repository/chat_repository.dart';
 
+import '../../data/model/chat_reply.dart';
+
 class SendTextMessage implements FutureUseCase<Null, SendTextMessageParams> {
   final ChatRepository chatRepository;
   const SendTextMessage(this.chatRepository);
@@ -14,6 +16,7 @@ class SendTextMessage implements FutureUseCase<Null, SendTextMessageParams> {
       receiver_id: params.receiver_id,
       message: params.message,
       messageType: params.messageType,
+      chatReply: params.chatReply,
     );
   }
 }
@@ -22,9 +25,11 @@ class SendTextMessageParams {
   final String receiver_id;
   final String message;
   final MessageTypeEnum messageType;
+  final ChatReply? chatReply;
   const SendTextMessageParams({
     required this.receiver_id,
     required this.message,
     required this.messageType,
+    required this.chatReply,
   });
 }

@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:JobNex/core/common/widget/cached_network_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:JobNex/core/common/widget/error.dart';
@@ -71,30 +71,31 @@ class _StoryUsersListState extends State<StoryUsersList> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          child: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: CachedNetworkImageProvider(
-                                  user['profile_url'])),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${user['name']}",
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .titleMedium,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CircleAvatar(
+                            radius: 34,
+                            backgroundColor: AppPallete.green,
+                            child: CircleAvatar(
+                              radius: 32,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: CachedNetworkImageWidget(
+                                  imageUrl: user['profile_url'],
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          Text(
+                            "${user['name']}",
+                            style:
+                                Theme.of(context).primaryTextTheme.titleMedium,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

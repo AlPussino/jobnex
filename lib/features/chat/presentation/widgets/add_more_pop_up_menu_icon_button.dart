@@ -85,6 +85,7 @@ class _AddMorePopUpMenuIconButtonState
                 widget.receiverData['user_id'],
                 "${currentLocation.latitude}@${currentLocation.longitude}@$currentAddress",
                 MessageTypeEnum.location,
+                null,
               ),
             ),
       ),

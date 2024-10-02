@@ -53,9 +53,10 @@ class _StoriesListState extends State<StoriesList> {
                 return ErrorWidgets(errorMessage: snapshot.error.toString());
               }
               List<Story> storyList = snapshot.data!;
+
               return Container(
-                margin: const EdgeInsets.all(15),
-                height: size.height / 8,
+                margin: const EdgeInsets.all(10),
+                height: size.height / 7,
                 child: ListView.builder(
                   addRepaintBoundaries: false,
                   addAutomaticKeepAlives: false,

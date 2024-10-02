@@ -25,13 +25,19 @@ class TotalReactInAppBarWidget extends StatelessWidget {
                   arguments: post);
             },
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: uniqueReactions
-                  .where((reaction) =>
-                      Reaction.reactionIcons.containsKey(reaction))
-                  .map((reaction) => Reaction.reactionIcons[reaction]!)
-                  .toList(),
-            ))
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: uniqueReactions
+                      .where((reaction) =>
+                          Reaction.reactionIcons.containsKey(reaction))
+                      .map((reaction) => Reaction.reactionIcons[reaction]!)
+                      .toList(),
+                ),
+                const Icon(Icons.arrow_forward_ios)
+              ],
+            ),
+          )
         : Container();
   }
 }

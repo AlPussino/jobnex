@@ -17,6 +17,7 @@ import 'package:JobNex/features/chat/domain/usecase/get_videos_in_chat.dart';
 import 'package:JobNex/features/chat/domain/usecase/get_voices_in_chat.dart';
 import 'package:JobNex/features/chat/domain/usecase/send_text_message.dart';
 import 'package:JobNex/features/chat/domain/usecase/update_theme.dart';
+import '../../data/model/chat_reply.dart';
 import '../../domain/usecase/block_user.dart';
 import '../../domain/usecase/get_chat_stream.dart';
 import '../../domain/usecase/send_file_message.dart';
@@ -123,9 +124,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   void onChatSendTextMessage(
       ChatSendTextMessage event, Emitter<ChatState> emit) async {
     final response = await _sendTextMessage.call(SendTextMessageParams(
-        receiver_id: event.receiver_id,
-        message: event.message,
-        messageType: event.messageType));
+      receiver_id: event.receiver_id,
+      message: event.message,
+      messageType: event.messageType,
+      chatReply: event.chatReply,
+    ));
     response.fold((failure) => emit(ChatFailure(failure.message)),
         (chatStream) => emit(ChatSendTextMessagesSuccess()));
   }

@@ -217,6 +217,15 @@ class _ProfileCardState extends State<ProfileCard> {
                                     context,
                                     "Creating chat Success.",
                                     ToastificationType.success);
+                                //
+                                Navigator.pushNamed(
+                                  context,
+                                  ChatConversationPage.routeName,
+                                  arguments: {
+                                    "receiverData": snapShotData,
+                                    "chatRoomId": widget.user_id,
+                                  },
+                                );
                               }
                             },
                             builder: (context, state) {
@@ -248,15 +257,6 @@ class _ProfileCardState extends State<ProfileCard> {
                                                   widget.user_id,
                                                   "Hello 🙌🙌",
                                                   MessageTypeEnum.text));
-                                          //
-                                          Navigator.pushNamed(
-                                            context,
-                                            ChatConversationPage.routeName,
-                                            arguments: {
-                                              "receiverData": snapShotData,
-                                              "chatRoomId": widget.user_id,
-                                            },
-                                          );
                                         },
                                         child: const Card(
                                           child: Padding(

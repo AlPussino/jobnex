@@ -1,5 +1,5 @@
+import 'package:JobNex/core/common/widget/cached_network_image_widget.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -75,8 +75,12 @@ class ChatContactListTile extends StatelessWidget {
                             radius: 25,
                             child: CircleAvatar(
                               radius: 25,
-                              backgroundImage: CachedNetworkImageProvider(
-                                  chatContact['profile_url']),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: CachedNetworkImageWidget(
+                                  imageUrl: chatContact['profile_url'],
+                                ),
+                              ),
                             ),
                           ),
                           CircleAvatar(

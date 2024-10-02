@@ -1,7 +1,7 @@
+import 'dart:developer';
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 import 'package:JobNex/core/theme/app_pallete.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoWidget extends StatefulWidget {
   final String videoUrl;
@@ -22,20 +22,19 @@ class _VideoWidgetState extends State<VideoWidget>
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) async {
-        routeObserver.subscribe(this, ModalRoute.of(context)!);
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
 
+    // Set up the video source and caching options
     betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
       widget.videoUrl,
       cacheConfiguration: BetterPlayerCacheConfiguration(
         key: widget.videoUrl,
         useCache: true,
-        maxCacheSize: 100 * 1024 * 1024,
-        maxCacheFileSize: 10 * 1024 * 1024,
+        maxCacheSize: 100 * 1024 * 1024, // 100 MB cache size
+        maxCacheFileSize: 10 * 1024 * 1024, // Max 10 MB per file
       ),
       bufferingConfiguration: const BetterPlayerBufferingConfiguration(
         minBufferMs: 20000,
@@ -45,13 +44,13 @@ class _VideoWidgetState extends State<VideoWidget>
       ),
     );
 
-    //
-    betterPlayerConfiguration = BetterPlayerConfiguration(
+    // Configure BetterPlayer
+    betterPlayerConfiguration = const BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
-      allowedScreenSleep: false,
       fit: BoxFit.contain,
       expandToFill: true,
-      controlsConfiguration: const BetterPlayerControlsConfiguration(
+      allowedScreenSleep: false,
+      controlsConfiguration: BetterPlayerControlsConfiguration(
         backgroundColor: AppPallete.black,
         controlBarColor: AppPallete.transparent,
         enablePip: false,
@@ -62,82 +61,103 @@ class _VideoWidgetState extends State<VideoWidget>
         progressBarBufferedColor: AppPallete.grey,
         progressBarPlayedColor: Color(0xff227143),
         enableMute: true,
-        enableFullscreen: true,
+        enableFullscreen: true, // Make sure fullscreen is enabled
         iconsColor: AppPallete.white,
         enableRetry: true,
       ),
-      autoDetectFullscreenDeviceOrientation: false,
-      autoDetectFullscreenAspectRatio: false,
-      fullScreenByDefault: false,
-      overlay: Container(
-        color: AppPallete.black.withOpacity(0.10),
-      ),
-      placeholderOnTop: true,
-      showPlaceholderUntilPlay: true,
+      autoDetectFullscreenDeviceOrientation: true,
+      autoDetectFullscreenAspectRatio: true,
+      fullScreenByDefault: false, // Let the user trigger fullscreen
       autoDispose: true,
       autoPlay: false,
-      subtitlesConfiguration:
-          const BetterPlayerSubtitlesConfiguration(fontSize: 10),
+      placeholderOnTop: true,
+      showPlaceholderUntilPlay: true,
     );
 
+    // Initialize the BetterPlayerController
     betterPlayerController = BetterPlayerController(
       betterPlayerConfiguration,
       betterPlayerDataSource: betterPlayerDataSource,
     );
 
+    // Listen to BetterPlayer events
     betterPlayerController.addEventsListener((BetterPlayerEvent event) {
+      log("BetterPlayer Event: ${event.betterPlayerEventType}");
+
+      // Handle specific event types
       if (event.betterPlayerEventType ==
           BetterPlayerEventType.setupDataSource) {
+        log("DataSource is setup");
+
+        // Set overridden aspect ratio if available
         double? aspectRatio =
             betterPlayerController.videoPlayerController?.value.aspectRatio;
         if (aspectRatio != null) {
           betterPlayerController.setOverriddenAspectRatio(aspectRatio);
         }
-      } else if (event.betterPlayerEventType ==
-          BetterPlayerEventType.openFullscreen) {
-        setState(() {
-          betterPlayerController.enterFullScreen();
-        });
+      }
+
+      // Handle fullscreen event (without manually calling enterFullScreen)
+      if (event.betterPlayerEventType == BetterPlayerEventType.openFullscreen) {
+        log("Entering Fullscreen");
+      }
+
+      if (event.betterPlayerEventType == BetterPlayerEventType.hideFullscreen) {
+        log("Exiting Fullscreen");
+      }
+    });
+
+    // Add listener to video player controller for initialization
+    betterPlayerController.videoPlayerController?.addListener(() {
+      if (betterPlayerController.videoPlayerController?.value.initialized ??
+          false) {
+        double? aspectRatio =
+            betterPlayerController.videoPlayerController?.value.aspectRatio;
+        if (aspectRatio != null) {
+          betterPlayerController.setOverriddenAspectRatio(aspectRatio);
+        }
       }
     });
   }
 
   @override
-  void dispose() async {
+  void dispose() {
     betterPlayerController.dispose();
     super.dispose();
   }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   betterPlayerController.pause();
+  // }
 
-  @override
-  void didChangeDependencies() async {
-    await betterPlayerController.pause();
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didPushNext() async {
-    super.didPushNext();
-    await betterPlayerController.pause();
-  }
+  // @override
+  // void didPushNext() {
+  //   super.didPushNext();
+  //   betterPlayerController.pause();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: Key(widget.videoUrl),
-      onVisibilityChanged: (info) async {
-        if (info.visibleFraction == 0) {
-          await betterPlayerController.pause();
-        } else {
-          betterPlayerController.setControlsVisibility(true);
-          betterPlayerController.isPlaying()!
-              ? await betterPlayerController.pause()
-              : null;
-        }
-      },
-      child: ClipRRect(
+    // return VisibilityDetector(
+    //   key: Key(widget.videoUrl),
+    //   onVisibilityChanged: (info) async {
+    //     if (info.visibleFraction == 0) {
+    //       await betterPlayerController.pause();
+    //     } else {
+    //       betterPlayerController.setControlsVisibility(true);
+    //       if (betterPlayerController.isPlaying()!) {
+    //         await betterPlayerController.pause();
+    //       }
+    //     }
+    //   },
+    //   child: ClipRRect(
+    //     borderRadius: BorderRadius.circular(10),
+    //     child: BetterPlayer(controller: betterPlayerController),
+    //   ),
+    // );
+    return ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: BetterPlayer(controller: betterPlayerController),
-      ),
-    );
+        child: BetterPlayer(controller: betterPlayerController));
   }
 }

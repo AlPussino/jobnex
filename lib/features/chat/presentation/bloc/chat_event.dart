@@ -21,7 +21,13 @@ final class ChatSendTextMessage extends ChatEvent {
   final String receiver_id;
   final String message;
   final MessageTypeEnum messageType;
-  ChatSendTextMessage(this.receiver_id, this.message, this.messageType);
+  final ChatReply? chatReply;
+  ChatSendTextMessage(
+    this.receiver_id,
+    this.message,
+    this.messageType,
+    this.chatReply,
+  );
 }
 
 final class ChatSendFileMessage extends ChatEvent {
