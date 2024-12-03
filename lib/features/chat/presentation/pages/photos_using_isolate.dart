@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:isolate';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 

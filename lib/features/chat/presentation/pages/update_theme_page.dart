@@ -102,19 +102,19 @@ class _UpdateThemePageState extends State<UpdateThemePage> {
                           isSender: true,
                         ),
                         const BubbleSpecialThree(
-                          text: "Gay Oak",
+                          text: "Oak Oak",
                           color: Color(0xFF1B97F3),
                           tail: false,
                           isSender: false,
                         ),
                         BubbleSpecialThree(
-                          text: "Fuck you, Gay Oak",
+                          text: "Hello Oak",
                           color: controller.color,
                           tail: false,
                           isSender: true,
                         ),
                         const BubbleSpecialThree(
-                          text: "Fuck You Too",
+                          text: "World!",
                           color: Color(0xFF1B97F3),
                           tail: false,
                           isSender: false,
@@ -126,7 +126,7 @@ class _UpdateThemePageState extends State<UpdateThemePage> {
                           isSender: false,
                         ),
                         BubbleSpecialThree(
-                          text: "Ma Ma Nwer Lay",
+                          text: "Steven",
                           color: controller.color,
                           tail: false,
                           isSender: true,

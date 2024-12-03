@@ -25,6 +25,7 @@ class TotalReactInAppBarWidget extends StatelessWidget {
                   arguments: post);
             },
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.min,

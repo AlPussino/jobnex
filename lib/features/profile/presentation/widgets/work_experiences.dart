@@ -61,8 +61,7 @@ class _WorkExperiencesState extends State<WorkExperiences> {
                 return const LoadingWidget();
               }
               if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
-                return const ErrorWidgets(
-                    errorMessage: "This motherfucker has no experiences.");
+                return const ErrorWidgets(errorMessage: "no experiences.");
               }
               final snapShotData = snapshot.data!.docs;
               return Padding(

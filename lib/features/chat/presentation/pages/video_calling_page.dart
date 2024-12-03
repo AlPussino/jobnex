@@ -1,45 +1,86 @@
+import 'dart:developer';
 import 'package:JobNex/core/common/widget/loading.dart';
 import 'package:JobNex/core/config/agora_config.dart';
 import 'package:agora_uikit/agora_uikit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class VideoCallPage extends StatefulWidget {
-  final String channelId;
-  const VideoCallPage({super.key, required this.channelId});
+class VideoCallingPage extends StatefulWidget {
+  final String receiver_id;
+  final String channel;
+  const VideoCallingPage(
+      {super.key, required this.receiver_id, required this.channel});
 
   @override
-  State<VideoCallPage> createState() => _VideoCallPageState();
+  State<VideoCallingPage> createState() => _VideoCallingPageState();
 }
 
-class _VideoCallPageState extends State<VideoCallPage> {
+class _VideoCallingPageState extends State<VideoCallingPage> {
   AgoraClient? agoraClient;
-  // String baseUr = "https://whatsapp-clone-akk-0784166b3ed4.herokuapp.com";
-  // String baseUr = "https://flutter-twitch-server1.onrender.com";
-  String baseUr = "https://flutter-twitch-sjerver-f5p6nahyh.vercel.app";
+  String baseUr = "https://flutter-twitch-server1.onrender.com";
   bool showButtons = true;
+  final fireAuth = FirebaseAuth.instance;
+  final fireStore = FirebaseFirestore.instance;
 
   @override
   void initState() {
-    agoraClient = AgoraClient(
-      agoraConnectionData: AgoraConnectionData(
-        appId: AgoraConfig.appId,
-        channelName: widget.channelId,
-        tokenUrl: baseUr,
-      ),
-    );
-
     initAgora();
     super.initState();
   }
 
   void initAgora() async {
+    log("Channel : ${widget.channel}");
+    agoraClient = AgoraClient(
+      agoraConnectionData: AgoraConnectionData(
+        appId: AgoraConfig.appId,
+        channelName: widget.channel,
+        tokenUrl: baseUr,
+        username: 'BLa BLa',
+      ),
+    );
     await agoraClient!.initialize();
+    log("Is initialized : ${agoraClient!.isInitialized}");
   }
 
   void showOrHideButtons() {
     setState(() {
       showButtons = !showButtons;
     });
+  }
+
+  void hangUp() async {
+    await agoraClient!.engine.leaveChannel();
+    await agoraClient!.engine.release();
+    QuerySnapshot senderQuerySnapshot = await fireStore
+        .collection('users')
+        .doc(fireAuth.currentUser!.uid)
+        .collection('video_call')
+        .get();
+
+    WriteBatch senderBatch = fireStore.batch();
+
+    for (QueryDocumentSnapshot document in senderQuerySnapshot.docs) {
+      senderBatch.delete(document.reference);
+    }
+
+    await senderBatch.commit();
+
+    //
+    QuerySnapshot receiverQuerySnapshot = await fireStore
+        .collection('users')
+        .doc(widget.receiver_id)
+        .collection('video_call')
+        .get();
+
+    WriteBatch receiverBatch = fireStore.batch();
+
+    for (QueryDocumentSnapshot document in receiverQuerySnapshot.docs) {
+      receiverBatch.delete(document.reference);
+    }
+
+    await receiverBatch.commit();
+    Navigator.pop(context);
   }
 
   @override
@@ -51,7 +92,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
             : Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(0),
                     child: AgoraVideoViewer(
                       client: agoraClient!,
                       layoutType: Layout.oneToOne,
@@ -77,14 +118,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
                               backgroundColor: Colors.red,
                               radius: 35,
                               child: IconButton(
-                                onPressed: () async {
-                                  await agoraClient!.engine.leaveChannel();
-                                  // ref.read(callControllerProvider).endCall(
-                                  //     context,
-                                  //     widget.call.callerId,
-                                  //     widget.call.receiverId);
-                                  Navigator.pop(context);
-                                },
+                                onPressed: hangUp,
                                 icon: const Icon(Icons.call_end),
                               ),
                             ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:JobNex/core/common/widget/loading.dart';
 import 'package:JobNex/core/util/show_snack_bar.dart';
-import 'package:JobNex/features/auth/presentation/pages/login_page.dart';
 import 'package:JobNex/features/auth/presentation/provider/sign_up_page_provider.dart';
 import 'package:JobNex/features/auth/presentation/widgets/elevated_buttons.dart';
 import 'package:JobNex/features/bottom_navigation_bar_page.dart';
@@ -141,8 +140,7 @@ class SignUpPagePortrait extends StatelessWidget {
                 ),
                 SizedBox(height: size.height / 10),
                 TextButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, LoginPage.routeName),
+                  onPressed: () => Navigator.pop(context),
                   child: const Text("Already have an account?. Log in."),
                 ),
               ],
@@ -233,8 +231,7 @@ class SignUpLandscape extends StatelessWidget {
                     ),
                     SizedBox(height: size.height / 10),
                     TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, LoginPage.routeName),
+                      onPressed: () => Navigator.pop(context),
                       child: const Text("Already have an account?. Log in."),
                     ),
                   ],

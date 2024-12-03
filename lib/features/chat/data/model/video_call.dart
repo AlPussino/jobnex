@@ -9,6 +9,7 @@ class VideoCall with _$VideoCall {
   factory VideoCall({
     required String caller_id,
     required String receiver_id,
+    required bool is_accepted,
   }) = _VideoCall;
 
   factory VideoCall.fromJson(Map<String, dynamic> json) =>

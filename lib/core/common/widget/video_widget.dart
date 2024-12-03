@@ -147,7 +147,7 @@ class _VideoWidgetState extends State<VideoWidget>
     //     } else {
     //       betterPlayerController.setControlsVisibility(true);
     //       if (betterPlayerController.isPlaying()!) {
-    //         await betterPlayerController.pause();
+    //         await betterPlayerController.pause();s
     //       }
     //     }
     //   },

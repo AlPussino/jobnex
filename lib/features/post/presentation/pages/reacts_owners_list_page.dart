@@ -27,7 +27,7 @@ class ReactsOwnersListPage extends StatelessWidget {
             tabs: uniqueReactionTypes.map((reaction) {
               return Tab(
                 icon: reaction == "All"
-                    ? const Icon(Icons.all_inclusive)
+                    ? const Icon(Icons.people_alt)
                     : Reaction.reactionIcons[reaction],
                 text: reaction,
               );

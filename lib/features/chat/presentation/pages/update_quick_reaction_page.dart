@@ -99,7 +99,7 @@ class _UpdateQuickReactionPageState extends State<UpdateQuickReactionPage> {
                               isSender: true,
                             ),
                             const BubbleSpecialThree(
-                              text: "Fuck You Too",
+                              text: "Hello!",
                               color: Color(0xFF1B97F3),
                               tail: false,
                               isSender: false,

@@ -1,6 +1,10 @@
+import 'package:JobNex/features/chat/data/model/video_call.dart';
+import 'package:JobNex/features/chat/presentation/pages/test_verification_code.dart';
 import 'package:JobNex/features/chat/presentation/pages/text_video_call_page.dart';
+import 'package:JobNex/features/chat/presentation/pages/vc_call_page.dart';
 import 'package:JobNex/features/chat/presentation/widgets/preview_reply_widget.dart';
 import 'package:JobNex/features/chat/presentation/provider/chat_input_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +37,8 @@ class ChatConversationPage extends StatefulWidget {
 }
 
 class _ChatConversationPageState extends State<ChatConversationPage> {
+  final fireAuth = FirebaseAuth.instance;
+  final fireStore = FirebaseFirestore.instance;
   final messageController = TextEditingController();
 
   @override
@@ -41,7 +47,30 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
     super.initState();
   }
 
-  void makeCall() {}
+  void call() async {
+    await fireStore
+        .collection('users')
+        .doc(widget.receiverData['user_id'])
+        .collection('video_call')
+        .doc(fireAuth.currentUser!.uid)
+        .set(VideoCall(
+          caller_id: fireAuth.currentUser!.uid,
+          receiver_id: widget.receiverData['user_id'],
+          is_accepted: false,
+        ).toJson());
+
+    //
+    await fireStore
+        .collection('users')
+        .doc(fireAuth.currentUser!.uid)
+        .collection('video_call')
+        .doc(widget.receiverData['user_id'])
+        .set(VideoCall(
+          caller_id: fireAuth.currentUser!.uid,
+          receiver_id: widget.receiverData['user_id'],
+          is_accepted: false,
+        ).toJson());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +127,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                                   arguments: {
                                     "receiverData": widget.receiverData,
                                     "chatRoomId": widget.chatRoomId,
-                                    "chatRoomData": chatRoomData
+                                    "chatRoomData": chatRoomData,
                                   },
                                 )
                               : null;
@@ -111,11 +140,29 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                       ),
                       actions: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const VcCallPage(),
+                                ));
+                          },
+                          icon: const Icon(Iconsax.video_bold),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TestVerificationCodePage(),
+                                ));
+                          },
                           icon: const Icon(Iconsax.call_bold),
                         ),
                         IconButton(
                           onPressed: () {
+                            call();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -124,6 +171,12 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                                 ),
                               ),
                             );
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) =>
+                            //           const VideoCallingPage(),
+                            //     ));
                           },
                           icon: const Icon(Iconsax.video_bold),
                         ),

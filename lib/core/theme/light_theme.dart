@@ -153,7 +153,7 @@ class LightTheme {
         indicatorColor: AppPallete.lightBlue,
         unselectedLabelColor: AppPallete.black,
         labelColor: AppPallete.lightBlue,
-        dividerColor: AppPallete.transparent,
+        dividerColor: AppPallete.grey,
         tabAlignment: TabAlignment.center,
       ),
 

@@ -83,12 +83,15 @@ class CommentListPage extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: commentList.length,
                       itemBuilder: (context, index) {
-                        return CommentAndRepliesWidget(
-                          comment: commentList[index],
-                          post_id: post.id,
-                          post_owner_id: post.post_owner_id,
-                          textFieldController: textFieldController,
-                          textFieldFocusNode: textFieldFocusNode,
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: CommentAndRepliesWidget(
+                            comment: commentList[index],
+                            post_id: post.id,
+                            post_owner_id: post.post_owner_id,
+                            textFieldController: textFieldController,
+                            textFieldFocusNode: textFieldFocusNode,
+                          ),
                         );
                       },
                     ),

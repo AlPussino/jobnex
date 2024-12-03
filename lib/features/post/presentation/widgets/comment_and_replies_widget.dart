@@ -43,6 +43,7 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
           preferredSize: const Size.fromRadius(20),
           child: CommentOrReplyOwnerProfileWidget(
             owner_id: widget.comment.comment_owner_id,
+            isComment: true,
           ),
         );
       },
@@ -67,29 +68,34 @@ class _CommentAndRepliesWidgetState extends State<CommentAndRepliesWidget> {
                 (e) => e,
               ),
             ]
-          : [],
+          : widget.comment.replies.isNotEmpty
+              ? [widget.comment.replies.first]
+              : [],
       avatarChild: (context, value) {
         return PreferredSize(
           preferredSize: const Size.fromRadius(20),
           child: CommentOrReplyOwnerProfileWidget(
             owner_id: value.reply_owner_id,
+            isComment: false,
           ),
         );
       },
       contentChild: (context, value) {
-        return OwnerAndCommentOrReplyTextWidget(
-          owner_id: value.reply_owner_id,
-          commentOrReply: value.reply,
-          post_id: widget.post_id,
-          comment_id: widget.comment.comment_id,
-          isComment: false,
-          showOrNotReplies: showOrNotReplies,
-          showReplies: showReplies,
-          replies: widget.comment.replies,
-          created_at: value.created_at,
-          textFieldController: widget.textFieldController,
-          textFieldFocusNode: widget.textFieldFocusNode,
-        );
+        return showReplies
+            ? OwnerAndCommentOrReplyTextWidget(
+                owner_id: value.reply_owner_id,
+                commentOrReply: value.reply,
+                post_id: widget.post_id,
+                comment_id: widget.comment.comment_id,
+                isComment: false,
+                showOrNotReplies: showOrNotReplies,
+                showReplies: showReplies,
+                replies: widget.comment.replies,
+                created_at: value.created_at,
+                textFieldController: widget.textFieldController,
+                textFieldFocusNode: widget.textFieldFocusNode,
+              )
+            : InkWell(onTap: showOrNotReplies, child: Text(value.reply));
       },
     );
   }

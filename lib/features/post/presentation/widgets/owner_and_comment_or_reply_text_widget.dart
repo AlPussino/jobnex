@@ -102,12 +102,13 @@ class _OwnerAndCommentOrReplyTextWidgetState
                     Card(
                       borderOnForeground: true,
                       child: Container(
-                        alignment: Alignment.centerLeft,
-                        margin: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Row(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 InkWell(
@@ -121,7 +122,6 @@ class _OwnerAndCommentOrReplyTextWidgetState
                                           arguments: user['user_id']);
                                     },
                                     child: Text("${user['name']}")),
-                                Text(changeToTimeAgo("${widget.created_at}")),
                               ],
                             ),
                             Text(widget.commentOrReply),
@@ -134,6 +134,8 @@ class _OwnerAndCommentOrReplyTextWidgetState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          Text(changeTimeFormat("${widget.created_at}")),
+                          SizedBox(width: size.width / 20),
                           InkWell(
                             onTap: () {
                               widget.textFieldFocusNode.requestFocus();
@@ -145,21 +147,21 @@ class _OwnerAndCommentOrReplyTextWidgetState
                             },
                             child: const Text("reply"),
                           ),
-                          SizedBox(width: size.width / 10),
-                          if (widget.isComment && widget.replies.isNotEmpty)
-                            InkWell(
-                              onTap: () {
-                                widget.showOrNotReplies();
-                                setState(() {
-                                  is_replies_showed = !is_replies_showed;
-                                });
-                              },
-                              child: Text(
-                                is_replies_showed
-                                    ? "hide replies"
-                                    : "show replies",
-                              ),
-                            ),
+                          // SizedBox(width: size.width / 20),
+                          // if (widget.isComment && widget.replies.isNotEmpty)
+                          //   InkWell(
+                          //     onTap: () {
+                          //       widget.showOrNotReplies();
+                          //       setState(() {
+                          //         is_replies_showed = !is_replies_showed;
+                          //       });
+                          //     },
+                          //     child: Text(
+                          //       is_replies_showed
+                          //           ? "hide replies"
+                          //           : "show replies",
+                          //     ),
+                          //   ),
                         ],
                       ),
                     ),
@@ -169,7 +171,7 @@ class _OwnerAndCommentOrReplyTextWidgetState
             );
           }
 
-          // No Avtive staet
+          // No Avtive state
           return const SizedBox();
         },
       ),

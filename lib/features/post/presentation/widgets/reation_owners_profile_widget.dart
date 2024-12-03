@@ -67,18 +67,32 @@ class ReactOwnerProfile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          backgroundImage: CachedNetworkImageProvider(
-                            user['profile_url'],
-                          ),
+                        Stack(
+                          alignment: Alignment.bottomRight,
+                          clipBehavior: Clip.none,
+                          children: [
+                            CircleAvatar(
+                              radius: 25,
+                              backgroundImage: CachedNetworkImageProvider(
+                                user['profile_url'],
+                              ),
+                            ),
+                            Positioned(
+                              right: -10,
+                              bottom: -4,
+                              child: CircleAvatar(
+                                radius: 14,
+                                child: reactionIcons[react.react] ??
+                                    const Icon(Icons.help_outline),
+                              ),
+                            )
+                          ],
                         ),
                         SizedBox(width: size.width / 20),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(user['name']),
-                            reactionIcons[react.react] ??
-                                const Icon(Icons.help_outline)
                           ],
                         )
                       ],

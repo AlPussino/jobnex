@@ -24,6 +24,8 @@ mixin _$VideoCall {
   set caller_id(String value) => throw _privateConstructorUsedError;
   String get receiver_id => throw _privateConstructorUsedError;
   set receiver_id(String value) => throw _privateConstructorUsedError;
+  bool get is_accepted => throw _privateConstructorUsedError;
+  set is_accepted(bool value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +38,7 @@ abstract class $VideoCallCopyWith<$Res> {
   factory $VideoCallCopyWith(VideoCall value, $Res Function(VideoCall) then) =
       _$VideoCallCopyWithImpl<$Res, VideoCall>;
   @useResult
-  $Res call({String caller_id, String receiver_id});
+  $Res call({String caller_id, String receiver_id, bool is_accepted});
 }
 
 /// @nodoc
@@ -54,6 +56,7 @@ class _$VideoCallCopyWithImpl<$Res, $Val extends VideoCall>
   $Res call({
     Object? caller_id = null,
     Object? receiver_id = null,
+    Object? is_accepted = null,
   }) {
     return _then(_value.copyWith(
       caller_id: null == caller_id
@@ -64,6 +67,10 @@ class _$VideoCallCopyWithImpl<$Res, $Val extends VideoCall>
           ? _value.receiver_id
           : receiver_id // ignore: cast_nullable_to_non_nullable
               as String,
+      is_accepted: null == is_accepted
+          ? _value.is_accepted
+          : is_accepted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +83,7 @@ abstract class _$$VideoCallImplCopyWith<$Res>
       __$$VideoCallImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String caller_id, String receiver_id});
+  $Res call({String caller_id, String receiver_id, bool is_accepted});
 }
 
 /// @nodoc
@@ -92,6 +99,7 @@ class __$$VideoCallImplCopyWithImpl<$Res>
   $Res call({
     Object? caller_id = null,
     Object? receiver_id = null,
+    Object? is_accepted = null,
   }) {
     return _then(_$VideoCallImpl(
       caller_id: null == caller_id
@@ -102,6 +110,10 @@ class __$$VideoCallImplCopyWithImpl<$Res>
           ? _value.receiver_id
           : receiver_id // ignore: cast_nullable_to_non_nullable
               as String,
+      is_accepted: null == is_accepted
+          ? _value.is_accepted
+          : is_accepted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -109,7 +121,10 @@ class __$$VideoCallImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$VideoCallImpl extends _VideoCall {
-  _$VideoCallImpl({required this.caller_id, required this.receiver_id})
+  _$VideoCallImpl(
+      {required this.caller_id,
+      required this.receiver_id,
+      required this.is_accepted})
       : super._();
 
   factory _$VideoCallImpl.fromJson(Map<String, dynamic> json) =>
@@ -119,10 +134,12 @@ class _$VideoCallImpl extends _VideoCall {
   String caller_id;
   @override
   String receiver_id;
+  @override
+  bool is_accepted;
 
   @override
   String toString() {
-    return 'VideoCall(caller_id: $caller_id, receiver_id: $receiver_id)';
+    return 'VideoCall(caller_id: $caller_id, receiver_id: $receiver_id, is_accepted: $is_accepted)';
   }
 
   @JsonKey(ignore: true)
@@ -140,8 +157,10 @@ class _$VideoCallImpl extends _VideoCall {
 }
 
 abstract class _VideoCall extends VideoCall {
-  factory _VideoCall({required String caller_id, required String receiver_id}) =
-      _$VideoCallImpl;
+  factory _VideoCall(
+      {required String caller_id,
+      required String receiver_id,
+      required bool is_accepted}) = _$VideoCallImpl;
   _VideoCall._() : super._();
 
   factory _VideoCall.fromJson(Map<String, dynamic> json) =
@@ -153,6 +172,9 @@ abstract class _VideoCall extends VideoCall {
   @override
   String get receiver_id;
   set receiver_id(String value);
+  @override
+  bool get is_accepted;
+  set is_accepted(bool value);
   @override
   @JsonKey(ignore: true)
   _$$VideoCallImplCopyWith<_$VideoCallImpl> get copyWith =>

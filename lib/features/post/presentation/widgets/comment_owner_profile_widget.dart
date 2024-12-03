@@ -12,9 +12,11 @@ import 'package:JobNex/features/profile/presentation/pages/profile_page.dart';
 
 class CommentOrReplyOwnerProfileWidget extends StatelessWidget {
   final String owner_id;
+  final bool isComment;
   const CommentOrReplyOwnerProfileWidget({
     super.key,
     required this.owner_id,
+    required this.isComment,
   });
 
   @override
@@ -60,6 +62,7 @@ class CommentOrReplyOwnerProfileWidget extends StatelessWidget {
                         arguments: owner_id);
                   },
                   child: CircleAvatar(
+                    radius: isComment ? 20 : 14,
                     backgroundImage: CachedNetworkImageProvider(
                       user['profile_url'],
                     ),

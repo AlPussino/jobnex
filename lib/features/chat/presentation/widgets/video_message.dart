@@ -73,7 +73,6 @@ class VideoMessage extends StatelessWidget {
                       videoUrl: chatData['message'][0],
                       isChat: true,
                     ),
-              // child: Text("FUCK"),
             ),
           ),
         ),
